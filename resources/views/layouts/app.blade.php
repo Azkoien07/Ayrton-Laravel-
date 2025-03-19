@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Ayrton')</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon copy.ico') }}">
     <!-- Agrega el CDN de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -21,14 +22,16 @@
             <!-- Menú de navegación -->
             <div class="flex items-center space-x-4">
                 <!-- Enlaces-->
-                <a href="{{ route('settings') }}" class="text-gray-700 hover:text-blue-500 transition duration-200 ease-in-out">
-                    Configuración
-                </a>
-
                 <a href="{{ route('plans') }}" class="text-gray-700 hover:text-blue-500 transition duration-200 ease-in-out">
                     Planes
                 </a>
 
+                <a href="{{ route('challenge.index') }}" class="text-gray-700 hover:text-blue-500 transition duration-200 ease-in-out">
+                    Desafíos
+                </a>
+                <a href="{{ route('settings') }}" class="text-gray-700 hover:text-blue-500 transition duration-200 ease-in-out">
+                    Configuración
+                </a>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">

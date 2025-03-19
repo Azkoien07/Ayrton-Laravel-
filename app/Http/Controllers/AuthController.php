@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,11 +20,10 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        // Invalida la sesión
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login'); // Redirige al login
+        return redirect('/login');
     }
 
     // Procesar el formulario de login

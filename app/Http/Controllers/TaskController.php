@@ -13,7 +13,7 @@ class TaskController extends Controller
         $tasks = Task::all();
         return view('tasks.index', compact('tasks'));
     }
-    
+
     public function create()
     {
         return view('tasks.create');
@@ -53,7 +53,7 @@ class TaskController extends Controller
         return view('tasks.show', compact('task'));
     }
 
-    // Mostrar el formulario para editar una tarea
+
     public function edit(Task $task)
     {
         return view('tasks.edit', compact('task'));

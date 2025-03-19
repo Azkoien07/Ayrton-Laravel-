@@ -12,8 +12,9 @@ class ChallengeController extends Controller
      */
     public function index()
     {
-        //
+        return view('challenge.challenge');
     }
+
 
     /**
      * Show the form for creating a new resource.

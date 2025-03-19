@@ -5,6 +5,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\ChallengeController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -15,6 +16,9 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 
 // Procesar el formulario de login
 Route::post('/login', [AuthController::class, 'login']);
+
+// Cerrar Sesión
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Mostrar el formulario de registro
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -29,7 +33,8 @@ Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.crea
 // Ruta para el módulo de configuración
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
 // Ruta para la página de planes
 Route::get('/plans', [PlanController::class, 'index'])->name('plans');
+
+// Ruta para el modulo de desafios
+Route::get('/challenge', [ChallengeController::class, 'index'])->name('challenge.index');
