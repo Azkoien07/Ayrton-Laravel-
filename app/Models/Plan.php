@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 
 class Plan extends Model
 {
@@ -17,6 +18,6 @@ class Plan extends Model
     // Relación uno a muchos con la tabla users
     public function users()
     {
-        return $this->hasMany(Users::class, 'plan_id');
+        return $this->hasMany(User::class, 'plan_id');
     }
 }

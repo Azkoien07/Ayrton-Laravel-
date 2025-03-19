@@ -1,6 +1,7 @@
 <!-- resources/views/auth/login.blade.php -->
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-50">
     <!-- Contenedor principal -->
     <div class="min-h-screen flex items-center justify-center p-4">
@@ -47,7 +49,7 @@
                 </div>
 
                 <div class="text-center">
-                    <p class="text-gray-600">¿No tienes una cuenta? 
+                    <p class="text-gray-600">¿No tienes una cuenta?
                         <button onclick="openModal()" class="text-blue-500 hover:text-blue-600 font-medium focus:outline-none">
                             Regístrate
                         </button>
@@ -93,6 +95,30 @@
                     <input type="password" name="password_confirmation" id="password_confirmation" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" placeholder="••••••••" required>
                 </div>
                 <div>
+                    <label for="username" class="block text-gray-700 font-medium mb-2">Nombre De Usuario</label>
+                    <input type="text" name="username" id="username" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" placeholder="Tu nombre" required>
+                </div>
+
+                <div>
+                    <label for="role_id" class="block text-gray-700 font-medium mb-2">Rol</label>
+                    <select name="role_id" id="role_id" required
+                        class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 bg-white">
+                        <option value="1">Administrador</option>
+                        <option value="2">Usuario</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="plan_id" class="block text-gray-700 font-medium mb-2">Plan</label>
+                    <select name="plan_id" id="plan_id" required
+                        class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 bg-white">
+                        <option value="1">Básico</option>
+                        <option value="2">Premium</option>
+                        <option value="3">Empresarial</option>
+                    </select>
+                </div>
+
+                <div>
                     <button type="submit" class="w-full bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2 px-4 rounded-lg transition duration-500">
                         Registrarse
                     </button>
@@ -121,4 +147,5 @@
         });
     </script>
 </body>
+
 </html>
