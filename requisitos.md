@@ -1,0 +1,2 @@
+Del team Scrum: tablas de migraciones completas , los modelos de cada una de las tablas, los controladores las vistas conectadas, funcionamiento real que la menos un modulo o una tablas que este realizando como mínimo dos métodos del crud  de una tabla.
+ Proyecto individual: el 70% como minino para el miércoles
