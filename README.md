@@ -1,66 +1,128 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Ayrton
+Ayrton es una aplicación web desarrollada en Laravel con plantillas Blade, diseñada para mejorar la gestión del tiempo y la productividad de los usuarios mediante un enfoque basado en tareas, desafíos automáticos y análisis del rendimiento. Inspirada en la disciplina y velocidad de Ayrton Senna, esta herramienta busca optimizar la organización personal y profesional.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 🚀 Características Principales
 
-## About Laravel
+### 📌 Módulo de Tareas
+- Creación, edición y eliminación de tareas.
+- Asignación de prioridades y categorización.
+- Organización en listas personalizadas.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### ⏳ Módulo de Priorización
+- Reconocimiento de tareas urgentes e importantes.
+- Algoritmo inteligente para sugerir prioridades.
+- Integración con recordatorios y deadlines.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🔔 Módulo de Recordatorios
+- Notificaciones y alertas personalizadas.
+- Establecimiento de fechas límite.
+- Sincronización con el calendario interno.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 📅 Módulo de Calendario
+- Vista semanal y mensual de tareas y eventos.
+- Agregado y gestión de eventos importantes.
+- Sincronización con otros módulos de productividad.
 
-## Learning Laravel
+### 🏆 Módulo de Desafíos
+- Seguimiento automático de streaks de productividad.
+- Logros desbloqueables según la constancia del usuario.
+- Motivación mediante notificaciones y premios virtuales.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 📲 Módulo de Notificaciones
+- Recordatorios automáticos según la actividad del usuario.
+- Confirmaciones de eventos, pagos y tareas completadas.
+- Notificaciones en tiempo real.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 💳 Módulo de Pasarela de Pagos
+- Procesamiento de pagos con tarjetas de crédito y débito.
+- Creación y almacenamiento de métodos de pago.
+- Historial de pagos y generación automática de facturas electrónicas.
+- Reembolsos y gestión de disputas.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🛠️ Módulo de Gestión de Usuarios
+- Creación y administración de cuentas de usuario.
+- Gestión de permisos y roles dentro de la aplicación.
+- Registro de actividad y estadísticas personales.
 
-## Laravel Sponsors
+## 🔧 Tecnologías Utilizadas
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Framework Backend:** Laravel 12
+- **Frontend:** Plantillas Blade,Tailwind CSS
+- **Base de Datos:** PostgreSQL
+- **Autenticación y Seguridad:** Laravel Breeze / Sanctum
+- **Pasarela de Pagos:** Stripe / MercadoPago
 
-### Premium Partners
+## 📜 Instalación y Configuración en Local
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 1️⃣ Clonar el Repositorio
+```bash
+git clone https://github.com/tu-usuario/ayrton.git
+cd ayrton
+```
 
-## Contributing
+### 2️⃣ Configurar el Entorno
+Renombra el archivo de configuración `.env.example` a `.env`:
+```bash
+composer install
+cp .env.example .env
+```
+Genera la clave de aplicación de Laravel:
+```bash
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3️⃣ Configurar la Base de Datos
+Edita el archivo `.env` y ajusta la configuración de la base de datos:
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=Ayrton
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
 
-## Code of Conduct
+Luego, ejecuta las migraciones y los seeders:
+```bash
+php artisan migrate --path=database/migrations/2025_03_18_192603_create_roles_table.php
+php artisan migrate --path=database/migrations/2025_03_18_180108_create_users_table.php
+php artisan migrate --path=database/migrations/2025_03_18_194230_create_pqrs_table.php
+php artisan migrate --path=database/migrations/2025_03_18_193638_create_plans_table.php
+php artisan migrate --path=database/migrations/2025_03_18_195030_create_payments_table.php
+php artisan migrate --path=database/migrations/2025_03_18_195902_create_challenges_table.php
+php artisan migrate --path=database/migrations/2025_03_18_200438_create_rankings_table.php
+php artisan migrate --path=database/migrations/2025_03_18_200707_create_vouchers_table.php
+php artisan migrate --path=database/migrations/2025_03_18_192931_create_tasks_table.php
+php artisan migrate --path=database/migrations/2025_03_18_203517_create_user_pqr_table.php
+php artisan migrate --path=database/migrations/2025_03_18_204502_create_user_task_table.php
+php artisan migrate --path=database/migrations/2025_03_18_205352_create_payment_user_table.php
+php artisan migrate --path=database/migrations/2025_03_18_210831_create_challenge_task_table.php
+php artisan migrate --path=database/migrations/2025_03_18_211351_create_challenge_ranking_table.php
+php artisan migrate --seed
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
 
-## Security Vulnerabilities
+### 4️⃣ Iniciar el Servidor
+Ejecuta el siguiente comando para iniciar la aplicación:
+```bash
+php artisan serve
+```
+La aplicación estará disponible en `http://127.0.0.1:8000`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🤝 Contribuciones
 
-## License
+Si deseas contribuir a **Ayrton**, sigue estos pasos:
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (`git checkout -b feature-nueva-funcionalidad`).
+3. Realiza tus cambios y haz un commit (`git commit -m "Descripción del cambio"`).
+4. Sube tus cambios (`git push origin feature-nueva-funcionalidad`).
+5. Abre un Pull Request.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🏅 Licencia
+
+Este proyecto está bajo la **Licencia MIT**, lo que significa que puedes usarlo, modificarlo y distribuirlo libremente.
+
+## 📩 Contacto
+
+Si tienes dudas o sugerencias, contáctame:
+📧 Email: caceresgabriel305@gmail.com
