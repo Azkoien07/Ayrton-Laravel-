@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     public $timestamps = false;
-    
-     protected $fillable = [
+
+    protected $fillable = [
         'name',
         'email',
         'password',
@@ -34,13 +34,13 @@ class User extends Model
     {
         return $this->belongsToMany(Pqr::class, 'user_pqr', 'user_id', 'pqr_id');
     }
-    
+
     // Relación muchos a muchos con la tabla tasks
     public function tasks()
     {
         return $this->belongsToMany(Task::class, 'user_task', 'user_id', 'task_id');
     }
-    
+
     // Relación muchos a muchos con la tabla payments
     public function payments()
     {

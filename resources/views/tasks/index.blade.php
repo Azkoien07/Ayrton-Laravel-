@@ -2,14 +2,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Agrega el CDN de Tailwind CSS -->
+    <!--Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <div class="container mx-auto px-4 py-8">
-        <!-- Título -->
         <h1 class="text-3xl font-bold text-gray-800 mb-8">Lista de Tareas</h1>
 
-        <!-- Botón para crear una nueva tarea -->
         <a href="{{ route('tasks.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out mb-8 inline-block">
             + Crear Tarea
         </a>
