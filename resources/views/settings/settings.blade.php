@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="{{ session('theme','light') }}">
 
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,26 @@
     <title>Configuración - Ayrton</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    /* Estilos para Dark Mode */
+    .dark {
+        background-color: #121212;
+        color: #e2e8f0;
+    }
+    .dark body {
+        background-color: #1e1e1e;
+    }
+    .dark .bg-white {
+        background-color: #2d3748;
+        color: #e2e8f0;
+    }
+    .dark .text-gray-700 {
+        color: #cbd5e0;
+    }
+    .dark .text-gray-900 {
+        color: #e2e8f0;
+    }
+</style>
 </head>
 
 <body class="bg-gray-100 text-gray-900 font-sans">
@@ -152,6 +172,7 @@
             </footer>
         </div>
     </div>
+    <script src="{{ asset('js/theme.js') }}"></script>
 </body>
 
 </html>

@@ -6,10 +6,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ChallengeController;
+use App\Http\Controllers\ThemeController;
 
 Route::get('/', function () {
     return view('auth.login');
 });
+Route::post('/set-theme', [ThemeController::class, 'setTheme'])->name('set.theme');
 
 // Mostrar el formulario de login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
