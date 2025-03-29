@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Ayrton')</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon copy.ico') }}">
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
  
 </head>
 
@@ -62,15 +61,9 @@
     <!-- Contenedor principal -->
     <div class="flex-grow flex flex-col">
         <!-- Contenido principal -->
-        <main class="flex-grow container mx-auto px-4 py-8">
+        <main class="flex-grow px-4 py-8 ml-0 mr-auto w-full max-w-full">
             @yield('content')
         </main>
-
-        <!-- Pie de página -->
-        <footer class="bg-blue-600 text-white p-4">
-
-        </footer>
     </div>
 </body>
-
 </html>

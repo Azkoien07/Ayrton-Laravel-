@@ -1,5 +1,4 @@
 <!-- resources/views/auth/login.blade.php -->
-@extends('layouts.app')
 <!DOCTYPE html>
 <html lang="es">
 
