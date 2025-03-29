@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Ayrton')</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon copy.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
- 
+
 </head>
 
 <body class="flex min-h-screen bg-whi">
-    <!-- Sidebar de navegación vertical -->
+    <!-- Sidebar de navegación -->
     <aside class="w-64 bg-gray-50 font-sans shadow-md p-6 space-y-4 sidebar-glow">
         <a href="{{ route('tasks.index') }}" class="text-3xl font-bold text-gray-800 hover:text-blue-500 transition duration-200 ease-in-out block text-center mb-8">
             Ayrton
@@ -46,6 +47,13 @@
                 Configuración
             </a>
 
+            <a href="{{ route('pqrs.pqrs') }}" class="block text-gray-800 hover:bg-blue-50 hover:text-blue-500 px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+                PQRS
+            </a>
+
             <form action="{{ route('logout') }}" method="POST" class="mt-4">
                 @csrf
                 <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out flex items-center justify-center">
@@ -60,10 +68,11 @@
 
     <!-- Contenedor principal -->
     <div class="flex-grow flex flex-col">
-        <!-- Contenido principal -->
-        <main class="flex-grow px-4 py-8 ml-0 mr-auto w-full max-w-full">
+        <!-- Contenido principal  -->
+        <main class="flex-grow px-4 pb-8 pt-4 ml-0 mr-auto w-full max-w-full">
             @yield('content')
         </main>
     </div>
 </body>
+
 </html>

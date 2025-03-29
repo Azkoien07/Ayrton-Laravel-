@@ -20,7 +20,7 @@ class PqrController extends Controller
      */
     public function create()
     {
-        //
+        return view('pqrs.pqrs');
     }
 
     /**

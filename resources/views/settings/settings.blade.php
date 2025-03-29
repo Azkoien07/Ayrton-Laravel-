@@ -29,7 +29,7 @@
                             <label for="" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
                             <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                         </div>
-                        <button type="submit" class="btn-primary bg-indigo-600 hover:bg-indigo-700">
+                        <button class="bg-primary-900 hover:bg-primary-600 focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
                             Guardar cambios
                         </button>
                     </form>
@@ -61,7 +61,7 @@
                                 <option>Inglés</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn-primary bg-indigo-600 hover:bg-indigo-700">
+                        <button class="bg-primary-900 hover:bg-primary-600 focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
                             Guardar preferencias
                         </button>
                     </form>
@@ -86,7 +86,7 @@
                             <input type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
                             <label for="" class="ml-2 block text-sm text-gray-700">Notificaciones push</label>
                         </div>
-                        <button type="submit" class="btn-primary bg-indigo-600 hover:bg-indigo-700">
+                        <button class="bg-primary-900 hover:bg-primary-600 focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
                             Guardar configuración
                         </button>
                     </form>
@@ -111,8 +111,8 @@
                             <label for="" class="block text-sm font-medium text-gray-700 mb-1">Confirmar contraseña</label>
                             <input type="password" autocomplete="new-password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                         </div>
-                        <button class="bg-primary-500 font-medium py-2 px-4 rounded-lg shadow-md transition">
-                           Cambiar contraseña
+                        <button class="bg-primary-900 hover:bg-primary-600 focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
+                            Cambiar contraseña
                         </button>
                     </form>
                 </div>
@@ -120,16 +120,4 @@
         </div>
     </div>
 </div>
-
-@push('styles')
-<style>
-    .btn-primary {
-        @apply text-white px-4 py-2 rounded-md transition-colors duration-200 shadow-sm;
-    }
-
-    .shadow-lg {
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
-</style>
-@endpush
 @endsection

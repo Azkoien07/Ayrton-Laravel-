@@ -7,6 +7,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\PqrController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -40,3 +41,6 @@ Route::get('/plans', [PlanController::class, 'index'])->name('plans');
 
 // Ruta para el modulo de desafios
 Route::get('/challenge', [ChallengeController::class, 'index'])->name('challenge.index');
+
+Route::get('/pqrs/create', [PqrController::class, 'create'])->name('pqrs.pqrs');
+Route::post('/pqrs', [PqrController::class, 'store'])->name('pqrs.store');
