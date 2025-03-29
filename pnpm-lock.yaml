@@ -5,7 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 
+
 importers:
+
 
 
   .:
@@ -1731,6 +1733,7 @@ snapshots:
       browserslist: 4.24.4
       caniuse-lite: 1.0.30001707
       caniuse-lite: 1.0.30001707
+      caniuse-lite: 1.0.30001707
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.1.1
@@ -1777,6 +1780,8 @@ snapshots:
 
   browserslist@4.24.4:
     dependencies:
+      caniuse-lite: 1.0.30001707
+      electron-to-chromium: 1.5.128
       caniuse-lite: 1.0.30001707
       electron-to-chromium: 1.5.128
       caniuse-lite: 1.0.30001707
