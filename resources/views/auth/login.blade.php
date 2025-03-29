@@ -1,5 +1,5 @@
 <!-- resources/views/auth/login.blade.php -->
-@extends('layouts.app')
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -34,13 +34,13 @@
                 <!-- Campo: Correo electrónico -->
                 <div>
                     <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
-                    <input type="email" name="email" id="email" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" placeholder="tu@email.com" required>
+                    <input type="email" name="email" id="email" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" placeholder="email" required pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|gmail\.com\.co|outlook\.com|yahoo\.com)$" title="ingresa un correo valido">
                 </div>
 
                 <!-- Campo: Contraseña -->
                 <div>
                     <label for="password" class="block text-gray-700 font-medium mb-2">Contraseña</label>
-                    <input type="password" name="password" id="password" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" placeholder="••••••••" required>
+                    <input type="password" name="password" id="password" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" placeholder="••••••••" required minlength="8" max="15"  pattern="^(?=.*[!@#$%^&*(),.?\:{}|<>]).{8,15}$" title="La contraseña debe de contar con al menos un caracter especial"  >
                 </div>
 
                 <div>

@@ -1,5 +1,6 @@
 <?php
 
+use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AuthController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\VoucherController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -40,3 +42,5 @@ Route::get('/plans', [PlanController::class, 'index'])->name('plans');
 
 // Ruta para el modulo de desafios
 Route::get('/challenge', [ChallengeController::class, 'index'])->name('challenge.index');
+//Ruta para el modulo de voucher
+Route::get('/voucher',[VoucherController::class,'voucher'])->name('voucher');

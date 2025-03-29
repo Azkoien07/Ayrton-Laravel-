@@ -1,3 +1,4 @@
+@extends('layouts.app')
 <!DOCTYPE html>
 <html lang="es" class="{{ session('theme','light') }}">
 
@@ -5,28 +6,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuración - Ayrton</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-    /* Estilos para Dark Mode */
-    .dark {
-        background-color: #121212;
-        color: #e2e8f0;
-    }
-    .dark body {
-        background-color: #1e1e1e;
-    }
-    .dark .bg-white {
-        background-color: #2d3748;
-        color: #e2e8f0;
-    }
-    .dark .text-gray-700 {
-        color: #cbd5e0;
-    }
-    .dark .text-gray-900 {
-        color: #e2e8f0;
-    }
-</style>
+        /* Estilos para Dark Mode */
+        .dark {
+            background-color: #121212;
+            color: #e2e8f0;
+        }
+
+        .dark body {
+            background-color: #1e1e1e;
+        }
+
+        .dark .bg-white {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+
+        .dark .text-gray-700 {
+            color: #cbd5e0;
+        }
+
+        .dark .text-gray-900 {
+            color: #e2e8f0;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100 text-gray-900 font-sans">
@@ -84,7 +88,7 @@
             <nav class="bg-white shadow-md p-4">
                 <div class="container mx-auto flex justify-between items-center">
                     <h1 class="text-xl font-semibold">Configuración</h1>
-                    
+
                 </div>
             </nav>
 
@@ -96,17 +100,35 @@
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h3 class="text-xl font-semibold mb-4">Perfil</h3>
                         <form>
+
+
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700">Nombre</label>
-                                <input type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Tu nombre">
+                                <input type="text"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Tu nombre"
+                                    name="name"
+                                    required
+                                    minlength="3"
+                                    maxlength="50"
+                                    pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+"
+                                    title="El nombre solo puede contener letras y espacios">
                             </div>
+
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                                <input type="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="tucorreo@example.com">
+                                <input type="email"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="tucorreo@example.com"
+                                    name="email"
+                                    required
+                                    pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|gmail\.com\.co|outlook\.com|yahoo\.com)$"
+                                    title="El correo debe ser de Gmail, Outlook o Yahoo">
                             </div>
                             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Guardar Cambios</button>
                         </form>
                     </div>
+
 
                     <!-- Sección 2: Preferencias -->
                     <div class="bg-white p-6 rounded-lg shadow-md">
@@ -165,14 +187,41 @@
             </div>
 
             <!-- Pie de página -->
-            <footer class="bg-blue-600 text-white p-4 mt-8">
-                <div class="container mx-auto text-center">
-                   
-                </div>
-            </footer>
+
         </div>
     </div>
-    <script src="{{ asset('js/theme.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nameInput = document.querySelector('input[name="name"]');
+            const emailInput = document.querySelector('input[name="email"]');
+
+            if (nameInput) {
+                nameInput.addEventListener('blur', function() {
+                    if (!this.value.trim()) {
+                        addError(this, 'El nombre es obligatorio');
+                    } else if (this.value.trim().length < 3) {
+                        addError(this, 'El nombre debe tener al menos 3 caracteres');
+                    } else {
+                        removeError(this);
+                    }
+                });
+            }
+
+            if (emailInput) {
+                emailInput.addEventListener('blur', function() {
+                    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com(\.co)?$/;
+
+                    if (!this.value.trim()) {
+                        addError(this, 'El correo electrónico es obligatorio');
+                    } else if (!gmailRegex.test(this.value.trim())) {
+                        addError(this, 'Debe ser un correo de Gmail (@gmail.com o @gmail.com.co)');
+                    } else {
+                        removeError(this);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
