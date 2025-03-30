@@ -10,14 +10,39 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
         }
         .modal-content {
-            max-height: calc(100vh - 2rem);
+            max-height: 90vh;
             overflow-y: auto;
+            width: 95%;
+            max-width: 32rem;
+            margin: 0 auto;
         }
         @media (max-width: 640px) {
+            .card-shadow {
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            }
+            
+            .modal-content {
+                max-height: 95vh;
+                padding: 1.25rem;
+            }
+        }
+        
+        /* Evitar que el formulario se desborde en pantallas muy pequeñas */
+        @media (max-width: 360px) {
             .modal-content {
                 width: 95%;
                 margin: 1rem auto;
             }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        .animate-fade-in-down {
+            animation: fadeInDown 0.6s ease-out forwards;
+        }
+        .animate-letter-bounce {
+            display: inline-block;
+            animation: bounce 0.8s infinite alternate;
         }
         .title-gradient {
             background: linear-gradient(45deg, #3b82f6, #8b5cf6);
@@ -101,37 +126,37 @@
             </div>
             @endif
 
-            <!-- Formulario de login -->
-            <form action="{{ route('login') }}" method="POST" class="space-y-4">
+            <!-- Formulario de login - mejor espaciado en móvil -->
+            <form action="{{ route('login') }}" method="POST" class="space-y-3 sm:space-y-4">
                 @csrf
 
                 <!-- Campo: Correo electrónico -->
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                    <label for="email" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
                     <input type="email" name="email" id="email" value="{{ old('email') }}"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                         placeholder="tu@email.com" required>
                 </div>
 
                 <!-- Campo: Contraseña -->
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                    <label for="password" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Contraseña</label>
                     <input type="password" name="password" id="password"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                         placeholder="••••••••" required>
                 </div>
 
                 <!-- Recordar sesión -->
                 <div class="flex items-center">
                     <input type="checkbox" name="remember" id="remember" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                    <label for="remember" class="ml-2 block text-sm text-gray-700">Recordar sesión</label>
+                    <label for="remember" class="ml-2 block text-xs sm:text-sm text-gray-700">Recordar sesión</label>
                 </div>
 
                 <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-all shadow hover:shadow-md">
                     Iniciar Sesión
                 </button>
 
-                <div class="text-center text-sm text-gray-600">
+                <div class="text-center text-xs sm:text-sm text-gray-600">
                     ¿No tienes una cuenta?
                     <button type="button" onclick="openModal()" class="text-blue-600 hover:text-blue-700 font-medium">
                         Regístrate
@@ -151,15 +176,15 @@
                 </svg>
             </button>
 
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Regístrate</h2>
+            <h2 class="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">Regístrate</h2>
 
-            <form action="{{ route('register') }}" method="POST" class="space-y-3">
+            <form action="{{ route('register') }}" method="POST" class="space-y-2 sm:space-y-3">
                 @csrf
 
                 <!-- Primera columna de campos -->
                 <div class="grid grid-cols-1 gap-3">
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+                        <label for="name" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
                         <input type="text" name="name" id="name" value="{{ old('name') }}"
                             class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                             required>
@@ -180,21 +205,21 @@
                     </div>
 
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-                        <input type="password" name="password" id="password"
+                        <label for="register_password" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                        <input type="password" name="password" id="register_password"
                             class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                             required>
                     </div>
 
                     <div>
-                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Contraseña</label>
+                        <label for="password_confirmation" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Confirmar Contraseña</label>
                         <input type="password" name="password_confirmation" id="password_confirmation"
                             class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                             required>
                     </div>
 
                     <div>
-                        <label for="role_id" class="block text-sm font-medium text-gray-700 mb-1">Rol</label>
+                        <label for="role_id" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Rol</label>
                         <select name="role_id" id="role_id"
                             class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                             required>
@@ -213,7 +238,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition mt-3">
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition mt-3 text-sm sm:text-base">
                     Registrarse
                 </button>
             </form>

@@ -22,12 +22,22 @@
                     </h3>
                     <form class="space-y-4">
                         <div>
-                            <label for="" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                            <input type="text"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                maxlength="20"
+                                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
+                                title="Solo se permiten letras y espacios."
+                                required>
                         </div>
                         <div>
-                            <label for="" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
-                            <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                            <input type="email"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                required
+                                maxlength="40"
+                                pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|gmail\.com\.co|outlook\.com|yahoo\.com)$"
+                                title="El correo debe ser de Gmail, Outlook o Yahoo">
                         </div>
                         <button class="bg-primary-900 hover:bg-primary-600 focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
                             Guardar cambios
