@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Voucher;
 use Illuminate\Http\Request;
+use App\Services\PdfService;
 
 class VoucherController extends Controller
 {
@@ -12,9 +13,14 @@ class VoucherController extends Controller
      */
     public function index()
     {
-        return view('voucher.voucher');
+        return view('vouchers.voucher');
     }
 
+    public function downloadVoucher($id, PdfService $pdfService)
+    {
+        $voucher = Voucher::findOrFail($id);
+        return $pdfService->generateVoucher($voucher);
+    }
     /**
      * Show the form for creating a new resource.
      */

@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="py-12 px-4 sm:px-6 lg:px-8">
     <!-- Encabezado -->
@@ -54,7 +53,7 @@
                 </ul>
             </div>
             <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
-                <button 
+                <button
                     onclick="openModal('Básico')"
                     class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     Seleccionar Plan
@@ -112,7 +111,7 @@
                 </ul>
             </div>
             <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
-                <button 
+                <button
                     onclick="openModal('Premium')"
                     class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     Seleccionar Plan
@@ -165,7 +164,7 @@
                 </ul>
             </div>
             <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
-                <button 
+                <button
                     onclick="openModal('Platino')"
                     class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     Seleccionar Plan
@@ -174,88 +173,87 @@
         </div>
     </div>
 
-<!-- Modal de Suscripción Actualizado -->
-<div id="subscriptionModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
-    <div class="flex items-center justify-center min-h-screen px-4">
-        <!-- Fondo oscuro -->
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75" onclick="closeModal()"></div>
-        
-        <!-- Contenido del modal -->
-        <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all max-w-lg w-full z-10">
-            <!-- Encabezado del modal -->
-            <div class="flex items-center justify-between px-6 py-4 bg-gray-100 border-b border-gray-200">
-                <h3 class="text-lg font-medium text-gray-900">Confirmar Suscripción</h3>
-                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-500 focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-            
-            <!-- Cuerpo del modal -->
-            <div class="px-6 py-4">
-                <p class="text-gray-700 text-base mb-4">Estás a punto de suscribirte al plan <span id="selectedPlanName" class="font-bold"></span>.</p>
-                
-                <!-- Información de facturación -->
-                <div class="bg-gray-50 p-4 rounded-lg mb-4">
-                    <h4 class="font-medium text-gray-900 mb-2">Resumen de Facturación</h4>
-                    <div class="flex justify-between mb-2">
-                        <span class="text-gray-600">Plan seleccionado:</span>
-                        <span id="modalPlanName" class="font-medium"></span>
-                    </div>
-                    <div class="flex justify-between mb-2">
-                        <span class="text-gray-600">Precio mensual:</span>
-                        <span id="modalPlanPrice" class="font-medium"></span>
-                    </div>
-                    <div class="flex justify-between border-t border-gray-200 pt-2 mt-2">
-                        <span class="text-gray-800 font-medium">Total a pagar:</span>
-                        <span id="modalTotalPrice" class="font-bold text-blue-600"></span>
-                    </div>
+    <!-- Modal de Suscripción -->
+    <div id="subscriptionModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <!-- Fondo oscuro -->
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75" onclick="closeModal()"></div>
+
+            <!-- Contenido del modal -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all max-w-lg w-full z-10">
+                <!-- Encabezado del modal -->
+                <div class="flex items-center justify-between px-6 py-4 bg-gray-100 border-b border-gray-200">
+                    <h3 class="text-lg font-medium text-gray-900">Confirmar Suscripción</h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
-                
-                <!-- Mensaje de confirmación -->
-                <p class="text-gray-700 text-base">¿Deseas continuar con la suscripción?</p>
-            </div>
-            
-            <!-- Pie del modal -->
-            <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-2 border-t border-gray-200">
-                <button 
-                    onclick="closeModal()" 
-                    class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400">
-                    Cancelar
-                </button>
-                <button 
-                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    Confirmar
-                </button>
+
+                <!-- Cuerpo del modal -->
+                <div class="px-6 py-4">
+                    <p class="text-gray-700 text-base mb-4">Estás a punto de suscribirte al plan <span id="selectedPlanName" class="font-bold"></span>.</p>
+
+                    <!-- Información de facturación -->
+                    <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                        <h4 class="font-medium text-gray-900 mb-2">Resumen de Facturación</h4>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Plan seleccionado:</span>
+                            <span id="modalPlanName" class="font-medium"></span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Precio mensual:</span>
+                            <span id="modalPlanPrice" class="font-medium"></span>
+                        </div>
+                        <div class="flex justify-between border-t border-gray-200 pt-2 mt-2">
+                            <span class="text-gray-800 font-medium">Total a pagar:</span>
+                            <span id="modalTotalPrice" class="font-bold text-blue-600"></span>
+                        </div>
+                    </div>
+
+                    <!-- Mensaje de confirmación -->
+                    <p class="text-gray-700 text-base">¿Deseas continuar con la suscripción?</p>
+                </div>
+
+                <!-- Opciones del modal -->
+                <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-2 border-t border-gray-200">
+                    <button
+                        onclick="closeModal()"
+                        class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        Cancelar
+                    </button>
+                    <button
+                        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        Confirmar
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    const planPrices = {
-        'Básico': '0',
-        'Premium': '34.000',
-        'Platino': '50.000'
-    };
-    
-    function openModal(planName) {
-        // Actualizar contenido del modal
-        document.getElementById('selectedPlanName').textContent = planName;
-        document.getElementById('modalPlanName').textContent = planName;
-        document.getElementById('modalPlanPrice').textContent = '$' + planPrices[planName] + '/mes';
-        document.getElementById('modalTotalPrice').textContent = '$' + planPrices[planName];
-        
-        // Mostrar el modal
-        document.getElementById('subscriptionModal').classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; 
-    }
-    
-    function closeModal() {
-        document.getElementById('subscriptionModal').classList.add('hidden');
-        document.body.style.overflow = 'auto'; 
-    }
-</script>
+    <script>
+        const planPrices = {
+            'Básico': '0',
+            'Premium': '34.000',
+            'Platino': '50.000'
+        };
 
-@endsection
+        function openModal(planName) {
+            // Actualizar contenido del modal
+            document.getElementById('selectedPlanName').textContent = planName;
+            document.getElementById('modalPlanName').textContent = planName;
+            document.getElementById('modalPlanPrice').textContent = '$' + planPrices[planName] + '/mes';
+            document.getElementById('modalTotalPrice').textContent = '$' + planPrices[planName];
+
+            // Mostrar el modal
+            document.getElementById('subscriptionModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('subscriptionModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+    @endsection

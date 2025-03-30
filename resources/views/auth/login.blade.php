@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    @notifyCss
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - Ayrton</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         .card-shadow {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
         }
+
         .modal-content {
             max-height: 90vh;
             overflow-y: auto;
@@ -16,38 +18,41 @@
             max-width: 32rem;
             margin: 0 auto;
         }
+
         @media (max-width: 640px) {
             .card-shadow {
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             }
-            
+
             .modal-content {
                 max-height: 95vh;
                 padding: 1.25rem;
             }
         }
-        
-        
+
         @media (max-width: 360px) {
             .modal-content {
                 width: 95%;
                 margin: 1rem auto;
             }
-           
         }
+
         .animate-fade-in-down {
             animation: fadeInDown 0.6s ease-out forwards;
         }
+
         .animate-letter-bounce {
             display: inline-block;
             animation: bounce 0.8s infinite alternate;
         }
+
         .title-gradient {
             background: linear-gradient(45deg, #3b82f6, #8b5cf6);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
+
         .title-underline {
             height: 4px;
             width: 80px;
@@ -55,27 +60,35 @@
             margin: 12px auto;
             border-radius: 2px;
         }
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
                 transform: translateY(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
         @keyframes bounce {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-5px);
             }
         }
+
         .animate-fade-in-down {
             animation: fadeInDown 0.6s ease-out forwards;
         }
+
         .animate-letter-bounce {
             display: inline-block;
             animation: bounce 0.8s infinite alternate;
@@ -84,7 +97,10 @@
 </head>
 
 <body class="bg-gray-50">
-    
+    <!-- Contenedor de notificaciones -->
+    @include('notify::components.notify')
+
+    <!-- Contenedor principal -->
     <div class="min-h-screen flex flex-col items-center justify-center p-4">
       
         <div class="text-center mb-10 animate-fade-in-down">
@@ -164,7 +180,7 @@
         </div>
     </div>
 
-   
+    <!-- Modal de registro -->
     <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
         <div class="modal-content bg-white rounded-xl card-shadow p-6 w-full max-w-md">
             
@@ -178,8 +194,7 @@
 
             <form action="{{ route('register') }}" method="POST" class="space-y-2 sm:space-y-3">
                 @csrf
-
-              
+                <!-- Primera columna de campos -->
                 <div class="grid grid-cols-1 gap-3">
                     <div>
                         <label for="name" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
@@ -272,5 +287,7 @@
             });
         });
     </script>
+    @notifyJs
 </body>
+
 </html>

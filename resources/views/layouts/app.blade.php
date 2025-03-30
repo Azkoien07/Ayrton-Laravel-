@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    @notifyCss
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Ayrton')</title>
@@ -9,16 +10,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="flex flex-col md:flex-row min-h-screen bg-white">
-   
-    <button id="sidebarToggle" class="md:hidden fixed top-4 left-4 z-50 bg-blue-500 text-white p-2 rounded-md shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-    </button>
-
-    
-    <aside id="sidebar" class="w-64 bg-gray-50 font-sans shadow-md p-6 space-y-4 sidebar-glow fixed md:static top-0 left-0 h-full z-40 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+<body class="flex min-h-screen bg-whi">
+    @include('notify::components.notify')
+    <!-- Sidebar de navegación -->
+    <aside class="w-64 bg-gray-50 font-sans shadow-md p-6 space-y-4 sidebar-glow">
         <a href="{{ route('tasks.index') }}" class="text-3xl font-bold text-gray-800 hover:text-blue-500 transition duration-200 ease-in-out block text-center mb-8">
             Ayrton
         </a>
@@ -82,46 +77,6 @@
             @yield('content')
         </main>
     </div>
-
-   
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sidebar = document.getElementById('sidebar');
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const sidebarOverlay = document.getElementById('sidebarOverlay');
-
-            sidebarToggle.addEventListener('click', function() {
-               
-                sidebar.classList.toggle('-translate-x-full');
-
-                
-                if (sidebar.classList.contains('-translate-x-full')) {
-                    sidebarOverlay.classList.add('opacity-0', 'pointer-events-none');
-                } else {
-                    sidebarOverlay.classList.remove('opacity-0', 'pointer-events-none');
-                    sidebarOverlay.classList.add('opacity-50', 'pointer-events-auto');
-                }
-            });
-
-            sidebarOverlay.addEventListener('click', function() {
-                sidebar.classList.add('-translate-x-full');
-                sidebarOverlay.classList.add('opacity-0', 'pointer-events-none');
-                sidebarOverlay.classList.remove('opacity-50', 'pointer-events-auto');
-            });
-
-            
-            const navLinks = document.querySelectorAll('#sidebar a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    if (window.innerWidth < 768) { // Only on mobile
-                        sidebar.classList.add('-translate-x-full');
-                        sidebarOverlay.classList.add('opacity-0', 'pointer-events-none');
-                        sidebarOverlay.classList.remove('opacity-50', 'pointer-events-auto');
-                    }
-                });
-            });
-        });
-    </script>
+    @notifyJs
 </body>
-
 </html>
