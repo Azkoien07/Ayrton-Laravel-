@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Mckenziearts\Notify\Facades\Notify;
 
 
 class AuthController extends Controller
@@ -23,6 +24,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        notify()->info('Sesión cerrada correctamente', 'Hasta pronto');
         return redirect('/login');
     }
 
@@ -34,13 +36,18 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
+
+            notify()->success('Bienvenido de nuevo', 'Inicio de sesión exitoso');
             return redirect()->route('tasks.index');
+
+        } else {
+            notify()->error('Credenciales incorrectas', 'Error al iniciar sesión');
+            return back()->withErrors([
+                'email' => 'Las credenciales no coinciden.',
+            ]);
         }
-        return back()->withErrors([
-            'email' => 'Las credenciales no coinciden.',
-        ]);
     }
 
     public function register(Request $request)
@@ -64,6 +71,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-         return redirect()->route('tasks.index')->with('success', 'Registro exitoso.');
+        Notify()->success('Cuenta creada exitosamente', '¡Bienvenido a Ayrton!');
+        return redirect()->route('tasks.index');
     }
 }

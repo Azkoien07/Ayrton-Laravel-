@@ -19,7 +19,6 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Desafío 1 -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 ease-in-out">
-            <!-- Encabezado -->
             <div class="p-6 border-b border-gray-200">
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">Desafío #1</h2>
                 <p class="text-gray-600">Descripción del desafío que puede ser de cualquier longitud sin afectar el layout.</p>
@@ -39,6 +38,7 @@
                 </a>
             </div>
         </div>
+
         <!-- Desafío 2-->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 ease-in-out">
             <div class="p-6 border-b border-gray-200">
@@ -78,8 +78,6 @@
                 </a>
             </div>
         </div>
-
-
     </div>
 </div>
 @endsection

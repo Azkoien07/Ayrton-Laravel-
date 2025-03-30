@@ -2,15 +2,16 @@
 <html lang="es">
 
 <head>
+    @notifyCss
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Ayrton')</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon copy.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 </head>
 
 <body class="flex min-h-screen bg-whi">
+    @include('notify::components.notify')
     <!-- Sidebar de navegación -->
     <aside class="w-64 bg-gray-50 font-sans shadow-md p-6 space-y-4 sidebar-glow">
         <a href="{{ route('tasks.index') }}" class="text-3xl font-bold text-gray-800 hover:text-blue-500 transition duration-200 ease-in-out block text-center mb-8">
@@ -73,6 +74,6 @@
             @yield('content')
         </main>
     </div>
+    @notifyJs
 </body>
-
 </html>

@@ -16,13 +16,16 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        // Si el usuario no está autenticado, redirige al login
+        // Si el usuario no está autenticado, redirige al login con notificación
         if (!Auth::check()) {
+            notify()->error('Debes iniciar sesión para acceder.', 'Acceso denegado');
             return redirect()->route('login');
         }
 
+        // Si el usuario no tiene el rol adecuado, muestra una notificación y redirige
         if (Auth::user()->role_id != $role) {
-            abort(403, 'No tienes permiso para acceder a esta página.');
+            notify()->error('No tienes permiso para acceder a esta página.', 'Acceso restringido');
+            return redirect()->route('dashboard'); // Puedes cambiar la ruta de redirección
         }
 
         return $next($request);

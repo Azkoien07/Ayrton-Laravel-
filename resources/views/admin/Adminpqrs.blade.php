@@ -4,7 +4,6 @@
 <div class="container mx-auto px-4 py-8">
     <!-- Contenido principal -->
     <div class="p-6">
-        <!-- Título principal -->
         <div class="mb-10">
             <h2 class="text-3xl font-bold text-gray-800 mb-2">PQRS - Peticiones, Quejas, Reclamos y Sugerencias</h2>
             <p class="text-gray-600">Gestiona todas las solicitudes de los usuarios en un solo lugar</p>

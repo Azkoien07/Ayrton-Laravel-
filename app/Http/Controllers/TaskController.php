@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Mckenziearts\Notify\Facades\Notify;
 
 class TaskController extends Controller
 {
@@ -18,10 +19,9 @@ class TaskController extends Controller
         return view('tasks.create');
     }
 
-    // Guardar una nueva tarea
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'state' => 'required|in:Pendiente,En Progreso,Completada,Cancelada',
@@ -29,58 +29,61 @@ class TaskController extends Controller
             'type' => 'required|in:Personal,Laboral,Educativa',
             'reminder' => 'required|string',
             'f_creation' => 'required|date',
-            'f_expiration' => 'required|date',
+            'f_expiration' => 'required|date|after_or_equal:f_creation',
+        ], [
+            'f_expiration.after_or_equal' => 'La fecha de expiración debe ser igual o posterior a la fecha de creación'
         ]);
 
-        // Crear la tarea en la base de datos
-        Task::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'state' => $request->state,
-            'priority' => $request->priority,
-            'type' => $request->type,
-            'reminder' => $request->reminder,
-            'f_creation' => $request->f_creation,
-            'f_expiration' => $request->f_expiration,
-        ]);
-        return redirect()->route('tasks.index')->with('success', 'Tarea creada correctamente.');
+        Task::create($validated);
+
+        Notify()->success('Tarea creada exitosamente', '¡Nueva tarea registrada!');
+        return redirect()->route('tasks.index');
     }
 
-    // Mostrar los detalles de una tarea
     public function show(Task $task)
     {
         return view('tasks.show', compact('task'));
     }
-
 
     public function edit(Task $task)
     {
         return view('tasks.edit', compact('task'));
     }
 
-    // Actualizar una tarea
     public function update(Request $request, Task $task)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
             'state' => 'required|in:Pendiente,En Progreso,Completada,Cancelada',
+            'description' => 'nullable|string',
             'priority' => 'required|in:Alta,Media,Baja',
             'type' => 'required|in:Personal,Laboral,Educativa',
             'reminder' => 'required|string',
             'f_creation' => 'required|date',
-            'f_expiration' => 'required|date',
+            'f_expiration' => 'required|date|after_or_equal:f_creation',
+        ], [
+            'f_expiration.after_or_equal' => 'La fecha de expiración debe ser igual o posterior a la fecha de creación'
         ]);
 
-        $task->update($request->all());
+        $task->update($validated);
 
-        return redirect()->route('tasks.index')->with('success', 'Tarea actualizada correctamente.');
+        Notify()->success('Tarea actualizada correctamente', '¡Cambios guardados!');
+        return redirect()->route('tasks.index');
     }
 
-    // Eliminar una tarea
-    public function destroy(Task $task)
+    public function destroy($id)
     {
+        $task = Task::find($id);
+
+        if (!$task) {
+            Notify()->error('La tarea no existe', 'Error');
+            return back();
+        }
+
+        $taskName = $task->name;
         $task->delete();
-        return redirect()->route('tasks.index')->with('success', 'Tarea eliminada correctamente.');
+
+        Notify()->warning("La tarea' {$taskName}' fue eliminada permanentemente",'Tarea Eliminada');
+        return redirect()->route('tasks.index');
     }
 }
