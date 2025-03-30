@@ -21,7 +21,6 @@ class RoleMiddleware
             return redirect()->route('login');
         }
 
-        // Si el usuario no tiene el rol requerido, deniega acceso
         if (Auth::user()->role_id != $role) {
             abort(403, 'No tienes permiso para acceder a esta página.');
         }
