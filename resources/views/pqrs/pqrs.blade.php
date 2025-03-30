@@ -2,17 +2,17 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-6">
-    <!-- Contenido principal -->
+   
     <div class="max-w-3xl mx-auto p-4">
         <div class="mb-8 text-center">
             <h2 class="text-3xl font-bold text-gray-800 mb-2">Envíe su PQRS</h2>
             <p class="text-gray-600">Formulario para Peticiones, Quejas, Reclamos y Sugerencias</p>
         </div>
 
-        <!-- Tarjeta del formulario -->
+       
         <div class="bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden">
-            <div class="p-6"> <!-- Reduje el p-6 md:p-8 a solo p-6 -->
-                <!-- Mensaje de éxito -->
+            <div class="p-6"> 
+              
                 @if(session('success'))
                 <div class="mb-4 p-3 bg-green-50 text-green-700 rounded-lg border border-green-200 text-sm"> <!-- Reduje mb-6 a mb-4 y tamaño del texto -->
                     <div class="flex items-center">
@@ -24,26 +24,26 @@
                 </div>
                 @endif
 
-                <form action="{{ route('pqrs.store') }}" method="POST">
+                <form action="{{ route('pqrs.store') }}" method="post">
                     @csrf
                     <!-- Tipo de PQRS -->
                     <div class="mb-6">
                         <label for="" class="block text-sm font-medium text-gray-700 mb-2">Tipo de PQRS *</label>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                             <label class="flex items-center">
-                                <input type="radio" name="type" value="peticion" class="h-4 w-4 text-primary-600 focus:ring-primary-500" required>
+                                <input type="radio" name="type_pqr" value="peticion" class="h-4 w-4 text-primary-600 focus:ring-primary-500" required>
                                 <span class="ml-2 text-sm text-gray-700">Petición</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="type" value="queja" class="h-4 w-4 text-primary-600 focus:ring-primary-500">
+                                <input type="radio" name="type_pqr" value="queja" class="h-4 w-4 text-primary-600 focus:ring-primary-500">
                                 <span class="ml-2 text-sm text-gray-700">Queja</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="type" value="reclamo" class="h-4 w-4 text-primary-600 focus:ring-primary-500">
+                                <input type="radio" name="type_pqr" value="reclamo" class="h-4 w-4 text-primary-600 focus:ring-primary-500">
                                 <span class="ml-2 text-sm text-gray-700">Reclamo</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="type" value="sugerencia" class="h-4 w-4 text-primary-600 focus:ring-primary-500">
+                                <input type="radio" name="type_pqr" value="sugerencia" class="h-4 w-4 text-primary-600 focus:ring-primary-500">
                                 <span class="ml-2 text-sm text-gray-700">Sugerencia</span>
                             </label>
                         </div>

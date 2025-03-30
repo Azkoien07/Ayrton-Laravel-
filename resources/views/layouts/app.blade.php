@@ -76,7 +76,7 @@
     <div id="sidebarOverlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none md:hidden transition-opacity duration-300 ease-in-out z-30"></div>
 
   
-    <div class="flex-grow flex flex-col w-full md:ml-56">
+    <div class="flex-grow flex flex-col w-full md:ml-64">
        
         <main class="flex-grow px-4 pb-8 pt-16 md:pt-4 w-full max-w-full ml-2">
             @yield('content')
