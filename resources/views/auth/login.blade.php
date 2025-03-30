@@ -27,14 +27,11 @@
             }
         }
         
-        /* Evitar que el formulario se desborde en pantallas muy pequeñas */
+
         @media (max-width: 360px) {
             .modal-content {
                 width: 95%;
                 margin: 1rem auto;
-            }
-            50% {
-                transform: translateY(-5px);
             }
         }
         .animate-fade-in-down {
