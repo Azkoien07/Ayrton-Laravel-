@@ -40,10 +40,14 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             notify()->success('Bienvenido de nuevo', 'Inicio de sesión exitoso');
-            return redirect()->route('tasks.index');
 
+            if (Auth::user()->role_id == 1) {
+                return redirect()->route('admin.index');
+            }
+            return redirect()->route('tasks.index');
         } else {
             notify()->error('Credenciales incorrectas', 'Error al iniciar sesión');
+
             return back()->withErrors([
                 'email' => 'Las credenciales no coinciden.',
             ]);

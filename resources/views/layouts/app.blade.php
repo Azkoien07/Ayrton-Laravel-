@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     @notifyCss
     <meta charset="UTF-8">
@@ -9,9 +8,15 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon copy.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-
-<body class="flex min-h-screen bg-whi">
+<body class="flex flex-col md:flex-row min-h-screen bg-white">
     @include('notify::components.notify')
+
+    <button id="sidebarToggle" class="md:hidden fixed top-4 left-4 z-50 bg-blue-500 text-white p-2 rounded-md shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
+    
     <!-- Sidebar de navegación -->
     <aside class="w-64 bg-gray-50 font-sans shadow-md p-6 space-y-4 sidebar-glow">
         <a href="{{ route('tasks.index') }}" class="text-3xl font-bold text-gray-800 hover:text-blue-500 transition duration-200 ease-in-out block text-center mb-8">

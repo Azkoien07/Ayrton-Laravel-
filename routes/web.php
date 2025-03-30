@@ -10,6 +10,7 @@ use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\PqrController;
 use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -31,6 +32,13 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 
 // Procesar el formulario de registro
 Route::post('/register', [AuthController::class, 'register']);
+
+
+Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':1'])->prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/pqrs', [AdminController::class, 'pqrs'])->name('admin.pqrs');
+    Route::get('/ranking', [AdminController::class, 'ranking'])->name('admin.ranking');
+});
 
 // Rutas para el módulo de tareas
 Route::middleware('auth')->group(function () {
