@@ -17,23 +17,23 @@ class PlanSeeder extends Seeder
             [
                 'name' => 'Basic Plan',
                 'description' => 'Acceso limitado a funcionalidades.',
-                'price' => 9.99,
+                'price' => 0,
                 'state' => 'Activo',
                 'duration' => 30,
             ],
             [
                 'name' => 'Premium Plan',
                 'description' => 'Acceso a más funciones y soporte premium.',
-                'price' => 19.99,
+                'price' => 34.000,
                 'state' => 'Activo',
-                'duration' => 90,
+                'duration' => 30,
             ],
             [
                 'name' => 'Platinum Plan',
                 'description' => 'Acceso total y beneficios exclusivos.',
-                'price' => 29.99,
+                'price' => 50.000,
                 'state' => 'Activo',
-                'duration' => 180,
+                'duration' => 30,
             ],
         ]);
     }

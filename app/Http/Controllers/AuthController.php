@@ -36,9 +36,8 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('tasks');
+            return redirect()->route('tasks.index');
         }
-
         return back()->withErrors([
             'email' => 'Las credenciales no coinciden.',
         ]);
@@ -49,10 +48,9 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
             'username' => 'required|string|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
             'role_id' => 'required|integer',
-            'plan_id' => 'required|integer',
         ]);
 
         $user = new User();
@@ -61,11 +59,11 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->username = $request->username;
         $user->role_id = $request->role_id;
-        $user->plan_id = $request->plan_id;
+        $user->plan_id = 1;
         $user->save();
 
         Auth::login($user);
 
-        return redirect()->route('tasks')->with('success', 'Registro exitoso.');
+         return redirect()->route('tasks.index')->with('success', 'Registro exitoso.');
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\PqrController;
 Route::get('/', function () {
     return view('auth.login');
 });
+
 Route::post('/set-theme', [ThemeController::class, 'setTheme'])->name('set.theme');
 
 // Mostrar el formulario de login
@@ -30,8 +31,10 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register']);
 
 // Rutas para el módulo de tareas
-Route::resource('tasks', TaskController::class);
-Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::middleware('auth')->group(function () {
+    Route::resource('tasks', TaskController::class);
+    Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+});
 
 // Ruta para el módulo de configuración
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
@@ -42,5 +45,6 @@ Route::get('/plans', [PlanController::class, 'index'])->name('plans');
 // Ruta para el modulo de desafios
 Route::get('/challenge', [ChallengeController::class, 'index'])->name('challenge.index');
 
-Route::get('/pqrs/create', [PqrController::class, 'create'])->name('pqrs.pqrs');
+// Ruta para el modulo de pqrs
 Route::post('/pqrs', [PqrController::class, 'store'])->name('pqrs.store');
+Route::get('/pqrs/create', [PqrController::class, 'create'])->name('pqrs.pqrs');
