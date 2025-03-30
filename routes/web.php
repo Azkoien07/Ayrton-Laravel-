@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Guesser\Name;
+use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AuthController;
@@ -9,10 +10,20 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\PqrController;
+use App\Models\Ranking;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RankingController;
 
 Route::get('/', function () {
     return view('auth.login');
 });
+
+Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class.':1'])->prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/pqrs', [AdminController::class, 'pqrs'])->name('admin.pqrs');
+    Route::get('/ranking', [AdminController::class, 'ranking'])->name('admin.ranking');
+});
+
 Route::post('/set-theme', [ThemeController::class, 'setTheme'])->name('set.theme');
 
 // Mostrar el formulario de login
@@ -31,8 +42,10 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register']);
 
 // Rutas para el módulo de tareas
-Route::resource('tasks', TaskController::class);
-Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::middleware('auth')->group(function () {
+    Route::resource('tasks', TaskController::class);
+    Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+});
 
 // Ruta para el módulo de configuración
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
@@ -42,7 +55,8 @@ Route::get('/plans', [PlanController::class, 'index'])->name('plans');
 
 // Ruta para el modulo de desafios
 Route::get('/challenge', [ChallengeController::class, 'index'])->name('challenge.index');
+
 // Ruta para el modulo de pqrs
-Route::get('/pqrs/create', [PqrController::class, 'create'])->name('pqrs.pqrs');
 Route::post('/pqrs', [PqrController::class, 'store'])->name('pqrs.store');
-//Ruta para el modulo
+Route::get('/pqrs/create', [PqrController::class, 'create'])->name('pqrs.pqrs');
+

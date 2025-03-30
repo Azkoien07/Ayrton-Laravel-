@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    // Mostrar la lista de tareas
     public function index()
     {
         $tasks = Task::all();

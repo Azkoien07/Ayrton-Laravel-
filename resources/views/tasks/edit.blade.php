@@ -1,36 +1,12 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Tarea - Gestión de Tareas</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
+@section('content')
 <body class="bg-gray-100 text-gray-900 font-sans">
 
     <!-- Contenedor Principal -->
     <div class="min-h-screen flex flex-col">
-
-        <!-- Barra de Navegación -->
-        <nav class="bg-white shadow-md p-4">
-            <div class="container mx-auto flex justify-between items-center">
-                <h1 class="text-xl font-semibold">Gestión de Tareas</h1>
-                <div class="flex space-x-4">
-                    <a href="{{ route('tasks.index') }}" class="text-gray-700 hover:text-blue-500">Inicio</a>
-                    <a href="{{ route('tasks.create') }}" class="text-gray-700 hover:text-blue-500">Crear Tarea</a>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Contenido de Edición -->
         <div class="flex-1 container mx-auto p-6">
-
-            <!-- Título de la Página -->
-            <h2 class="text-2xl font-bold mb-8">Editar Tarea</h2>
-
+            <h2 class="text-3xl font-bold mb-8">Editar Tarea</h2>
             <!-- Formulario de Edición -->
             <form action="{{ route('tasks.update', $task->id) }}" method="POST" class="bg-white p-6 rounded-lg shadow-md">
                 @csrf
@@ -104,16 +80,5 @@
                 </div>
             </form>
         </div>
-
-        <!-- Pie de Página -->
-        <footer class="bg-white shadow-md p-4 mt-8">
-            <div class="container mx-auto text-center text-sm text-gray-500">
-                &copy; 2023 Gestión de Tareas. Todos los derechos reservados.
-            </div>
-        </footer>
-
     </div>
-
-</body>
-
-</html>
+@endsection

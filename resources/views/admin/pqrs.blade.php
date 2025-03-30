@@ -1,6 +1,6 @@
-@extends('layouts.app')
 
-@section('content')
+@extends('layouts.admin')
+@section('admin-content')
 <div class="container mx-auto px-4 py-8">
     <!-- Contenido principal -->
     <div class="p-6">

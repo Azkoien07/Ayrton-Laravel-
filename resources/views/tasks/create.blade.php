@@ -68,19 +68,19 @@
         <!-- Campo: Recordatorio -->
         <div class="mb-4">
             <label for="reminder" class="block text-gray-700 font-semibold mb-2">Recordatorio</label>
-            <input type="date" name="reminder" id="reminder" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required min="2000-01-01" max="2023-10-31">
+            <input type="date" name="reminder" id="reminder" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required min="2000-01-01" max="2030-10-31">
         </div>
 
         <!-- Campo: Fecha de Creación -->
         <div class="mb-4">
             <label for="f_creation" class="block text-gray-700 font-semibold mb-2">Fecha de Creación</label>
-            <input type="date" name="f_creation" id="f_creation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required min="2000-01-01" max="2023-10-31">
+            <input type="date" name="f_creation" id="f_creation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required min="2000-01-01" max="2030-10-31">
         </div>
 
         <!-- Campo: Fecha de Vencimiento -->
         <div class="mb-4">
             <label for="f_expiration" class="block text-gray-700 font-semibold mb-2">Fecha de Vencimiento</label>
-            <input type="date" name="f_expiration" id="f_expiration" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required min="2000-01-01" max="2023-10-31">
+            <input type="date" name="f_expiration" id="f_expiration" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required min="2000-01-01" max="2030-10-31">
         </div>
 
         <!-- Botón de enviar -->
