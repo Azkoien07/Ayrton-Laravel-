@@ -4,9 +4,9 @@
 <div class="container mx-auto px-4 py-8">
     @include('notify::components.notify')
 
-    <h1 class="text-3xl font-bold text-gray-800 mb-8">Lista de Tareas</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-8 dark:text-desertMist">Lista de Tareas</h1>
 
-    <a href="{{ route('tasks.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out mb-8 inline-block">
+    <a href="{{ route('tasks.create') }}" class="bg-deepTeal hover:bg-stormyBlue  text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out mb-8 inline-block">
         + Crear Tarea
     </a>
     <!-- Lista de tareas -->

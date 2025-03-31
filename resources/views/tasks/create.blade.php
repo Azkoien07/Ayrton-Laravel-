@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-gray-800 mb-8">Crear Nueva Tarea</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-8 dark:text-desertMist">Crear Nueva Tarea</h1>
 
     <!-- Formulario -->
     <form action="{{ route('tasks.store') }}" method="POST" class="bg-white rounded-lg shadow-md p-6">
@@ -83,7 +83,7 @@
 
         <!-- Botón de enviar -->
         <div class="flex items-center justify-end">
-            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+            <button type="submit" class="bg-deepTeal hover:bg-stormyBlue  text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
                 Crear Tarea
             </button>
         </div>

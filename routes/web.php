@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Guesser\Name;
+use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AuthController;
@@ -11,9 +12,14 @@ use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\PqrController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AdminController;
-
 Route::get('/', function () {
     return view('auth.login');
+});
+
+Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class.':1'])->prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/pqrs', [AdminController::class, 'pqrs'])->name('admin.pqrs');
+    Route::get('/ranking', [AdminController::class, 'ranking'])->name('admin.ranking');
 });
 
 Route::post('/set-theme', [ThemeController::class, 'setTheme'])->name('set.theme');
