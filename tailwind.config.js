@@ -1,5 +1,5 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
@@ -8,16 +8,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#3178C4',  
-          50: '#E6F0FF',   
-          100: '#CCE0FF',
-          500: '#3178C4', 
-          700: '#1E4ED8',      
-          900: '#0F2A6B'     
-        }
-      }
+        desertMist: "#F2E1C2",
+        midnightBlue: "#2C3E50",
+        stormyBlue: "#1F2D3D",
+        deepTeal: "#006D77",
+        sandDune: "#C19A6B",
+      },
     },
   },
   plugins: [],
-}
+};

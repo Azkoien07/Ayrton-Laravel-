@@ -3,8 +3,8 @@
 <div class="py-12 px-4 sm:px-6 lg:px-8">
     <!-- Encabezado -->
     <div class="text-center mb-8 -mt-4">
-        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">Planes de Suscripción</h1>
-        <p class="mt-4 text-xl text-gray-600">Elige el plan que mejor se adapte a tus necesidades</p>
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl dark:text-desertMist">Planes de Suscripción</h1>
+        <p class="mt-4 text-xl text-gray-600 dark:text-desertMist">Elige el plan que mejor se adapte a tus necesidades</p>
     </div>
     <!-- Contenedor de Planes -->
     <div class="grid gap-8 md:grid-cols-3 max-w-7xl mx-auto">
@@ -55,17 +55,17 @@
             <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
                 <button
                     onclick="openModal('Básico')"
-                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-deepTeal hover:bg-stormyBlue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     Seleccionar Plan
                 </button>
             </div>
         </div>
 
         <!-- Plan Premium (Destacado) -->
-        <div class="flex flex-col rounded-xl shadow-xl overflow-hidden transform scale-105 z-10 border-2 border-blue-500">
+        <div class="flex flex-col rounded-xl shadow-xl overflow-hidden transform scale-105 z-10 border-2 bg-deepTeal ">
             <div class="px-6 py-8 bg-white">
                 <div class="absolute -top-2 -right-2 z-10">
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-blue-500 text-white shadow-lg">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-deepTeal  text-white shadow-lg">
                         Popular
                     </span>
                 </div>
@@ -113,7 +113,7 @@
             <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
                 <button
                     onclick="openModal('Premium')"
-                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-deepTeal hover:bg-stormyBlue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     Seleccionar Plan
                 </button>
             </div>
@@ -166,7 +166,7 @@
             <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
                 <button
                     onclick="openModal('Platino')"
-                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-deepTeal hover:bg-stormyBlue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     Seleccionar Plan
                 </button>
             </div>

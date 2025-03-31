@@ -5,8 +5,8 @@
    
     <div class="max-w-3xl mx-auto p-4">
         <div class="mb-8 text-center">
-            <h2 class="text-3xl font-bold text-gray-800 mb-2">Envíe su PQRS</h2>
-            <p class="text-gray-600">Formulario para Peticiones, Quejas, Reclamos y Sugerencias</p>
+            <h2 class="text-3xl font-bold text-gray-800 mb-2 dark:text-desertMist">Envíe su PQRS</h2>
+            <p class="text-gray-600 dark:text-desertMist">Formulario para Peticiones, Quejas, Reclamos y Sugerencias</p>
         </div>
 
        
@@ -106,7 +106,7 @@
                     <!-- Botón de envío -->
                     <div class="flex justify-end">
                         <button type="submit"
-                            class="bg-primary-900 hover:bg-primary-700 text-white font-medium py-2 px-6 rounded-lg shadow-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                            class="bg-deepTeal hover:bg-stormyBlue text-white font-medium py-2 px-6 rounded-lg shadow-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
                             Enviar PQRS
                         </button>
                     </div>
