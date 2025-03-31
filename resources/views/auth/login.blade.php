@@ -99,7 +99,6 @@
 <body class="bg-gray-50">
     <!-- Contenedor de notificaciones -->
     @include('notify::components.notify')
-
     <!-- Contenedor principal -->
     <div class="min-h-screen flex flex-col items-center justify-center p-4">
         <!-- Título fuera de la card con animación -->
