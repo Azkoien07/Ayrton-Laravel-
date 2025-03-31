@@ -17,4 +17,11 @@ export default defineConfig({
     optimizeDeps: {
         include: ['esbuild'],
     },
+    server: {
+        host: '0.0.0.0',
+        port: 5173,      
+        hmr: {
+            host: '', 
+        }
+    }
 });

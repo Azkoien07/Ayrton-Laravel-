@@ -16,12 +16,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class.':1'])->prefix('admin')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('/pqrs', [AdminController::class, 'pqrs'])->name('admin.pqrs');
-    Route::get('/ranking', [AdminController::class, 'ranking'])->name('admin.ranking');
-});
-
+// Rutas para el darkMode
 Route::post('/set-theme', [ThemeController::class, 'setTheme'])->name('set.theme');
 
 // Mostrar el formulario de login
@@ -39,8 +34,8 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 // Procesar el formulario de registro
 Route::post('/register', [AuthController::class, 'register']);
 
-
-Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':1'])->prefix('admin')->group(function () {
+// Rutas protegidas por el middlware para el rol admin
+Route::middleware(['auth', RoleMiddleware::class . ':1'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/pqrs', [AdminController::class, 'pqrs'])->name('admin.pqrs');
     Route::get('/ranking', [AdminController::class, 'ranking'])->name('admin.ranking');

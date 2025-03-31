@@ -1,4 +1,4 @@
-@extends('layouts.admin') 
+@extends('layouts.admin')
 @php
     use App\Models\Pqr;
 @endphp
@@ -34,7 +34,6 @@
             </div>
             @endforeach
         </div>
-
         <div class="bg-white rounded-lg shadow-lg border border-gray-100 p-6 mb-8">
             <form action="{{ route('admin.pqrs') }}" method="GET">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -74,7 +73,6 @@
                 </div>
             </form>
         </div>
-
         @if(session('success'))
         <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-8 rounded shadow-md" role="alert">
             <p>{{ session('success') }}</p>

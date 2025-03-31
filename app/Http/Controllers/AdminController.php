@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\Pqr;
 use App\Models\Ranking;
@@ -12,17 +13,15 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-
-
     public function index()
     {
         //mostrar los usuarios
         $users = User::all();
-        return view('admin.index', compact('users')); 
-         }
+        return view('admin.index', compact('users'));
+    }
 
 
-         //mostrar los pqrs
+    //mostrar los pqrs
     public function pqrs()
     {
         $pqrs = Pqr::all();
@@ -32,9 +31,9 @@ class AdminController extends Controller
     public function ranking()
     {
         $ranking = Ranking::all();
-        return view('admin.ranking',compact('ranking'));
+        return view('admin.ranking', compact('ranking'));
     }
-    
+
     public function create()
     {
         //
@@ -49,8 +48,9 @@ class AdminController extends Controller
     }
 
     //desabilitar usuario
-    public function destroy(User $users){
+    public function destroy(User $users)
+    {
         $users->delete();
         return redirect()->route('admin.index')->with('succes', 'usuario desabilitado');
     }
- }
+}
