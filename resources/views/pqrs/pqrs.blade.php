@@ -140,7 +140,7 @@
                     <!-- Botón de envío -->
                     <div class="flex justify-end">
                         <button type="submit"
-                            class="bg-deepTeal hover:bg-stormyBlue text-white font-medium py-2 px-6 rounded-lg shadow-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-dark-card">
+                            class="bg-light-primary hover:bg-dark-background text-white font-medium py-2 px-6 rounded-lg shadow-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-dark-card">
                             Enviar PQRS
                         </button>
                     </div>

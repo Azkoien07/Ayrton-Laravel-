@@ -120,8 +120,8 @@
                 </div>
                 <div class="px-6 py-4 bg-gray-50 dark:bg-dark-border border-t border-gray-200 dark:border-dark-border">
                     <button
-                        onclick="openModal('Premium')"
-                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-deepTeal hover:bg-stormyBlue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300">
+                        onclick="openModal('Básico')"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-300">
                         Seleccionar Plan
                     </button>
                 </div>
@@ -174,8 +174,8 @@
             </div>
             <div class="px-6 py-4 bg-gray-50 dark:bg-dark-border border-t border-gray-200 dark:border-dark-border">
                 <button
-                    onclick="openModal('Platino')"
-                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-deepTeal hover:bg-stormyBlue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300">
+                    onclick="openModal('Básico')"
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-300">
                     Seleccionar Plan
                 </button>
             </div>
@@ -319,8 +319,8 @@
             const planName = document.getElementById('selectedPlanName').textContent;
             alert(`¡Gracias por suscribirte al plan ${planName}! Redirigiendo a tu panel...`);
             closeModal();
-            
-           
+
+
         }
 
         // Cerrar modal con ESC
@@ -330,4 +330,4 @@
             }
         });
     </script>
-@endsection
+    @endsection

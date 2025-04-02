@@ -1,9 +1,7 @@
 @extends('layouts.admin')
-
 @section('admin-content')
 <div class="container mx-auto p-6">
     <h2 class="text-2xl font-bold mb-4">Dashboard de Administrador</h2>
-
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <div class="bg-white shadow-md rounded-lg p-4 text-center">
             <h3 class="text-lg font-semibold mb-2">Usuarios Registrados</h3>

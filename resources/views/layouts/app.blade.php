@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Ayrton')</title>
+    <title>@yield('title', __('messages.title'))</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon copy.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -22,29 +22,29 @@
 
     <aside id="sidebar" class="fixed md:relative transform -translate-x-full md:translate-x-0 w-64 bg-light-card dark:bg-dark-card font-sans shadow-md p-6 space-y-4 z-40 transition-transform duration-300 ease-in-out min-h-screen">
         <a href="{{ route('tasks.index') }}" class="text-3xl font-bold text-light-text dark:text-dark-text hover:text-light-hover transition duration-200 ease-in-out block text-center mb-8">
-            Ayrton
+            {{ __('messages.title') }}
         </a>
         
         <nav class="space-y-2">
             <a href="{{ route('tasks.index') }}" class="block text-light-text dark:text-dark-text hover:bg-light-primary hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
-                 Tareas
+                {{ __('messages.tasks') }}
             </a>
             <a href="{{ route('plans') }}" class="block text-light-text dark:text-dark-text hover:bg-light-primary hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
-                 Planes
+                {{ __('messages.plans') }}
             </a>
             <a href="{{ route('challenge.index') }}" class="block text-light-text dark:text-dark-text hover:bg-light-primary hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
-                 Desafíos
+                {{ __('messages.challenges') }}
             </a>
             <a href="{{ route('settings') }}" class="block text-light-text dark:text-dark-text hover:bg-light-primary hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
-                 Configuración
+                {{ __('messages.settings') }}
             </a>
             <a href="{{ route('pqrs.pqrs') }}" class="block text-light-text dark:text-dark-text hover:bg-light-primary hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
-                 PQRS
+                {{ __('messages.pqrs') }}
             </a>
             <form action="{{ route('logout') }}" method="POST" class="mt-4">
                 @csrf
                 <button type="submit" class="w-full bg-light-primary hover:bg-dark-background text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out flex items-center justify-center">
-                    Cerrar sesión
+                    {{ __('messages.logout') }}
                 </button>
             </form>
         </nav>

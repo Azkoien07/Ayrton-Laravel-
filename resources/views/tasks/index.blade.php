@@ -1,14 +1,14 @@
-<!-- resources/views/tasks/index.blade.php -->
 @extends('layouts.app')
 @section('content')
 <div class="container mx-auto px-4 py-8">
     @include('notify::components.notify')
 
-    <h1 class="text-3xl font-bold text-gray-800 mb-8 dark:text-white">Lista de Tareas</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-8 dark:text-white">{{ __('messages.task_list') }}</h1>
 
-    <a href="{{ route('tasks.create') }}" class="bg-deepTeal hover:bg-stormyBlue  text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out mb-8 inline-block">
-        + Crear Tarea
+    <a href="{{ route('tasks.create') }}" class="bg-light-primary hover:bg-dark-background text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out mb-8 inline-block">
+        + {{ __('messages.create_task') }}
     </a>
+
     <!-- Lista de tareas -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach ($tasks as $task)
@@ -16,7 +16,7 @@
             <!-- Encabezado de la tarjeta -->
             <div class="p-6 border-b border-gray-200">
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ $task->name }}</h2>
-                <p class="text-gray-600">{{ $task->description ?? 'Sin descripción' }}</p>
+                <p class="text-gray-600">{{ $task->description ?? __('messages.no_description') }}</p>
             </div>
 
             <!-- Pie de la tarjeta con acciones -->
