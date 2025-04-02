@@ -49,7 +49,7 @@ Ayrton es una aplicación web desarrollada en Laravel con plantillas Blade, dise
 - **Framework Backend:** Laravel 12
 - **Frontend:** Plantillas Blade,Tailwind CSS
 - **Base de Datos:** PostgreSQL
-- **Autenticación y Seguridad:** Laravel Breeze / Sanctum
+- **Autenticación y Seguridad:** Autenticación tradicional basada en sesiones
 - **Pasarela de Pagos:** Stripe / MercadoPago
 
 ## 📜 Instalación y Configuración en Local
@@ -57,7 +57,6 @@ Ayrton es una aplicación web desarrollada en Laravel con plantillas Blade, dise
 ### 1️⃣ Clonar el Repositorio
 ```bash
 git clone https://github.com/tu-usuario/ayrton.git
-cd ayrton
 ```
 
 ### 2️⃣ Configurar el Entorno
@@ -82,7 +81,7 @@ DB_USERNAME=tu_usuario
 DB_PASSWORD=tu_contraseña
 ```
 
-Luego, ejecuta las migraciones y los seeders:
+Luego, ejecuta las migraciones y los seeders en este orden:
 ```bash
 php artisan migrate --path=database/migrations/2025_03_18_192603_create_roles_table.php
 php artisan migrate --path=database/migrations/2025_03_18_194230_create_pqrs_table.php
@@ -103,6 +102,8 @@ php artisan migrate --path=database/migrations/2025_03_18_211351_create_challeng
 ### 4️⃣ Iniciar el Servidor
 Ejecuta el siguiente comando para iniciar la aplicación:
 ```bash
+pnpm run build
+pnpm run dev
 php artisan serve
 ```
 La aplicación estará disponible en `http://127.0.0.1:8000`
