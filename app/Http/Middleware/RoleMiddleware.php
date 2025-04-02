@@ -25,7 +25,7 @@ class RoleMiddleware
         // Si el usuario no tiene el rol adecuado, muestra una notificación y redirige
         if (Auth::user()->role_id != $role) {
             notify()->error('No tienes permiso para acceder a esta página.', 'Acceso restringido');
-            return redirect()->route('dashboard'); // Puedes cambiar la ruta de redirección
+            return redirect()->route('pqrs.pqrs'); // Puedes cambiar la ruta de redirección
         }
 
         return $next($request);
