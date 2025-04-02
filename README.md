@@ -63,6 +63,7 @@ git clone https://github.com/tu-usuario/ayrton.git
 Renombra el archivo de configuración `.env.example` a `.env`:
 ```bash
 composer install
+pnpm install
 cp .env.example .env
 ```
 Genera la clave de aplicación de Laravel:
