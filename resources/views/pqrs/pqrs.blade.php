@@ -37,7 +37,7 @@
                 </div>
                 @endif
 
-                <form action="{{ route('pqrs.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('pqrs.store') }}" method="POST">
                     @csrf
                     
                     <!-- Tipo de PQRS -->
@@ -45,24 +45,19 @@
                         <label class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-2">Tipo de PQRS *</label>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                             <label class="flex items-center">
-                                <input type="radio" name="type_pqr" value="peticion" class="h-4 w-4 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400" 
-                                    required {{ old('type_pqr') == 'peticion' ? 'checked' : '' }}>
-                                <span class="ml-2 text-sm text-gray-700 dark:text-dark-text">Petición</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="type_pqr" value="queja" class="h-4 w-4 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400"
-                                    {{ old('type_pqr') == 'queja' ? 'checked' : '' }}>
+                                <input type="radio" name="type_pqr" value="Queja" class="h-4 w-4 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400"
+                                    {{ old('type_pqr') == 'Queja' ? 'checked' : '' }}>
                                 <span class="ml-2 text-sm text-gray-700 dark:text-dark-text">Queja</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="type_pqr" value="reclamo" class="h-4 w-4 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400"
-                                    {{ old('type_pqr') == 'reclamo' ? 'checked' : '' }}>
-                                <span class="ml-2 text-sm text-gray-700 dark:text-dark-text">Reclamo</span>
+                                <input type="radio" name="type_pqr" value="Sugerencia" class="h-4 w-4 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400"
+                                    {{ old('type_pqr') == 'Sugerencia' ? 'checked' : '' }}>
+                                <span class="ml-2 text-sm text-gray-700 dark:text-dark-text">Sugerencia</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="type_pqr" value="sugerencia" class="h-4 w-4 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400"
-                                    {{ old('type_pqr') == 'sugerencia' ? 'checked' : '' }}>
-                                <span class="ml-2 text-sm text-gray-700 dark:text-dark-text">Sugerencia</span>
+                                <input type="radio" name="type_pqr" value="Sugerencia" class="h-4 w-4 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400"
+                                    {{ old('type_pqr') == 'Duda' ? 'checked' : '' }}>
+                                <span class="ml-2 text-sm text-gray-700 dark:text-dark-text">Duda</span>
                             </label>
                         </div>
                         @error('type_pqr')
@@ -70,43 +65,16 @@
                         @enderror
                     </div>
 
-                    <!-- Información del usuario -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-1">Nombre completo *</label>
-                            <input type="text" id="name" name="name" value="{{ old('name', auth()->user()->name ?? '') }}"
-                                class="w-full px-3 py-2 border border-gray-300 dark:border-dark-border rounded-md focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-background dark:text-dark-text"
-                                required
-                                minlength="3"
-                                maxlength="100"
-                                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
-                                title="Solo se permiten letras y espacios">
-                            @error('name')
-                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-1">Correo electrónico *</label>
-                            <input type="email" id="email" name="email" value="{{ old('email', auth()->user()->email ?? '') }}"
-                                class="w-full px-3 py-2 border border-gray-300 dark:border-dark-border rounded-md focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-background dark:text-dark-text"
-                                required
-                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                title="Ingrese un correo electrónico válido">
-                            @error('email')
-                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Asunto -->
+                    <!-- Título (Asunto) -->
                     <div class="mb-6">
-                        <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-1">Asunto *</label>
-                        <input type="text" id="subject" name="subject" value="{{ old('subject') }}"
+                        <label for="title" class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-1">Título *</label>
+                        <input type="text" id="title" name="title" value="{{ old('title') }}"
                             class="w-full px-3 py-2 border border-gray-300 dark:border-dark-border rounded-md focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-background dark:text-dark-text"
                             required
                             minlength="10"
-                            maxlength="100">
-                        @error('subject')
+                            maxlength="255"
+                            placeholder="Ej: Problema con facturación del servicio">
+                        @error('title')
                         <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
@@ -118,21 +86,20 @@
                             class="w-full px-3 py-2 border border-gray-300 dark:border-dark-border rounded-md focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-background dark:text-dark-text"
                             required
                             minlength="20"
-                            maxlength="1000">{{ old('description') }}</textarea>
+                            maxlength="1000"
+                            placeholder="Describa su petición, queja, reclamo o sugerencia con el mayor detalle posible">{{ old('description') }}</textarea>
                         @error('description')
                         <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <!-- Adjuntos -->
-                    <div class="mb-8">
-                        <label for="attachments" class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-1">Adjuntos (opcional)</label>
-                        <input type="file" id="attachments" name="attachments[]" multiple
-                            class="block w-full text-sm text-gray-500 dark:text-dark-text-secondary file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary-50 dark:file:bg-dark-background file:text-primary-700 dark:file:text-dark-text hover:file:bg-primary-100 dark:hover:file:bg-dark-border"
-                            accept=".pdf,.jpg,.jpeg,.png"
-                            data-max-size="5120">
-                        <p class="mt-1 text-xs text-gray-500 dark:text-dark-text-secondary">Formatos aceptados: PDF, JPG, PNG. Máx. 5MB por archivo.</p>
-                        @error('attachments.*')
+                    <!-- Argumento -->
+                    <div class="mb-6">
+                        <label for="argument" class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-1">Argumento *</label>
+                        <textarea id="argument" name="argument" rows="3"
+                            class="w-full px-3 py-2 border border-gray-300 dark:border-dark-border rounded-md focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-background dark:text-dark-text"
+                            placeholder="Argumentos o razones que respaldan su solicitud">{{ old('argument') }}</textarea>
+                        @error('argument')
                         <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
@@ -155,59 +122,4 @@
         </div>
     </div>
 </div>
-
-@push('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Validación de tamaño de archivos
-        const fileInput = document.getElementById('attachments');
-        const maxSize = fileInput.dataset.maxSize * 1024; // Convertir a bytes
-        
-        fileInput.addEventListener('change', function() {
-            const files = this.files;
-            for (let i = 0; i < files.length; i++) {
-                if (files[i].size > maxSize) {
-                    alert(`El archivo ${files[i].name} excede el tamaño máximo de 5MB`);
-                    this.value = '';
-                    break;
-                }
-            }
-        });
-
-        // Validación de campos antes de enviar
-        const form = document.querySelector('form');
-        form.addEventListener('submit', function(e) {
-            let isValid = true;
-            
-            // Validar tipo de PQRS seleccionado
-            const typeSelected = document.querySelector('input[name="type_pqr"]:checked');
-            if (!typeSelected) {
-                alert('Por favor seleccione un tipo de PQRS');
-                isValid = false;
-            }
-            
-            if (!isValid) {
-                e.preventDefault();
-            }
-        });
-    });
-</script>
-@endpush
-
-@push('styles')
-<style>
-    .shadow-lg {
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
-
-    input[type="radio"]:checked+span {
-        font-weight: 600;
-        color: #1a365d;
-    }
-
-    .dark input[type="radio"]:checked+span {
-        color: #63b3ed;
-    }
-</style>
-@endpush
 @endsection

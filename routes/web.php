@@ -19,7 +19,17 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-// Rutas para el darkMode
+Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class.':1'])
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+        Route::get('/pqrs', [PqrController::class, 'index'])->name('admin.pqrs');
+        Route::post('/pqrs/update-status', [PqrController::class, 'updateStatus'])->name('admin.pqrs.update-status');
+        Route::post('/pqrs/archive', [PqrController::class, 'archive'])->name('admin.pqrs.archive');
+        Route::delete('/pqrs/delete', [PqrController::class, 'destroy'])->name('admin.pqrs.delete');
+        Route::get('/ranking', [AdminController::class, 'ranking'])->name('admin.ranking');
+    });
+
 Route::post('/set-theme', [ThemeController::class, 'setTheme'])->name('set.theme');
 
 // Mostrar el formulario de login
