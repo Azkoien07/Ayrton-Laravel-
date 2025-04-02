@@ -6,7 +6,7 @@
     <div class="p-6">
         <!-- Título principal elevado y con más jerarquía -->
         <div class="mb-10">
-            <h2 class="text-3xl font-bold text-gray-800 mb-2 dark:text-desertMist">Configuración de la cuenta</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mb-2 dark:text-white">Configuración de la cuenta</h2>
         </div>
 
         <!-- Grid de configuración con sombras mejoradas -->

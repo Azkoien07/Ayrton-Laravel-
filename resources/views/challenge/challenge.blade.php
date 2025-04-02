@@ -5,7 +5,7 @@
     <!-- Header consistente con la vista de tareas -->
     <div class="flex justify-between items-center mb-8">
         
-        <h1 class="text-3xl font-bold text-gray-800 dark:text-desertMist">Lista de Desafíos</h1>
+        <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Lista de Desafíos</h1>
         <button
             @click="openModal = true"
             class="bg-deepTeal hover:bg-stormyBlue text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300 ease-in-out flex items-center">

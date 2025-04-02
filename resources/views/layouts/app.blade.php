@@ -7,43 +7,43 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon copy.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="flex min-h-screen bg-desertMist text-midnightBlue dark:bg-stormyBlue dark:text-desertMist">
+<body class="flex min-h-screen bg-light-background text-light-text dark:bg-dark-background dark:text-dark-text">
     @include('notify::components.notify')
     
-    <button id="menuToggle" class="md:hidden fixed top-4 left-4 bg-deepTeal text-white p-2 rounded z-50">
+    <button id="menuToggle" class="md:hidden fixed top-4 left-4 bg-light-primary text-white p-2 rounded z-50">
         &#9776;
     </button>
     
-    <button id="themeToggle" class="fixed top-4 right-4 bg-deepTeal text-white p-2 rounded z-50">
+    <button id="themeToggle" class="fixed top-4 right-4 bg-light-primary text-white p-2 rounded z-50">
         🌙
     </button>
     
     <div id="sidebarOverlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none md:hidden transition-opacity duration-300 ease-in-out z-30"></div>
 
-    <aside id="sidebar" class="fixed md:relative transform -translate-x-full md:translate-x-0 w-64 bg-sandDune dark:bg-midnightBlue font-sans shadow-md p-6 space-y-4 sidebar-glow z-40 transition-transform duration-300 ease-in-out min-h-screen">
-        <a href="{{ route('tasks.index') }}" class="text-3xl font-bold text-midnightBlue dark:text-desertMist hover:text-deepTeal transition duration-200 ease-in-out block text-center mb-8">
+    <aside id="sidebar" class="fixed md:relative transform -translate-x-full md:translate-x-0 w-64 bg-light-card dark:bg-dark-card font-sans shadow-md p-6 space-y-4 z-40 transition-transform duration-300 ease-in-out min-h-screen">
+        <a href="{{ route('tasks.index') }}" class="text-3xl font-bold text-light-text dark:text-dark-text hover:text-light-hover transition duration-200 ease-in-out block text-center mb-8">
             Ayrton
         </a>
         
         <nav class="space-y-2">
-            <a href="{{ route('tasks.index') }}" class="block text-midnightBlue dark:text-desertMist hover:bg-deepTeal hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
+            <a href="{{ route('tasks.index') }}" class="block text-light-text dark:text-dark-text hover:bg-light-primary hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
                  Tareas
             </a>
-            <a href="{{ route('plans') }}" class="block text-midnightBlue dark:text-desertMist hover:bg-deepTeal hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
+            <a href="{{ route('plans') }}" class="block text-light-text dark:text-dark-text hover:bg-light-primary hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
                  Planes
             </a>
-            <a href="{{ route('challenge.index') }}" class="block text-midnightBlue dark:text-desertMist hover:bg-deepTeal hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
+            <a href="{{ route('challenge.index') }}" class="block text-light-text dark:text-dark-text hover:bg-light-primary hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
                  Desafíos
             </a>
-            <a href="{{ route('settings') }}" class="block text-midnightBlue dark:text-desertMist hover:bg-deepTeal hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
+            <a href="{{ route('settings') }}" class="block text-light-text dark:text-dark-text hover:bg-light-primary hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
                  Configuración
             </a>
-            <a href="{{ route('pqrs.pqrs') }}" class="block text-midnightBlue dark:text-desertMist hover:bg-deepTeal hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
+            <a href="{{ route('pqrs.pqrs') }}" class="block text-light-text dark:text-dark-text hover:bg-light-primary hover:text-white px-4 py-2 rounded transition duration-200 ease-in-out flex items-center">
                  PQRS
             </a>
             <form action="{{ route('logout') }}" method="POST" class="mt-4">
                 @csrf
-                <button type="submit" class="w-full bg-deepTeal hover:bg-stormyBlue text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out flex items-center justify-center">
+                <button type="submit" class="w-full bg-light-primary hover:bg-dark-background text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out flex items-center justify-center">
                     Cerrar sesión
                 </button>
             </form>
