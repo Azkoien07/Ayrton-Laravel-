@@ -12,14 +12,11 @@ use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\PqrController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\LanguageController;
-
-
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class.':1'])
+Route::middleware(['auth',RoleMiddleware::class.':1'])
     ->prefix('admin')
     ->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
@@ -47,13 +44,6 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 // Procesar el formulario de registro
 Route::post('/register', [AuthController::class, 'register']);
 
-// Rutas protegidas por el middlware para el rol admin
-Route::middleware(['auth', RoleMiddleware::class . ':1'])->prefix('admin')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('/pqrs', [AdminController::class, 'pqrs'])->name('admin.pqrs');
-    Route::get('/ranking', [AdminController::class, 'ranking'])->name('admin.ranking');
-});
-
 // Rutas para el módulo de tareas
 Route::middleware('auth')->group(function () {
     Route::resource('tasks', TaskController::class);
@@ -76,6 +66,3 @@ Route::get('/pqrs/create', [PqrController::class, 'create'])->name('pqrs.pqrs');
 
 // Ruta para la generacion del voucher en pdf (Pendiente)
 Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
-
-// Ruta para el cambio de idioma
-Route::post('/language/switch', [LanguageController::class, 'switch'])->name('language.switch');
