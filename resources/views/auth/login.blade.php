@@ -88,10 +88,10 @@
                 </div>
 
                 <!-- Recordar sesión -->
-                <div class="flex items-center">
+                <!-- <div class="flex items-center">
                     <input type="checkbox" name="remember" id="remember" class="h-4 w-4 text-light-primary focus:ring-light-primary border-light-border rounded bg-light-background">
                     <label for="remember" class="ml-2 block text-sm text-light-text">Recordar sesión</label>
-                </div>
+                </div> -->
 
                 <button type="submit" class="w-full bg-light-primary hover:bg-light-hover text-light-background font-medium py-2.5 px-4 rounded-lg transition-all shadow-md hover:shadow-lg">
                     Iniciar Sesión
