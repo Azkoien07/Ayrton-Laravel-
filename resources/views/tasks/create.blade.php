@@ -138,7 +138,7 @@
 
        
         <div class="flex items-center justify-end">
-            <button type="submit" class="bg-deepTeal hover:bg-stormyBlue text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+            <button type="submit" class="bg-light-primary hover:bg-dark-background text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
                 {{ __('tasks.create_button') }}
             </button>
         </div>

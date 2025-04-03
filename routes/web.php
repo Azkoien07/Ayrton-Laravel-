@@ -12,6 +12,7 @@ use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\PqrController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LanguageController;
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -66,3 +67,5 @@ Route::get('/pqrs/create', [PqrController::class, 'create'])->name('pqrs.pqrs');
 
 // Ruta para la generacion del voucher en pdf (Pendiente)
 Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
+
+Route::post('/language/switch', [LanguageController::class, 'switch'])->name('language.switch');

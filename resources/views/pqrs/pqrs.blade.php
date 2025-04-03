@@ -1,7 +1,7 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container mx-auto px-4 py-6 dark:bg-dark-background">
+    @include('notify::components.notify')
     <div class="max-w-3xl mx-auto p-4">
         <div class="mb-8 text-center">
             <h2 class="text-3xl font-bold text-gray-800 mb-2 dark:text-dark-text">Envíe su PQRS</h2>
@@ -11,19 +11,19 @@
         <div class="bg-white dark:bg-dark-card rounded-lg shadow-lg border border-gray-100 dark:border-dark-border overflow-hidden">
             <div class="p-6">
                 @if($errors->any())
-                    <div class="mb-4 p-3 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded-lg border border-red-200 dark:border-red-800 text-sm">
-                        <div class="flex items-center">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>Por favor corrige los siguientes errores:</span>
-                        </div>
-                        <ul class="mt-1 ml-6 list-disc">
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                <div class="mb-4 p-3 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded-lg border border-red-200 dark:border-red-800 text-sm">
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Por favor corrige los siguientes errores:</span>
                     </div>
+                    <ul class="mt-1 ml-6 list-disc">
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
                 @endif
 
                 @if(session('success'))
@@ -39,7 +39,7 @@
 
                 <form action="{{ route('pqrs.store') }}" method="POST">
                     @csrf
-                    
+
                     <!-- Tipo de PQRS -->
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-2">Tipo de PQRS *</label>

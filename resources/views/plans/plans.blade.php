@@ -6,7 +6,6 @@
     <div class="text-center mb-12 animate-fade-in">
         <h1 class="text-4xl font-extrabold text-light-text dark:text-dark-text sm:text-5xl">
             <span class="block">Planes de Suscripción</span>
-            <span class="block text-light-primary dark:text-dark-primary mt-2 text-3xl sm:text-4xl">Personaliza tu experiencia</span>
         </h1>
         <p class="mt-4 text-xl text-light-textSecondary dark:text-dark-textSecondary max-w-2xl mx-auto">
             Elige el plan que mejor se adapte a tus necesidades y lleva tu productividad al siguiente nivel
@@ -121,7 +120,7 @@
                 <div class="px-6 py-4 bg-light-secondary dark:bg-dark-secondary border-t border-light-border dark:border-dark-border">
                     <button
                         onclick="openModal('Básico')"
-                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-300">
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-light-primary hover:bg-light-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-primary transition-colors duration-300 dark:bg-dark-primary dark:hover:bg-dark-hover dark:focus:ring-dark-primary">
                         Seleccionar Plan
                     </button>
                 </div>
@@ -175,7 +174,7 @@
             <div class="px-6 py-4 bg-light-secondary dark:bg-dark-secondary border-t border-light-border dark:border-dark-border">
                 <button
                     onclick="openModal('Básico')"
-                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-300">
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-light-primary hover:bg-light-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-primary transition-colors duration-300 dark:bg-dark-primary dark:hover:bg-dark-hover dark:focus:ring-dark-primary">
                     Seleccionar Plan
                 </button>
             </div>
@@ -335,7 +334,7 @@
             modal.classList.remove('hidden');
             modal.classList.add('animate-fade-in');
             document.body.style.overflow = 'hidden';
-            
+
             // Enfocar el primer campo del formulario
             setTimeout(() => {
                 document.getElementById('cardNumber')?.focus();
