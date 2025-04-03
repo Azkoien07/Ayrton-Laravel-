@@ -13,6 +13,7 @@ use App\Http\Controllers\PqrController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\PaymentController;
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -27,6 +28,9 @@ Route::middleware(['auth',RoleMiddleware::class.':1'])
         Route::delete('/pqrs/delete', [PqrController::class, 'destroy'])->name('admin.pqrs.delete');
         Route::get('/ranking', [AdminController::class, 'ranking'])->name('admin.ranking');
     });
+
+Route::get('/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
+Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('payment.process');
 
 Route::post('/set-theme', [ThemeController::class, 'setTheme'])->name('set.theme');
 

@@ -2,64 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Payment;
 use Illuminate\Http\Request;
+use Stripe\Stripe;
+use Stripe\Charge;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function checkout()
     {
-        //
+        return view('pay.checkout'); 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function processPayment(Request $request)
     {
-        //
-    }
+        try {
+            Stripe::setApiKey(env('STRIPE_SECRET'));
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            $charge = Charge::create([
+                'amount' => $request->amount * 100, 
+                'currency' => 'usd',
+                'source' => $request->stripeToken, 
+                'description' => 'Pago desde Laravel con Stripe',
+            ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Payment $payment)
-    {
-        //
+            return back()->with('success_message', 'Pago realizado con éxito!');
+        } catch (\Exception $e) {
+            return back()->with('error_message', 'Error: ' . $e->getMessage());
+        }
     }
 }

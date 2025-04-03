@@ -270,29 +270,6 @@
                             <span id="modalTotalPrice" class="font-bold text-light-primary dark:text-dark-primary"></span>
                         </div>
                     </div>
-
-                    <!-- Formulario de pago (simulado) -->
-                    <div class="mb-4">
-                        <label for="cardNumber" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Número de tarjeta</label>
-                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary focus:border-light-primary dark:bg-dark-background dark:text-dark-text">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label for="expiryDate" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Fecha de expiración</label>
-                            <input type="text" id="expiryDate" placeholder="MM/AA" class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary focus:border-light-primary dark:bg-dark-background dark:text-dark-text">
-                        </div>
-                        <div>
-                            <label for="cvv" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">CVV</label>
-                            <input type="text" id="cvv" placeholder="123" class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary focus:border-light-primary dark:bg-dark-background dark:text-dark-text">
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="cardName" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Nombre en la tarjeta</label>
-                        <input type="text" id="cardName" placeholder="Nombre Apellido" class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary focus:border-light-primary dark:bg-dark-background dark:text-dark-text">
-                    </div>
-                </div>
-
-                <!-- Opciones del modal -->
                 <div class="px-6 py-4 bg-light-secondary dark:bg-dark-secondary flex justify-between border-t border-light-border dark:border-dark-border">
                     <button
                         onclick="closeModal()"
@@ -349,12 +326,17 @@
         }
 
         function processPayment() {
-            const planName = document.getElementById('selectedPlanName').textContent;
-            alert(`¡Gracias por suscribirte al plan ${planName}! Redirigiendo a tu panel...`);
-            closeModal();
-
-
-        }
+    const planName = document.getElementById('selectedPlanName').textContent;
+    
+    // Cerrar el modal
+    closeModal();
+    
+    // Redirigir a la página de checkout
+    window.location.href = "{{ route('payment.checkout') }}";
+    
+    
+     window.location.href = "{{ route('payment.checkout') }}?plan=" + encodeURIComponent(planName);
+}
 
         // Cerrar modal con ESC
         document.addEventListener('keydown', function(e) {

@@ -8,9 +8,74 @@ use Mckenziearts\Notify\Facades\Notify;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::all();
+        $query = Task::query();
+        
+      
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%'.$request->name.'%');
+        }
+        
+        if ($request->filled('state')) {
+            $query->where('state', $request->state);
+        }
+        
+        if ($request->filled('priority')) {
+            $query->where('priority', $request->priority);
+        }
+        
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+        
+        // Filtros por fechas
+        if ($request->filled('f_creation_from')) {
+            $query->where('f_creation', '>=', $request->f_creation_from);
+        }
+        
+        if ($request->filled('f_creation_to')) {
+            $query->where('f_creation', '<=', $request->f_creation_to);
+        }
+        
+        if ($request->filled('f_expiration_from')) {
+            $query->where('f_expiration', '>=', $request->f_expiration_from);
+        }
+        
+        if ($request->filled('f_expiration_to')) {
+            $query->where('f_expiration', '<=', $request->f_expiration_to);
+        }
+        
+        // Filtros por relaciones (asumiendo que existen estas relaciones en el modelo Task)
+        
+        // Ejemplo: Filtrar por usuario asignado (relación belongsTo)
+        if ($request->filled('user_name')) {
+            $query->whereHas('user', function($q) use ($request) {
+                $q->where('name', 'like', '%'.$request->user_name.'%');
+            });
+        }
+        
+        // Ejemplo: Filtrar por etiquetas (relación belongsToMany)
+        if ($request->filled('tag_name')) {
+            $query->whereHas('tags', function($q) use ($request) {
+                $q->where('name', 'like', '%'.$request->tag_name.'%');
+            });
+        }
+        
+        // Ejemplo: Filtrar por comentarios (relación hasMany)
+        if ($request->filled('comment_text')) {
+            $query->whereHas('comments', function($q) use ($request) {
+                $q->where('text', 'like', '%'.$request->comment_text.'%');
+            });
+        }
+        
+        // Ordenamiento
+        $sortField = $request->get('sort_by', 'f_creation');
+        $sortDirection = $request->get('sort_order', 'desc');
+        $query->orderBy($sortField, $sortDirection);
+        
+        $tasks = $query->paginate(15)->withQueryString();
+        
         return view('tasks.index', compact('tasks'));
     }
 
@@ -83,7 +148,7 @@ class TaskController extends Controller
         $taskName = $task->name;
         $task->delete();
 
-        Notify()->warning("La tarea' {$taskName}' fue eliminada permanentemente",'Tarea Eliminada');
+        Notify()->warning("La tarea '{$taskName}' fue eliminada permanentemente", 'Tarea Eliminada');
         return redirect()->route('tasks.index');
     }
 }
