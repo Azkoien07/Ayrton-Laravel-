@@ -1,0 +1,31 @@
+<?php
+
+return [
+    'create_title' => 'Create New Task',
+    'error_message' => 'Please correct the following errors:',
+    'name' => 'Name',
+    'name_validation' => 'Name can only contain letters, numbers, spaces, hyphens, commas, periods, and apostrophes',
+    'state' => 'Status',
+    'select_state' => 'Select a status',
+    'pending' => 'Pending',
+    'in_progress' => 'In progress',
+    'completed' => 'Completed',
+    'canceled' => 'Canceled',
+    'description' => 'Description',
+    'priority' => 'Priority',
+    'select_priority' => 'Select a priority',
+    'low' => 'Low',
+    'medium' => 'Medium',
+    'high' => 'High',
+    'type' => 'Type',
+    'select_type' => 'Select a type',
+    'personal' => 'Personal',
+    'work' => 'Work',
+    'educational' => 'Educational',
+    'reminder' => 'Reminder',
+    'creation_date' => 'Creation Date',
+    'expiration_date' => 'Expiration Date',
+    'create_button' => 'Create Task',
+    'future_date_required' => 'The expiration date must be in the future',
+    'reminder_before_expiration' => 'The reminder must be before the expiration date'
+];

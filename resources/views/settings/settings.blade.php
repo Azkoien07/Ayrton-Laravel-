@@ -22,7 +22,7 @@
                     </h3>
                     <form class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                            <label for="" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
                             <input type="text"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                                 maxlength="20"
@@ -31,7 +31,7 @@
                                 required>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                            <label for="" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
                             <input type="email"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                                 required
@@ -39,7 +39,7 @@
                                 pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|gmail\.com\.co|outlook\.com|yahoo\.com)$"
                                 title="El correo debe ser de Gmail, Outlook o Yahoo">
                         </div>
-                        <button class=" bg-deepTeal hover:bg-stormyBlue focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
+                        <button class="bg-light-primary hover:bg-dark-background focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
                             Guardar cambios
                         </button>
                     </form>
@@ -56,28 +56,28 @@
                         </svg>
                         Preferencias
                     </h3>
-                    <form class="space-y-4">
+                    <form class="space-y-4" action="{{ route('language.switch') }}" method="POST">
+                        @csrf
                         <div>
-                            <label for="" class="block text-sm font-medium text-gray-700 mb-1">Tema</label>
-                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                                <option>Claro</option>
-                                <option>Oscuro</option>
+                            <label for="theme" class="block text-sm font-medium text-gray-700 mb-1">Tema</label>
+                            <select id="theme" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" name="theme">
+                                <option value="light">Claro</option>
+                                <option value="dark">Oscuro</option>
                             </select>
                         </div>
                         <div>
-                            <label for="" class="block text-sm font-medium text-gray-700 mb-1">Idioma</label>
-                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                                <option>Español</option>
-                                <option>Inglés</option>
+                            <label for="language" class="block text-sm font-medium text-gray-700 mb-1">Idioma</label>
+                            <select id="language" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" name="language">
+                                <option value="es" {{ app()->getLocale() == 'es' ? 'selected' : '' }}>Español</option>
+                                <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English</option>
                             </select>
                         </div>
-                        <button class=" bg-deepTeal hover:bg-stormyBlue focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
+                        <button type="submit" class="bg-light-primary hover:bg-dark-background focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
                             Guardar preferencias
                         </button>
                     </form>
                 </div>
             </div>
-
             <!-- Sección Notificaciones -->
             <div class="bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden transition-transform hover:scale-[1.02]">
                 <div class="p-6">
@@ -96,7 +96,7 @@
                             <input type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
                             <label for="" class="ml-2 block text-sm text-gray-700">Notificaciones push</label>
                         </div>
-                        <button class=" bg-deepTeal hover:bg-stormyBlue  focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
+                        <button class="bg-light-primary hover:bg-dark-background  focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
                             Guardar configuración
                         </button>
                     </form>
@@ -121,7 +121,7 @@
                             <label for="" class="block text-sm font-medium text-gray-700 mb-1">Confirmar contraseña</label>
                             <input type="password" autocomplete="new-password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                         </div>
-                        <button class=" bg-deepTeal hover:bg-stormyBlue focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
+                        <button class="bg-light-primary hover:bg-dark-background focus:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
                             Cambiar contraseña
                         </button>
                     </form>

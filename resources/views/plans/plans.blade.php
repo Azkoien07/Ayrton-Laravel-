@@ -6,7 +6,6 @@
     <div class="text-center mb-12 animate-fade-in">
         <h1 class="text-4xl font-extrabold text-light-text dark:text-dark-text sm:text-5xl">
             <span class="block">Planes de Suscripción</span>
-            <span class="block text-light-primary dark:text-dark-primary mt-2 text-3xl sm:text-4xl">Personaliza tu experiencia</span>
         </h1>
         <p class="mt-4 text-xl text-light-textSecondary dark:text-dark-textSecondary max-w-2xl mx-auto">
             Elige el plan que mejor se adapte a tus necesidades y lleva tu productividad al siguiente nivel
@@ -120,7 +119,7 @@
                 </div>
                 <div class="px-6 py-4 bg-light-secondary dark:bg-dark-secondary border-t border-light-border dark:border-dark-border">
                     <button
-                        onclick="openModal('Premium')"
+                        onclick="openModal('Básico')"
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-light-primary hover:bg-light-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-primary transition-colors duration-300 dark:bg-dark-primary dark:hover:bg-dark-hover dark:focus:ring-dark-primary">
                         Seleccionar Plan
                     </button>
@@ -174,7 +173,7 @@
             </div>
             <div class="px-6 py-4 bg-light-secondary dark:bg-dark-secondary border-t border-light-border dark:border-dark-border">
                 <button
-                    onclick="openModal('Platino')"
+                    onclick="openModal('Básico')"
                     class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-light-primary hover:bg-light-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-primary transition-colors duration-300 dark:bg-dark-primary dark:hover:bg-dark-hover dark:focus:ring-dark-primary">
                     Seleccionar Plan
                 </button>
@@ -271,29 +270,6 @@
                             <span id="modalTotalPrice" class="font-bold text-light-primary dark:text-dark-primary"></span>
                         </div>
                     </div>
-
-                    <!-- Formulario de pago (simulado) -->
-                    <div class="mb-4">
-                        <label for="cardNumber" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Número de tarjeta</label>
-                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary focus:border-light-primary dark:bg-dark-background dark:text-dark-text">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label for="expiryDate" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Fecha de expiración</label>
-                            <input type="text" id="expiryDate" placeholder="MM/AA" class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary focus:border-light-primary dark:bg-dark-background dark:text-dark-text">
-                        </div>
-                        <div>
-                            <label for="cvv" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">CVV</label>
-                            <input type="text" id="cvv" placeholder="123" class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary focus:border-light-primary dark:bg-dark-background dark:text-dark-text">
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="cardName" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Nombre en la tarjeta</label>
-                        <input type="text" id="cardName" placeholder="Nombre Apellido" class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary focus:border-light-primary dark:bg-dark-background dark:text-dark-text">
-                    </div>
-                </div>
-
-                <!-- Opciones del modal -->
                 <div class="px-6 py-4 bg-light-secondary dark:bg-dark-secondary flex justify-between border-t border-light-border dark:border-dark-border">
                     <button
                         onclick="closeModal()"
@@ -335,7 +311,7 @@
             modal.classList.remove('hidden');
             modal.classList.add('animate-fade-in');
             document.body.style.overflow = 'hidden';
-            
+
             // Enfocar el primer campo del formulario
             setTimeout(() => {
                 document.getElementById('cardNumber')?.focus();
@@ -350,41 +326,17 @@
         }
 
         function processPayment() {
-            const planName = document.getElementById('selectedPlanName').textContent;
-            const cardNumber = document.getElementById('cardNumber').value;
-            const expiryDate = document.getElementById('expiryDate').value;
-            const cvv = document.getElementById('cvv').value;
-            const cardName = document.getElementById('cardName').value;
-            
-            // Validación básica
-            if (!cardNumber || !expiryDate || !cvv || !cardName) {
-                alert('Por favor completa todos los campos del formulario de pago.');
-                return;
-            }
-            
-            // Simular procesamiento de pago
-            const spinner = document.createElement('div');
-            spinner.className = 'inline-block h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-r-transparent';
-            spinner.setAttribute('role', 'status');
-            
-            const confirmButton = document.querySelector('#subscriptionModal button[onclick="processPayment()"]');
-            confirmButton.disabled = true;
-            confirmButton.innerHTML = '';
-            confirmButton.appendChild(spinner);
-            confirmButton.appendChild(document.createTextNode(' Procesando...'));
-            
-            // Simular retraso en el pago
-            setTimeout(() => {
-                alert(`¡Gracias por suscribirte al plan ${planName}! Redirigiendo a tu panel...`);
-                closeModal();
-                // Aquí podrías redirigir al usuario
-                // window.location.href = '/dashboard';
-                
-                // Restaurar el botón
-                confirmButton.disabled = false;
-                confirmButton.innerHTML = 'Confirmar y Pagar';
-            }, 2000);
-        }
+    const planName = document.getElementById('selectedPlanName').textContent;
+    
+    // Cerrar el modal
+    closeModal();
+    
+    // Redirigir a la página de checkout
+    window.location.href = "{{ route('payment.checkout') }}";
+    
+    
+     window.location.href = "{{ route('payment.checkout') }}?plan=" + encodeURIComponent(planName);
+}
 
         // Cerrar modal con ESC
         document.addEventListener('keydown', function(e) {
@@ -406,16 +358,4 @@
             this.value = this.value.replace(/[^\d]/g, '').substring(0, 4);
         });
     </script>
-    
-    <style>
-        .animate-fade-in {
-            animation: fadeIn 0.3s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</div>
-@endsection
+    @endsection

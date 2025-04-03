@@ -12,11 +12,13 @@ use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\PqrController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\PaymentController;
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class.':1'])
+Route::middleware(['auth',RoleMiddleware::class.':1'])
     ->prefix('admin')
     ->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
@@ -26,6 +28,9 @@ Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class.':1'])
         Route::delete('/pqrs/delete', [PqrController::class, 'destroy'])->name('admin.pqrs.delete');
         Route::get('/ranking', [AdminController::class, 'ranking'])->name('admin.ranking');
     });
+
+Route::get('/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
+Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('payment.process');
 
 Route::post('/set-theme', [ThemeController::class, 'setTheme'])->name('set.theme');
 
@@ -66,3 +71,5 @@ Route::get('/pqrs/create', [PqrController::class, 'create'])->name('pqrs.pqrs');
 
 // Ruta para la generacion del voucher en pdf (Pendiente)
 Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
+
+Route::post('/language/switch', [LanguageController::class, 'switch'])->name('language.switch');
