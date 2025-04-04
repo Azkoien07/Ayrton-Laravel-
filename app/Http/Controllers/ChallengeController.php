@@ -12,7 +12,8 @@ class ChallengeController extends Controller
      */
     public function index()
     {
-        return view('challenge.challenge');
+        $desafios = Challenge::all();
+        return view('challenge.challenge', compact('desafios'));
     }
 
 
@@ -29,9 +30,28 @@ class ChallengeController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // Validación de datos
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'dificulty' => 'required|string|max:255',
+            'points' => 'required|integer|min:1'
+        ]);
 
+        // Guardar en la base de datos
+        $challenge = Challenge::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'category' => $validated['category'],
+            'state' => $validated['state'],
+            'dificulty' => $validated['dificulty'],
+            'points' => $validated['points']
+        ]);
+
+        return redirect()->route('challenge.index')->with('success', 'Desafío creado con éxito.');
+    }
     /**
      * Display the specified resource.
      */

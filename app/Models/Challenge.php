@@ -11,7 +11,7 @@ class Challenge extends Model
         'description',
         'category',
         'state',
-        'difficulty',
+        'dificulty',
         'points',
     ];
 

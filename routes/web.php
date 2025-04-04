@@ -14,6 +14,8 @@ use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PaymentController;
+use App\Models\Challenge;
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -62,9 +64,6 @@ Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 // Ruta para la página de planes
 Route::get('/plans', [PlanController::class, 'index'])->name('plans');
 
-// Ruta para el modulo de desafios
-Route::get('/challenge', [ChallengeController::class, 'index'])->name('challenge.index');
-
 // Ruta para el modulo de pqrs
 Route::post('/pqrs', [PqrController::class, 'store'])->name('pqrs.store');
 Route::get('/pqrs/create', [PqrController::class, 'create'])->name('pqrs.pqrs');
@@ -72,4 +71,9 @@ Route::get('/pqrs/create', [PqrController::class, 'create'])->name('pqrs.pqrs');
 // Ruta para la generacion del voucher en pdf (Pendiente)
 Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
 
+// Rua para el cambio de idioma
 Route::post('/language/switch', [LanguageController::class, 'switch'])->name('language.switch');
+
+// Ruta para el modulo de desafios
+Route::get('/challenge', [ChallengeController::class, 'index'])->name('challenge.index');
+Route::post('/challenge', [ChallengeController::class, 'store'])->name('challenge.store');
