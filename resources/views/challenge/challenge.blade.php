@@ -15,7 +15,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Desafío 1 -->
+        
         <div class="bg-light-card dark:bg-dark-card rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 ease-in-out">
             <div class="p-6 border-b border-light-border dark:border-dark-border">
                 <h2 class="text-xl font-semibold text-light-text dark:text-dark-text mb-2">Desafío #1</h2>
@@ -76,4 +76,5 @@
         </div>
     </div>
 </div>
+
 @endsection
