@@ -9,7 +9,7 @@
 </head>
 <body class="min-h-full flex flex-col bg-light-background dark:bg-dark-background transition-colors duration-300">
     <div class="flex-grow container mx-auto px-4 py-8 max-w-3xl">
-        <!-- Botón de volver a planes (añadido arriba del título) -->
+        
         <div class="mb-4">
             <a href="{{ route('plans') }}" class="inline-flex items-center text-light-primary dark:text-dark-primary hover:text-light-hover dark:hover:text-dark-hover transition-colors duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -19,13 +19,13 @@
             </a>
         </div>
 
-        <!-- Encabezado -->
+       
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold text-light-text dark:text-dark-text mb-2">Proceso de Pago</h1>
             <p class="text-light-textSecondary dark:text-dark-textSecondary">Complete los detalles de su tarjeta para continuar</p>
         </div>
 
-        <!-- Mensajes de estado -->
+        
         <div class="mb-6">
             @if(session('success_message'))
                 <div class="p-4 rounded-lg bg-green-50 border border-green-200 text-green-800 dark:bg-green-900 dark:border-green-800 dark:text-green-100">
@@ -39,7 +39,7 @@
             @endif
         </div>
 
-        <!-- Formulario de pago -->
+
         <div class="bg-light-card dark:bg-dark-card rounded-xl shadow-md overflow-hidden border border-light-border dark:border-dark-border transition-all duration-300">
             <div class="px-6 py-4 border-b border-light-border dark:border-dark-border">
                 <h2 class="text-xl font-semibold text-light-text dark:text-dark-text">Información de Pago</h2>
@@ -47,9 +47,9 @@
             
             <form action="{{ route('payment.process') }}" method="POST" id="payment-form" class="p-6">
                 @csrf
-                <input type="hidden" name="amount" value="50"> <!-- Monto en dólares -->
+                <input type="hidden" name="amount" value="50"> 
                 
-                <!-- Detalles del plan -->
+                
                 <div class="mb-6 p-4 bg-light-secondary dark:bg-dark-secondary rounded-lg">
                     <div class="flex justify-between items-center">
                         <div>
@@ -60,7 +60,7 @@
                     </div>
                 </div>
 
-                <!-- Elemento de tarjeta de Stripe -->
+                
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-light-text dark:text-dark-text mb-2">Detalles de la Tarjeta</label>
                     <div id="card-element" class="p-3 border border-light-border dark:border-dark-border rounded-lg bg-light-background dark:bg-dark-background focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary focus:border-transparent"></div>
@@ -85,7 +85,7 @@
             </form>
         </div>
 
-        <!-- Información de seguridad -->
+        
         <div class="mt-6 text-center text-sm text-light-textSecondary dark:text-dark-textSecondary">
             <p class="flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -97,11 +97,11 @@
     </div>
 
     <script>
-        // Configuración de Stripe
+      
         var stripe = Stripe("{{ env('STRIPE_KEY') }}");
         var elements = stripe.elements();
         
-        // Estilo personalizado para el elemento de la tarjeta
+       
         var style = {
             base: {
                 color: '#2D3748',
