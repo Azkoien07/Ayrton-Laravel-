@@ -65,16 +65,10 @@
             </ul>
 
             <!-- Botón de logout -->
-            <form action="{{ route('logout') }}" method="POST" class="mt-6">
+            <form action="{{ route('logout') }}" method="POST" class="mt-4">
                 @csrf
-                <button type="submit"
-                    class="w-full bg-light-error hover:bg-light-warning text-white font-semibold py-2 px-4 rounded-lg shadow transition-all flex items-center justify-center dark:bg-dark-border">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                    </svg>
-                    Cerrar sesión
+                <button type="submit" class="w-full bg-light-primary hover:bg-dark-background text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out flex items-center justify-center">
+                    {{ __('messages.logout') }}
                 </button>
             </form>
         </nav>
