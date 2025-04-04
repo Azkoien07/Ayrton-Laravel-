@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="py-12 px-4 sm:px-6 lg:px-8 dark:bg-dark-background bg-light-background">
-    <!-- Encabezado mejorado con animación -->
+    
     <div class="text-center mb-12 animate-fade-in">
         <h1 class="text-4xl font-extrabold text-light-text dark:text-dark-text sm:text-5xl">
             <span class="block">Planes de Suscripción</span>

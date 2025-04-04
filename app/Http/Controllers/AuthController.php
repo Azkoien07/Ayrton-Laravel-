@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RegistroExitosoMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Mckenziearts\Notify\Facades\Notify;
 
@@ -71,6 +73,8 @@ class AuthController extends Controller
         $user->role_id = $request->role_id;
         $user->plan_id = 1;
         $user->save();
+
+        Mail::to($user->email)->send(new RegistroExitosoMail($user));
 
         Auth::login($user);
 

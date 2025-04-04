@@ -67,7 +67,7 @@
                     <div id="card-errors" role="alert" class="text-red-500 text-sm mt-2"></div>
                 </div>
 
-                <!-- Botones de acción -->
+            
                 <div class="flex flex-col sm:flex-row gap-4">
                     <a href="{{ route('plans') }}" class="flex-1 py-3 px-4 text-center border border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-medium rounded-lg shadow-sm hover:bg-light-secondary dark:hover:bg-dark-secondary transition-colors duration-300">
                         Volver a planes
