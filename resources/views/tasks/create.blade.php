@@ -93,20 +93,33 @@
         </div>
 
         <div class="mb-4">
-            <label for="reminder" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">{{ __('tasks.reminder') }}</label>
-            <input type="datetime-local" 
-                name="reminder" 
-                id="reminder" 
-                value="{{ old('reminder') }}"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-background dark:border-dark-border dark:text-dark-text" 
-                min="{{ date('Y-m-d\TH:i') }}" 
-                max="2030-12-31T23:59">
-            @error('reminder')
-                <span class="text-red-600 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
+    <label for="reminder" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">
+        {{ __('tasks.reminder') }}
+    </label>
+    <input type="datetime-local" 
+        name="reminder" 
+        id="reminder" 
+        value="{{ old('reminder') }}"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-background dark:border-dark-border dark:text-dark-text"
+        max="2030-12-31T23:59">
+    @error('reminder')
+        <span class="text-red-600 text-sm">{{ $message }}</span>
+    @enderror
+</div>
 
-  
+        <div class="mb-4">
+    <label for="reminder" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">Recordatorio</label>
+    <input type="datetime-local"
+        name="reminder"
+        id="reminder"
+        value="{{ old('reminder') }}"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-background dark:border-dark-border dark:text-dark-text"
+        required>
+    @error('reminder')
+        <span class="text-red-600 text-sm">{{ $message }}</span>
+    @enderror
+</div>
+
         <div class="mb-4">
             <label for="f_creation" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">{{ __('tasks.creation_date') }}</label>
             <input type="datetime-local" 
