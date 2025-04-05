@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="py-12 px-4 sm:px-6 lg:px-8 dark:bg-dark-background bg-light-background">
-    
+
     <div class="text-center mb-12 animate-fade-in">
         <h1 class="text-4xl font-extrabold text-light-text dark:text-dark-text sm:text-5xl">
             <span class="block">Planes de Suscripción</span>
@@ -60,9 +60,9 @@
             </div>
             <div class="px-6 py-4 bg-light-secondary dark:bg-dark-secondary border-t border-light-border dark:border-dark-border">
                 <button
-                    onclick="openModal('Básico')"
-                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-light-primary hover:bg-light-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-primary transition-colors duration-300 dark:bg-dark-primary dark:hover:bg-dark-hover dark:focus:ring-dark-primary">
-                    Seleccionar Plan
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-400 cursor-not-allowed dark:bg-gray-600"
+                    disabled>
+                    Plan Actual
                 </button>
             </div>
         </div>
@@ -119,7 +119,7 @@
                 </div>
                 <div class="px-6 py-4 bg-light-secondary dark:bg-dark-secondary border-t border-light-border dark:border-dark-border">
                     <button
-                        onclick="openModal('Básico')"
+                        onclick="openModal('Premium')"
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-light-primary hover:bg-light-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-primary transition-colors duration-300 dark:bg-dark-primary dark:hover:bg-dark-hover dark:focus:ring-dark-primary">
                         Seleccionar Plan
                     </button>
@@ -173,7 +173,7 @@
             </div>
             <div class="px-6 py-4 bg-light-secondary dark:bg-dark-secondary border-t border-light-border dark:border-dark-border">
                 <button
-                    onclick="openModal('Básico')"
+                    onclick="openModal('Platino')"
                     class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-light-primary hover:bg-light-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-primary transition-colors duration-300 dark:bg-dark-primary dark:hover:bg-dark-hover dark:focus:ring-dark-primary">
                     Seleccionar Plan
                 </button>
@@ -270,92 +270,95 @@
                             <span id="modalTotalPrice" class="font-bold text-light-primary dark:text-dark-primary"></span>
                         </div>
                     </div>
-                <div class="px-6 py-4 bg-light-secondary dark:bg-dark-secondary flex justify-between border-t border-light-border dark:border-dark-border">
-                    <button
-                        onclick="closeModal()"
-                        class="px-4 py-2 bg-light-secondary text-light-text dark:bg-dark-secondary dark:text-dark-text rounded-md hover:bg-light-border dark:hover:bg-dark-border focus:outline-none focus:ring-2 focus:ring-light-border dark:focus:ring-dark-border transition-colors duration-300">
-                        Cancelar
-                    </button>
-                    <button
-                        onclick="processPayment()"
-                        class="px-4 py-2 bg-light-primary text-white rounded-md hover:bg-light-hover focus:outline-none focus:ring-2 focus:ring-light-primary transition-colors duration-300 dark:bg-dark-primary dark:hover:bg-dark-hover dark:focus:ring-dark-primary">
-                        Confirmar y Pagar
-                    </button>
+                    <div class="px-6 py-4 bg-light-secondary dark:bg-dark-secondary flex justify-between border-t border-light-border dark:border-dark-border">
+                        <button
+                            onclick="closeModal()"
+                            class="px-4 py-2 bg-light-secondary text-light-text dark:bg-dark-secondary dark:text-dark-text rounded-md hover:bg-light-border dark:hover:bg-dark-border focus:outline-none focus:ring-2 focus:ring-light-border dark:focus:ring-dark-border transition-colors duration-300">
+                            Cancelar
+                        </button>
+                        <button
+                            onclick="processPayment()"
+                            class="px-4 py-2 bg-light-primary text-white rounded-md hover:bg-light-hover focus:outline-none focus:ring-2 focus:ring-light-primary transition-colors duration-300 dark:bg-dark-primary dark:hover:bg-dark-hover dark:focus:ring-dark-primary">
+                            Confirmar y Pagar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        const planPrices = {
-            'Básico': '0',
-            'Premium': '34.000',
-            'Platino': '50.000'
-        };
+        <script>
+            const planPrices = {
+                'Básico': '0',
+                'Premium': '34.000',
+                'Platino': '50.000'
+            };
 
-        const planFeatures = {
-            'Básico': ['5 tareas activas', 'Soporte básico', 'Plantillas básicas'],
-            'Premium': ['Tareas ilimitadas', 'Soporte prioritario', 'Plantillas premium', 'Colaboración en equipo'],
-            'Platino': ['Tareas ilimitadas', 'Soporte 24/7', 'Todas las plantillas', 'Colaboración ilimitada', 'Integraciones avanzadas']
-        };
+            const planFeatures = {
+                'Básico': ['5 tareas activas', 'Soporte básico', 'Plantillas básicas'],
+                'Premium': ['Tareas ilimitadas', 'Soporte prioritario', 'Plantillas premium', 'Colaboración en equipo'],
+                'Platino': ['Tareas ilimitadas', 'Soporte 24/7', 'Todas las plantillas', 'Colaboración ilimitada', 'Integraciones avanzadas']
+            };
 
-        function openModal(planName) {
-            // Actualizar contenido del modal
-            document.getElementById('selectedPlanName').textContent = planName;
-            document.getElementById('modalPlanName').textContent = planName;
-            document.getElementById('modalPlanPrice').textContent = '$' + planPrices[planName] + '/mes';
-            document.getElementById('modalTotalPrice').textContent = '$' + planPrices[planName];
+            function openModal(planName) {
+                // Actualizar contenido del modal
+                document.getElementById('selectedPlanName').textContent = planName;
+                document.getElementById('modalPlanName').textContent = planName;
 
-            // Mostrar el modal con animación
-            const modal = document.getElementById('subscriptionModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('animate-fade-in');
-            document.body.style.overflow = 'hidden';
+                // Mostrar precio
+                const price = planPrices[planName];
+                document.getElementById('modalPlanPrice').textContent = `$${price}/mes`;
+                document.getElementById('modalTotalPrice').textContent = `$${price}`;
 
-            // Enfocar el primer campo del formulario
-            setTimeout(() => {
-                document.getElementById('cardNumber')?.focus();
-            }, 100);
-        }
+                // Mostrar el modal con animación
+                const modal = document.getElementById('subscriptionModal');
+                modal.classList.remove('hidden');
+                modal.classList.add('animate-fade-in');
+                document.body.style.overflow = 'hidden';
 
-        function closeModal() {
-            const modal = document.getElementById('subscriptionModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('animate-fade-in');
-            document.body.style.overflow = 'auto';
-        }
-
-        function processPayment() {
-    const planName = document.getElementById('selectedPlanName').textContent;
-    
-    // Cerrar el modal
-    closeModal();
-    
-    // Redirigir a la página de checkout
-    window.location.href = "{{ route('payment.checkout') }}";
-    
-    
-     window.location.href = "{{ route('payment.checkout') }}?plan=" + encodeURIComponent(planName);
-}
-
-        // Cerrar modal con ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
+                // Enfocar el primer campo del formulario
+                setTimeout(() => {
+                    document.getElementById('cardNumber')?.focus();
+                }, 100);
             }
-        });
 
-        // Validación de campos de tarjeta en tiempo real
-        document.getElementById('cardNumber')?.addEventListener('input', function(e) {
-            this.value = this.value.replace(/[^\d]/g, '').replace(/(\d{4})(?=\d)/g, '$1 ');
-        });
+            function closeModal() {
+                const modal = document.getElementById('subscriptionModal');
+                modal.classList.add('hidden');
+                modal.classList.remove('animate-fade-in');
+                document.body.style.overflow = 'auto';
+            }
 
-        document.getElementById('expiryDate')?.addEventListener('input', function(e) {
-            this.value = this.value.replace(/[^\d]/g, '').replace(/(\d{2})(?=\d{2})/, '$1/');
-        });
+            function processPayment() {
+                const planName = document.getElementById('selectedPlanName').textContent;
 
-        document.getElementById('cvv')?.addEventListener('input', function(e) {
-            this.value = this.value.replace(/[^\d]/g, '').substring(0, 4);
-        });
-    </script>
-    @endsection
+                // Cerrar el modal
+                closeModal();
+
+                // Redirigir a la página de checkout
+                window.location.href = "{{ route('payment.checkout') }}";
+
+
+                window.location.href = "{{ route('payment.checkout') }}?plan=" + encodeURIComponent(planName);
+            }
+
+            // Cerrar modal con ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+
+            // Validación de campos de tarjeta en tiempo real
+            document.getElementById('cardNumber')?.addEventListener('input', function(e) {
+                this.value = this.value.replace(/[^\d]/g, '').replace(/(\d{4})(?=\d)/g, '$1 ');
+            });
+
+            document.getElementById('expiryDate')?.addEventListener('input', function(e) {
+                this.value = this.value.replace(/[^\d]/g, '').replace(/(\d{2})(?=\d{2})/, '$1/');
+            });
+
+            document.getElementById('cvv')?.addEventListener('input', function(e) {
+                this.value = this.value.replace(/[^\d]/g, '').substring(0, 4);
+            });
+        </script>
+        @endsection

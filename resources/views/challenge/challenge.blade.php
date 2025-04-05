@@ -72,7 +72,7 @@
                     <select name="state" id="state" required
                         class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-background text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-600 transition">
                         <option value="Pendiente">Pendiente</option>
-                        <option value="En progreso">En progreso</option>
+                        <option value="En Progreso">En Progreso</option>
                         <option value="Completado">Completado</option>
                         <option value="Cancelado">Cancelado</option>
                     </select>
@@ -139,12 +139,6 @@
                         {{ $desafio->dificulty }}
                     </span>
                 </div>
-                <a href="#" class="text-light-primary dark:text-dark-primary hover:text-light-hover dark:hover:text-dark-hover transition duration-200 ease-in-out flex items-center">
-                    Ver detalles
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </a>
             </div>
         </div>
         @endforeach
