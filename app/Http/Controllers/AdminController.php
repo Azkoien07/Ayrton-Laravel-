@@ -15,7 +15,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = User::with('role') // Si tienes relación de roles
+        $users = User::with('role')
                    ->orderBy('created_at', 'desc')
                    ->paginate(10);
         
@@ -27,7 +27,7 @@ class AdminController extends Controller
      */
     public function pqrs()
     {
-        $pqrs = Pqr::with(['user', 'category']) // Si tienes relaciones
+        $pqrs = Pqr::with(['user', 'category'])
                  ->latest()
                  ->paginate(10);
         
@@ -39,9 +39,9 @@ class AdminController extends Controller
      */
     public function ranking()
     {
-        $ranking = Ranking::with('user') // Si tienes relación con usuario
-                     ->orderBy('score', 'desc')
-                     ->paginate(10);
+        $ranking = Ranking::with('user')
+        ->orderBy('score', 'desc')
+        ->paginate(10);
         
         return view('admin.ranking', compact('ranking'));
     }
@@ -56,7 +56,7 @@ class AdminController extends Controller
         $validated = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,'.$user->id,
-            'role' => 'required|in:user,admin' // Asegurar valores válidos
+            'role' => 'required|in:user,admin'
         ])->validate();
         
         $user->update($validated);
@@ -64,7 +64,7 @@ class AdminController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Usuario actualizado correctamente',
-            'user' => $user->fresh() // Devuelve los datos actualizados
+            'user' => $user->fresh()
         ]);
     }
     
@@ -74,9 +74,7 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        
-        // Alternativa para deshabilitar en lugar de eliminar
-        // $user->update(['is_active' => false]);
+
         
         $user->delete();
         

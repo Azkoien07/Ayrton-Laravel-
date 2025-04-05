@@ -2,14 +2,13 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8 bg-light-background dark:bg-dark-background">
+    @include('notify::components.notify')
     <!-- Contenido principal -->
     <div class="p-6">
-        <!-- Título principal elevado y con más jerarquía -->
         <div class="mb-10">
             <h2 class="text-3xl font-bold text-light-text dark:text-dark-text mb-2">Configuración de la cuenta</h2>
         </div>
-
-        <!-- Grid de configuración con sombras mejoradas -->
+        <!-- Grid de configuración -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Sección Perfil -->
             <div class="bg-light-card dark:bg-dark-card rounded-lg shadow-lg border border-light-border dark:border-dark-border overflow-hidden transition-transform hover:scale-[1.02]">
@@ -20,32 +19,35 @@
                         </svg>
                         Perfil
                     </h3>
-                    <form class="space-y-4">
+                    <form method="POST" action="{{ route('account.profile.update') }}" class="space-y-4">
+                        @csrf
+
                         <div>
-                            <label for="" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Nombre</label>
-                            <input type="text"
-                                class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary dark:focus:ring-dark-hover focus:border-light-primary dark:focus:border-dark-hover bg-light-card dark:bg-dark-card text-light-text dark:text-dark-text"
-                                maxlength="20"
-                                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
-                                title="Solo se permiten letras y espacios."
-                                required>
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre</label>
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                value="{{ old('name', auth()->user()->name) }}"
+                                class="mt-1 block w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
+
                         <div>
-                            <label for="" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Correo electrónico</label>
-                            <input type="email"
-                                class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary dark:focus:ring-dark-hover focus:border-light-primary dark:focus:border-dark-hover bg-light-card dark:bg-dark-card text-light-text dark:text-dark-text"
-                                required
-                                maxlength="40"
-                                pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|gmail\.com\.co|outlook\.com|yahoo\.com)$"
-                                title="El correo debe ser de Gmail, Outlook o Yahoo">
+                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Correo electrónico</label>
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                value="{{ old('email', auth()->user()->email) }}"
+                                class="mt-1 block w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
+
                         <button class="bg-light-primary hover:bg-light-hover dark:bg-dark-primary dark:hover:bg-dark-hover text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
                             Guardar cambios
                         </button>
                     </form>
                 </div>
             </div>
-
             <!-- Sección Preferencias -->
             <div class="bg-light-card dark:bg-dark-card rounded-lg shadow-lg border border-light-border dark:border-dark-border overflow-hidden transition-transform hover:scale-[1.02]">
                 <div class="p-6">
@@ -112,15 +114,31 @@
                         </svg>
                         Seguridad
                     </h3>
-                    <form class="space-y-4">
+                    <form action="{{ route('account.password.update') }}" method="POST" class="space-y-4">
+                        @csrf
+
                         <div>
-                            <label for="" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Nueva contraseña</label>
-                            <input type="password" autocomplete="new-password" class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary dark:focus:ring-dark-hover focus:border-light-primary dark:focus:border-dark-hover bg-light-card dark:bg-dark-card text-light-text dark:text-dark-text">
+                            <label for="password" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Nueva contraseña</label>
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                autocomplete="new-password"
+                                required
+                                class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary dark:focus:ring-dark-hover focus:border-light-primary dark:focus:border-dark-hover bg-light-card dark:bg-dark-card text-light-text dark:text-dark-text">
                         </div>
+
                         <div>
-                            <label for="" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Confirmar contraseña</label>
-                            <input type="password" autocomplete="new-password" class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary dark:focus:ring-dark-hover focus:border-light-primary dark:focus:border-dark-hover bg-light-card dark:bg-dark-card text-light-text dark:text-dark-text">
+                            <label for="password_confirmation" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Confirmar contraseña</label>
+                            <input
+                                type="password"
+                                name="password_confirmation"
+                                id="password_confirmation"
+                                autocomplete="new-password"
+                                required
+                                class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary dark:focus:ring-dark-hover focus:border-light-primary dark:focus:border-dark-hover bg-light-card dark:bg-dark-card text-light-text dark:text-dark-text">
                         </div>
+
                         <button class="bg-light-primary hover:bg-light-hover dark:bg-dark-primary dark:hover:bg-dark-hover text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
                             Cambiar contraseña
                         </button>

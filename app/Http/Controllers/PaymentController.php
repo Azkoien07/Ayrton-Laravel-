@@ -19,9 +19,9 @@ class PaymentController extends Controller
             Stripe::setApiKey(env('STRIPE_SECRET'));
 
             $charge = Charge::create([
-                'amount' => $request->amount * 100, 
+                'amount' => $request->amount * 100,
                 'currency' => 'usd',
-                'source' => $request->stripeToken, 
+                'source' => $request->stripeToken,
                 'description' => 'Pago desde Laravel con Stripe',
             ]);
 

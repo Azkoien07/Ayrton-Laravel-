@@ -77,3 +77,8 @@ Route::post('/language/switch', [LanguageController::class, 'switch'])->name('la
 // Ruta para el modulo de desafios
 Route::get('/challenge', [ChallengeController::class, 'index'])->name('challenge.index');
 Route::post('/challenge', [ChallengeController::class, 'store'])->name('challenge.store');
+
+Route::prefix('settings')->middleware('auth')->group(function () {
+    Route::post('/account/profile', [SettingsController::class, 'updateProfile'])->name('account.profile.update');
+    Route::post('/account/password', [SettingsController::class, 'updatePassword'])->name('account.password.update');
+});

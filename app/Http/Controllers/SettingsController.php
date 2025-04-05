@@ -1,36 +1,48 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
 {
     public function index()
     {
-        
+
         return view('settings.settings');
     }
 
-    public function updateProfile(Request $request){
-        //validacion de credenciales
-       $validate = $request->validate([
-           'name'=>'required|string|max:200',
-          'email'=> ['required',
-          'string',
-          'email',
-          'max:200',
-          'regex:/^[a-zA-Z0-9._%+-]+@gmail\.com(\.co)?$/'
-       ],
-    ],[
-        'name.requiered'=> 'El nombre es obligatorio',
-        'name.min'=> 'El nombre debe tener minimo 5 caracteres',
-        'email.requiered'=>'El correo es obligatorio',
-        'email.email'=>'introducir un correo valido',
-        'email' => ['required', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@(gmail\.com|gmail\.com\.co|outlook\.com|yahoo\.com)$/i'],
-        'email.unique' => 'Este correo electronico ya esta en uso',
-    ]);
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
+        ]);
 
-      return redirect()->route('settings')->with('success','Perfil actualizado correctamente');
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+        notify()->success('Perfil actualizado correctamente.', '¡Éxito!');
+        return back();
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        Notify()->success('Contraseña actualizada exitosamente', 'Éxito');
+        return back();
     }
 }
