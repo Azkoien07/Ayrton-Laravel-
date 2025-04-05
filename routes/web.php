@@ -71,7 +71,7 @@ Route::get('/pqrs/create', [PqrController::class, 'create'])->name('pqrs.pqrs');
 // Ruta para la generacion del voucher en pdf (Pendiente)
 Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
 
-// Rua para el cambio de idioma
+// Ruta para el cambio de idioma
 Route::post('/language/switch', [LanguageController::class, 'switch'])->name('language.switch');
 
 // Ruta para el modulo de desafios

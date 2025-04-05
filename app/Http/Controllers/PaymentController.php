@@ -10,7 +10,7 @@ class PaymentController extends Controller
 {
     public function checkout()
     {
-        return view('pay.checkout'); 
+        return view('pay.checkout');
     }
 
     public function processPayment(Request $request)

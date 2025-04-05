@@ -61,13 +61,6 @@
                     <form class="space-y-4" action="{{ route('language.switch') }}" method="POST">
                         @csrf
                         <div>
-                            <label for="theme" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Tema</label>
-                            <select id="theme" class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary dark:focus:ring-dark-hover focus:border-light-primary dark:focus:border-dark-hover bg-light-card dark:bg-dark-card text-light-text dark:text-dark-text" name="theme">
-                                <option value="light">Claro</option>
-                                <option value="dark">Oscuro</option>
-                            </select>
-                        </div>
-                        <div>
                             <label for="language" class="block text-sm font-medium text-light-text dark:text-dark-text mb-1">Idioma</label>
                             <select id="language" class="w-full px-3 py-2 border border-light-border dark:border-dark-border rounded-md focus:ring-light-primary dark:focus:ring-dark-hover focus:border-light-primary dark:focus:border-dark-hover bg-light-card dark:bg-dark-card text-light-text dark:text-dark-text" name="language">
                                 <option value="es" {{ app()->getLocale() == 'es' ? 'selected' : '' }}>Español</option>

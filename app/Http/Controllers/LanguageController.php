@@ -9,13 +9,8 @@ class LanguageController extends Controller
 {
     public function switch(Request $request)
     {
-         // Validar el idioma
-    $validated = $request->validate([
-        'language' => 'required|in:es,en',
-    ]);
-
-    Session::put('locale', $validated['language']);
-
-    return redirect()->back();
+        $language = $request->input('language');
+        Session::put('locale', $language);
+        return back(); // ← redirige a la página anterior
     }
 }
