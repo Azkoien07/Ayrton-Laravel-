@@ -82,22 +82,9 @@ DB_USERNAME=tu_usuario
 DB_PASSWORD=tu_contraseña
 ```
 
-Luego, ejecuta las migraciones y los seeders en este orden:
+Luego, ejecuta las migraciones y los seeders:
 ```bash
-php artisan migrate --path=database/migrations/2025_03_18_192603_create_roles_table.php
-php artisan migrate --path=database/migrations/2025_03_18_194230_create_pqrs_table.php
-php artisan migrate --path=database/migrations/2025_03_18_193638_create_plans_table.php
-php artisan migrate --path=database/migrations/2025_03_18_195902_create_challenges_table.php
-php artisan migrate --path=database/migrations/2025_03_18_200438_create_rankings_table.php
-php artisan migrate --path=database/migrations/2025_03_18_200707_create_vouchers_table.php
-php artisan migrate --path=database/migrations/2025_03_18_192931_create_tasks_table.php
-php artisan migrate --path=database/migrations/2025_03_18_195030_create_payments_table.php
-php artisan migrate --path=database/migrations/2025_03_18_180108_create_users_table.php
-php artisan migrate --path=database/migrations/2025_03_18_203517_create_user_pqr_table.php
-php artisan migrate --path=database/migrations/2025_03_18_204502_create_user_task_table.php
-php artisan migrate --path=database/migrations/2025_03_18_205352_create_payment_user_table.php
-php artisan migrate --path=database/migrations/2025_03_18_210831_create_challenge_task_table.php
-php artisan migrate --path=database/migrations/2025_03_18_211351_create_challenge_ranking_table.php
+php artisan migrate:fresh --seed
 ```
 
 ### 4️⃣ Iniciar el Servidor
