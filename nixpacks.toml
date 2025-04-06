@@ -1,12 +1,14 @@
 [phases.setup]
 nixPkgs = ["php", "composer", "nodejs"]
-
-[phases.setup.commands]
-# Instalamos pnpm globalmente desde npm
-install_pnpm = "npm install -g pnpm"
+commands = [
+  "npm install -g pnpm"
+]
 
 [phases.install]
-commands = ["composer install", "pnpm install"]
+commands = [
+  "composer install",
+  "pnpm install"
+]
 
 [phases.build]
 commands = [
