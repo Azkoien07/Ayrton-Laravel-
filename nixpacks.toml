@@ -1,5 +1,15 @@
 [phases.setup]
-nixPkgs = ["php83", "php83Extensions.swoole", "nodejs", "phpPackages.composer", "pnpm"]
+nixPkgs = [
+  "php83",
+  "php83Extensions.swoole",
+  "php83Extensions.pdo",
+  "php83Extensions.pdo_pgsql",
+  "php83Extensions.pgsql",
+  "php83Extensions.fileinfo",
+  "phpPackages.composer",
+  "nodejs",
+  "pnpm"
+]
 
 [phases.install]
 commands = [
