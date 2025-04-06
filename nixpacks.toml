@@ -1,0 +1,9 @@
+[phases.setup]
+nixPkgs = ["php", "composer"]
+
+[phases.node]
+dependsOn = ["setup"]
+nixPkgs = ["nodejs", "pnpm"]
+
+[start]
+cmd = "php artisan migrate --force && pnpm run build && php artisan config:cache"
