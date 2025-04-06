@@ -238,7 +238,6 @@
            
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeModal()"></div>
 
-           
             <div class="inline-block align-bottom bg-light-card dark:bg-dark-card rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                
                 <div class="flex items-center justify-between px-6 py-4 bg-light-secondary dark:bg-dark-secondary border-b border-light-border dark:border-dark-border">
@@ -332,8 +331,8 @@
         const planPrice = planPrices[planName];
         
         
-        window.location.href = "{{ route('payment.checkout') }}?plan=" + 
-                              encodeURIComponent(planName) + 
+        window.location.href = "{{ route('payment.checkout') }}?plan=" +
+                              encodeURIComponent(planName) +
                               "&price=" + encodeURIComponent(planPrice);
     }
 

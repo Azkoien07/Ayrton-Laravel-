@@ -30,7 +30,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 <!-- Campo: Nombre -->
                 <div class="sm:col-span-2 lg:col-span-1">
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">@lang('tasks.name')</label>
+                    <label for="" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">@lang('tasks.name')</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
@@ -191,7 +191,7 @@
                     <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
                 </svg>
                 <span class="whitespace-nowrap">
-                    {{ \Carbon\Carbon::parse($task->f_creation)->format(__('tasks.date_format')) }} - 
+                    {{ \Carbon\Carbon::parse($task->f_creation)->format(__('tasks.date_format')) }} -
                     {{ \Carbon\Carbon::parse($task->f_expiration)->format(__('tasks.date_format')) }}
                 </span>
             </div>

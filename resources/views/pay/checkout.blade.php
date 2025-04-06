@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagar con Stripe</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon copy.ico') }}">
     <script src="https://js.stripe.com/v3/"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -131,7 +132,7 @@
                 @if(($plan ?? 'Premium') !== 'Básico')
                   
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-light-text dark:text-dark-text mb-2">Detalles de la Tarjeta</label>
+                        <label for="" class="block text-sm font-medium text-light-text dark:text-dark-text mb-2">Detalles de la Tarjeta</label>
                         <div id="card-element" class="p-3 border border-light-border dark:border-dark-border rounded-lg bg-light-background dark:bg-dark-background focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary focus:border-transparent"></div>
                         <div id="card-errors" role="alert" class="text-red-500 text-sm mt-2"></div>
                     </div>

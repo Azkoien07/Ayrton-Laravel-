@@ -71,9 +71,9 @@ return [
         'title' => 'Confirm Subscription',
         'confirming' => 'You are about to subscribe to the :plan plan.',
         'billing_summary' => 'Billing Summary',
-        'selected_plan' => 'Selected plan:',
-        'monthly_price' => 'Monthly price:',
-        'total_to_pay' => 'Total to pay:',
+        'selected_plan' => 'Selected plan',
+        'monthly_price' => 'Monthly price',
+        'total_to_pay' => 'Total to pay',
         'cancel' => 'Cancel',
         'confirm_pay' => 'Confirm and Pay'
     ],
