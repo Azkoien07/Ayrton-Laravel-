@@ -19,8 +19,11 @@ return new class extends Migration
             $table->enum('priority',['Alta', 'Media', 'Baja']);
             $table->enum('type',['Personal', 'Laboral', 'Educativa']);
             $table->string('reminder');
+            $table->boolean('reminder_shown')->default(false); 
+            $table->boolean('reminder_sent')->default(false);
             $table->date('f_creation');
             $table->date('f_expiration');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
 

@@ -20,8 +20,16 @@ class TaskReminderNotification extends Notification
 
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database']; 
     }
+    public function toDatabase($notifiable)
+{
+    return [
+        'task_id' => $this->task->id,
+        'message' => 'Recordatorio de tarea: ' . $this->task->name,
+        'url' => url('/tasks/' . $this->task->id)
+    ];
+}
 
     public function toMail($notifiable)
     {

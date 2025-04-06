@@ -4,7 +4,6 @@
 <div class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold text-gray-800 mb-8 dark:text-white">{{ __('tasks.create_title') }}</h1>
 
-   
     @if ($errors->any())
         <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
             <p class="font-bold">{{ __('tasks.error_message') }}</p>
@@ -16,11 +15,10 @@
         </div>
     @endif
 
-
     <form action="{{ route('tasks.store') }}" method="POST" class="bg-white rounded-lg shadow-md p-6 dark:bg-dark-card">
         @csrf
-        
 
+        <!-- Nombre de la tarea -->
         <div class="mb-4">
             <label for="name" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">{{ __('tasks.name') }}</label>
             <input type="text"
@@ -38,7 +36,7 @@
             @enderror
         </div>
 
-       
+        <!-- Estado -->
         <div class="mb-4">
             <label for="state" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">{{ __('tasks.state') }}</label>
             <select name="state" id="state" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-background dark:border-dark-border dark:text-dark-text" required>
@@ -53,19 +51,17 @@
             @enderror
         </div>
 
-       
+        <!-- Descripción -->
         <div class="mb-4">
             <label for="description" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">{{ __('tasks.description') }}</label>
             <textarea name="description" id="description" rows="4" 
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-background dark:border-dark-border dark:text-dark-text"
-                required
-                minlength="15"
-                maxlength="350">{{ old('description') }}</textarea>
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-background dark:border-dark-border dark:text-dark-text">{{ old('description') }}</textarea>
             @error('description')
                 <span class="text-red-600 text-sm">{{ $message }}</span>
             @enderror
         </div>
 
+        <!-- Prioridad -->
         <div class="mb-4">
             <label for="priority" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">{{ __('tasks.priority') }}</label>
             <select name="priority" id="priority" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-background dark:border-dark-border dark:text-dark-text" required>
@@ -79,6 +75,7 @@
             @enderror
         </div>
 
+        <!-- Tipo -->
         <div class="mb-4">
             <label for="type" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">{{ __('tasks.type') }}</label>
             <select name="type" id="type" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-background dark:border-dark-border dark:text-dark-text" required>
@@ -92,6 +89,7 @@
             @enderror
         </div>
 
+       
         <div class="mb-4">
     <label for="reminder" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">
         {{ __('tasks.reminder') }}
@@ -101,39 +99,27 @@
         id="reminder" 
         value="{{ old('reminder') }}"
         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-background dark:border-dark-border dark:text-dark-text"
-        max="2030-12-31T23:59">
-    @error('reminder')
-        <span class="text-red-600 text-sm">{{ $message }}</span>
-    @enderror
-</div>
-
-        <div class="mb-4">
-    <label for="reminder" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">Recordatorio</label>
-    <input type="datetime-local"
-        name="reminder"
-        id="reminder"
-        value="{{ old('reminder') }}"
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-background dark:border-dark-border dark:text-dark-text"
         required>
     @error('reminder')
         <span class="text-red-600 text-sm">{{ $message }}</span>
     @enderror
 </div>
 
+       
         <div class="mb-4">
-            <label for="f_creation" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">{{ __('tasks.creation_date') }}</label>
-            <input type="datetime-local" 
-                name="f_creation" 
-                id="f_creation" 
-                value="{{ old('f_creation', now()->format('Y-m-d\TH:i')) }}"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-background dark:border-dark-border dark:text-dark-text" 
-                readonly>
-            @error('f_creation')
-                <span class="text-red-600 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
+    <label for="f_creation" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">{{ __('tasks.creation_date') }}</label>
+    <input type="datetime-local" 
+        name="f_creation" 
+        id="f_creation" 
+        value="{{ old('f_creation', now()->setTimezone('America/Bogota')->format('Y-m-d\TH:i')) }}"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-background dark:border-dark-border dark:text-dark-text" 
+        readonly>
+    @error('f_creation')
+        <span class="text-red-600 text-sm">{{ $message }}</span>
+    @enderror
+</div>
 
-        
+       
         <div class="mb-4">
             <label for="f_expiration" class="block text-gray-700 font-semibold mb-2 dark:text-dark-text">{{ __('tasks.expiration_date') }}</label>
             <input type="datetime-local" 
@@ -164,7 +150,7 @@
         const fExpiration = document.getElementById('f_expiration');
         const reminder = document.getElementById('reminder');
         
-     
+        
         fExpiration.addEventListener('change', function() {
             const expirationDate = new Date(this.value);
             const currentDate = new Date();
@@ -175,7 +161,7 @@
             }
         });
         
- 
+       
         reminder.addEventListener('change', function() {
             const reminderDate = new Date(this.value);
             const expirationDate = new Date(fExpiration.value);
@@ -184,7 +170,23 @@
                 alert('El recordatorio debe ser antes de la fecha de vencimiento');
                 this.value = '';
             }
+            
+           
+            const currentDate = new Date();
+            if (reminderDate < currentDate) {
+                alert('El recordatorio debe ser una fecha futura');
+                this.value = '';
+            }
         });
+        
+       
+        if (fExpiration.value) {
+            const expirationDate = new Date(fExpiration.value);
+            const currentDate = new Date();
+            if (expirationDate < currentDate) {
+                fExpiration.value = '';
+            }
+        }
     });
 </script>
 @endsection

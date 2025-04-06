@@ -51,9 +51,13 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 // Procesar el formulario de registro
 Route::post('/register', [AuthController::class, 'register']);
 
+
+
+
 // Rutas para el módulo de tareas
 Route::middleware('auth')->group(function () {
     Route::resource('tasks', TaskController::class);
+    Route::post('/tasks/check-reminders', [TaskController::class, 'checkReminders'])->name('tasks.check-reminders');
     Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
     Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 });
