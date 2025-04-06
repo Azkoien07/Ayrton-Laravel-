@@ -47,10 +47,11 @@ Route::middleware([\App\Http\Middleware\Localization::class])->group(function ()
         // Rutas para gestión de PQRs
         Route::get('/pqrs', [PqrController::class, 'index'])->name('admin.pqrs');
         Route::post('/pqrs/update-status', [PqrController::class, 'updateStatus'])->name('admin.pqrs.update-status');
-        Route::post('/pqrs/archive', [PqrController::class, 'archive'])->name('admin.pqrs.archive');
-        Route::delete('/pqrs/delete', [PqrController::class, 'destroy'])->name('admin.pqrs.delete');
-        
-        // Otras rutas del admin que puedas necesitar...
+        Route::delete('/pqr/{id}', [PqrController::class, 'destroy'])->name('pqr.destroy');
+        Route::put('/pqr/{id}/update-status', [PqrController::class, 'updateStatus'])->name('pqr.updateStatus');
+        Route::put('/pqrs/{id}/archive', [PqrController::class, 'archive'])->name('pqr.archive');
+        Route::put('/admin/pqrs/archive', [PqrController::class, 'archive'])->name('admin.pqrs.archive');
+        Route::get('/admin/pqrs/delete', [PqrController::class, 'delete'])->name('admin.pqrs.delete');
     });
 
     // Rutas para el registro de los usuario
