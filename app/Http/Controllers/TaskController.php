@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Mckenziearts\Notify\Facades\Notify;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TaskReminderMailable;
+use App\Models\User;
+use Carbon\Carbon;
 class TaskController extends Controller
 {
     public function index(Request $request)
@@ -92,19 +96,27 @@ class TaskController extends Controller
             'state' => 'required|in:Pendiente,En Progreso,Completada,Cancelada',
             'priority' => 'required|in:Alta,Media,Baja',
             'type' => 'required|in:Personal,Laboral,Educativa',
-            'reminder' => 'required|string',
+            'reminder' => 'required|date',
             'f_creation' => 'required|date',
             'f_expiration' => 'required|date|after_or_equal:f_creation',
         ], [
             'f_expiration.after_or_equal' => 'La fecha de expiración debe ser igual o posterior a la fecha de creación'
         ]);
-
-        Task::create($validated);
-
+    
+        
+        $task = Task::create($validated);
+    
+       
+        $user = Auth::user();
+        
+       
+        if ($user && Carbon::parse($validated['reminder'])->isToday()) {
+            Mail::to($user->email)->send(new TaskReminderMailable($task));
+        }
+    
         Notify()->success('Tarea creada exitosamente', '¡Nueva tarea registrada!');
         return redirect()->route('tasks.index');
     }
-
     public function show(Task $task)
     {
         return view('tasks.show', compact('task'));

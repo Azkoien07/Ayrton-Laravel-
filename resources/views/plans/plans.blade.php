@@ -181,7 +181,7 @@
     </div>
 </div>
 
-    <!-- Comparación de Planes -->
+   
     <div class="max-w-7xl mx-auto mt-16 bg-light-card dark:bg-dark-card rounded-xl shadow-lg overflow-hidden border border-light-border dark:border-dark-border">
         <div class="px-6 py-4 bg-light-secondary dark:bg-dark-secondary border-b border-light-border dark:border-dark-border">
             <h3 class="text-xl font-semibold text-light-text dark:text-dark-text">@lang('plans.comparison.title')</h3>
@@ -232,15 +232,15 @@
         </div>
     </div>
 
-    <!-- Modal de Suscripción mejorado -->
+   
     <div id="subscriptionModal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            <!-- Fondo oscuro -->
+           
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeModal()"></div>
 
-            <!-- Contenido del modal -->
+           
             <div class="inline-block align-bottom bg-light-card dark:bg-dark-card rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <!-- Encabezado del modal -->
+               
                 <div class="flex items-center justify-between px-6 py-4 bg-light-secondary dark:bg-dark-secondary border-b border-light-border dark:border-dark-border">
                     <h3 class="text-lg font-medium text-light-text dark:text-dark-text" id="modal-title">@lang('plans.modal.title')</h3>
                     <button onclick="closeModal()" class="text-light-textSecondary hover:text-light-text dark:hover:text-dark-text focus:outline-none">
@@ -250,7 +250,7 @@
                     </button>
                 </div>
 
-                <!-- Cuerpo del modal -->
+                
                 <div class="px-6 py-4">
                     <p class="text-light-text dark:text-dark-text text-base mb-4">@lang('plans.modal.confirming', ['plan' => '<span id="selectedPlanName" class="font-bold text-light-primary dark:text-dark-primary"></span>'])</p>
 
@@ -299,22 +299,22 @@
             };
 
             function openModal(planName) {
-                // Actualizar contenido del modal
+                
                 document.getElementById('selectedPlanName').textContent = planName;
                 document.getElementById('modalPlanName').textContent = planName;
 
-                // Mostrar precio
+       
                 const price = planPrices[planName];
                 document.getElementById('modalPlanPrice').textContent = `$${price}/mes`;
                 document.getElementById('modalTotalPrice').textContent = `$${price}`;
 
-                // Mostrar el modal con animación
+              
                 const modal = document.getElementById('subscriptionModal');
                 modal.classList.remove('hidden');
                 modal.classList.add('animate-fade-in');
                 document.body.style.overflow = 'hidden';
 
-                // Enfocar el primer campo del formulario
+                
                 setTimeout(() => {
                     document.getElementById('cardNumber')?.focus();
                 }, 100);
@@ -329,25 +329,23 @@
 
             function processPayment() {
                 const planName = document.getElementById('selectedPlanName').textContent;
+        const planPrice = planPrices[planName];
+        
+        
+        window.location.href = "{{ route('payment.checkout') }}?plan=" + 
+                              encodeURIComponent(planName) + 
+                              "&price=" + encodeURIComponent(planPrice);
+    }
 
-                // Cerrar el modal
-                closeModal();
 
-                // Redirigir a la página de checkout
-                window.location.href = "{{ route('payment.checkout') }}";
-
-
-                window.location.href = "{{ route('payment.checkout') }}?plan=" + encodeURIComponent(planName);
-            }
-
-            // Cerrar modal con ESC
+       
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
                     closeModal();
                 }
             });
 
-            // Validación de campos de tarjeta en tiempo real
+           
             document.getElementById('cardNumber')?.addEventListener('input', function(e) {
                 this.value = this.value.replace(/[^\d]/g, '').replace(/(\d{4})(?=\d)/g, '$1 ');
             });
