@@ -1,6 +1,5 @@
 <?php
 
-use Faker\Guesser\Name;
 use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;

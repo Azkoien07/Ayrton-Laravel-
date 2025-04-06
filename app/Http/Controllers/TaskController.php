@@ -103,11 +103,11 @@ class TaskController extends Controller
             'f_expiration.after_or_equal' => 'La fecha de expiración debe ser igual o posterior a la fecha de creación'
         ]);
     
-        
+        $validated['user_id'] = Auth::id();
         $task = Task::create($validated);
+        $user = Auth::user();
     
        
-        $user = Auth::user();
         
        
         if ($user && Carbon::parse($validated['reminder'])->isToday()) {
