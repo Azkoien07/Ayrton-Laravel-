@@ -76,4 +76,9 @@ Route::middleware([\App\Http\Middleware\Localization::class])->group(function ()
     // Rutas para el modulo de challenge
     Route::get('/challenge', [ChallengeController::class, 'index'])->name('challenge.index');
     Route::post('/challenge', [ChallengeController::class, 'store'])->name('challenge.store');
+
+        // Rutas CRUD
+        Route::get('/users/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+        Route::put('/users/{id}', [AdminController::class, 'update'])->name('admin.update');
+        Route::delete('/users/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });

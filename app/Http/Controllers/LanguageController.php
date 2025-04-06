@@ -11,7 +11,7 @@ class LanguageController extends Controller
     public function switch(Request $request)
     {
         $language = $request->input('language');
-        Session::put('locale', $language); // Guarda en sesión
-        return back(); // Redirige a la vista anterior
+        Session::put('locale', $language);
+        return back();
     }
 }

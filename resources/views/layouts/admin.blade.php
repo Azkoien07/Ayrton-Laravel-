@@ -2,15 +2,16 @@
 <html lang="es">
 
 <head>
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin')</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon copy.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="flex flex-col md:flex-row min-h-screen bg-light-background text-light-text dark:bg-dark-background dark:text-dark-text transition-all">
+    @include('notify::components.notify')
     <!-- Header móvil -->
     <header class="w-full flex items-center justify-between p-4 md:hidden bg-light-primary text-white dark:bg-dark-primary">
         <button id="menu-toggle" class="p-2 focus:outline-none" aria-label="Abrir menú">☰</button>
@@ -68,7 +69,7 @@
             <form action="{{ route('logout') }}" method="POST" class="mt-4">
                 @csrf
                 <button type="submit" class="w-full bg-light-primary hover:bg-dark-background text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out flex items-center justify-center">
-                    {{ __('messages.logout') }}
+                    {{ __('sidebar.logout') }}
                 </button>
             </form>
         </nav>
@@ -79,6 +80,7 @@
     <main class="flex-1 p-6">
         @yield('admin-content')
     </main>
+    @notifyJs
 
     <script>
         const sidebar = document.getElementById('sidebar');

@@ -3,7 +3,6 @@
 @section('content')
 <div class="container mx-auto px-4 py-8">
     @include('notify::components.notify')
-
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
             <h1 class="text-3xl font-bold text-gray-800 dark:text-white">@lang('tasks.page_title')</h1>
@@ -45,7 +44,7 @@
 
                 <!-- Campo: Estado -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">@lang('tasks.status')</label>
+                    <label for="" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">@lang('tasks.status')</label>
                     <select name="state" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
                         <option value="">@lang('tasks.all_statuses')</option>
                         <option value="Pendiente" {{ request('state') == 'Pendiente' ? 'selected' : '' }}>@lang('tasks.pending')</option>
@@ -57,7 +56,7 @@
 
                 <!-- Campo: Prioridad -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">@lang('tasks.priority')</label>
+                    <label for="" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">@lang('tasks.priority')</label>
                     <select name="priority" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
                         <option value="">@lang('tasks.all_priorities')</option>
                         <option value="Alta" {{ request('priority') == 'Alta' ? 'selected' : '' }}>@lang('tasks.high')</option>
@@ -68,7 +67,7 @@
 
                 <!-- Campo: Asignado a -->
                 <div class="sm:col-span-2 lg:col-span-1">
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">@lang('tasks.assigned_to')</label>
+                    <label for="" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">@lang('tasks.assigned_to')</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
@@ -82,14 +81,14 @@
 
                 <!-- Campo: Fecha creación (desde) -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">@lang('tasks.creation_date') (@lang('tasks.from'))</label>
+                    <label for="" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">@lang('tasks.creation_date') (@lang('tasks.from'))</label>
                     <input type="date" name="f_creation_from" value="{{ request('f_creation_from') }}"
                         class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
                 </div>
 
                 <!-- Campo: Fecha creación (hasta) -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">@lang('tasks.creation_date') (@lang('tasks.to'))</label>
+                    <label for="" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">@lang('tasks.creation_date') (@lang('tasks.to'))</label>
                     <input type="date" name="f_creation_to" value="{{ request('f_creation_to') }}"
                         class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
                 </div>

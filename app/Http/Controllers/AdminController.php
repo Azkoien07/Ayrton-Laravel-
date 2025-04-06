@@ -10,21 +10,13 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of users with pagination
-     */
     public function index()
     {
-        $users = User::with('role')
-                   ->orderBy('created_at', 'desc')
-                   ->paginate(10);
-        
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.index', compact('users'));
     }
 
-    /**
-     * Display PQRS with pagination
-     */
+
     public function pqrs()
     {
         $pqrs = Pqr::with(['user', 'category'])
@@ -34,9 +26,6 @@ class AdminController extends Controller
         return view('admin.pqrs', compact('pqrs'));
     }
 
-    /**
-     * Display ranking with pagination
-     */
     public function ranking()
     {
         $ranking = Ranking::with('user')
@@ -45,58 +34,41 @@ class AdminController extends Controller
         
         return view('admin.ranking', compact('ranking'));
     }
+     // Mostrar formulario de edición
+     public function edit($id)
+     {
+         $user = User::findOrFail($id);
+         return view('admin.edit', compact('user'));
+     }
+ 
+     // Actualizar usuario
+     public function update(Request $request, $id)
+     {
+         $request->validate([
+             'name' => 'required|string|max:255',
+             'email' => 'required|email|unique:users,email,'.$id,
+             'role' => 'required|in:user,admin'
+         ]);
+ 
+         $user = User::findOrFail($id);
+         $user->update([
+             'name' => $request->name,
+             'email' => $request->email,
+             'role' => $request->role
+         ]);
+         
+         Notify()->success('Usuario actualizado correctamente', 'Éxito');
+         return redirect()->route('admin.index');
+     }
+ 
+     // Eliminar usuario
+     public function destroy($id)
+     {
+         $user = User::findOrFail($id);
+         $user->delete();
+        
+         Notify()->warning('Usuario eliminado correctamente', 'Usuario Eliminado');
+         return redirect()->route('admin.index');
+     }
 
-    /**
-     * Update user information
-     */
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-        
-        $validated = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,'.$user->id,
-            'role' => 'required|in:user,admin'
-        ])->validate();
-        
-        $user->update($validated);
-        
-        return response()->json([
-            'success' => true,
-            'message' => 'Usuario actualizado correctamente',
-            'user' => $user->fresh()
-        ]);
-    }
-    
-    /**
-     * Disable user (soft delete if enabled in model)
-     */
-    public function destroy($id)
-    {
-        $user = User::findOrFail($id);
-
-        
-        $user->delete();
-        
-        return response()->json([
-            'success' => true,
-            'message' => 'Usuario deshabilitado',
-            'userCount' => User::count(),
-            'deletedUserId' => $id
-        ]);
-    }
-    
-    /**
-     * Restore disabled user (if using soft deletes)
-     */
-    public function restore($id)
-    {
-        $user = User::withTrashed()->findOrFail($id);
-        $user->restore();
-        
-        return response()->json([
-            'success' => true,
-            'message' => 'Usuario restaurado correctamente'
-        ]);
-    }
 }

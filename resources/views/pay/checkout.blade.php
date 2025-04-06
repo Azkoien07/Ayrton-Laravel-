@@ -137,9 +137,6 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="{{ route('plans') }}" class="flex-1 py-3 px-4 text-center border border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-medium rounded-lg shadow-sm hover:bg-light-secondary dark:hover:bg-dark-secondary transition-colors duration-300">
-                            Volver a planes
-                        </a>
                         <button type="submit" id="submit-button" class="flex-1 py-3 px-4 bg-light-primary hover:bg-light-hover text-white font-medium rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-primary transition-colors duration-300 dark:bg-dark-primary dark:hover:bg-dark-hover dark:focus:ring-dark-primary">
                             <span id="button-text">Pagar ahora</span>
                             <span id="button-spinner" class="hidden ml-2">
@@ -148,16 +145,6 @@
                                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
                             </span>
-                        </button>
-                    </div>
-                @else
-                  
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="{{ route('plans') }}" class="flex-1 py-3 px-4 text-center border border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-medium rounded-lg shadow-sm hover:bg-light-secondary dark:hover:bg-dark-secondary transition-colors duration-300">
-                            Volver a planes
-                        </a>
-                        <button type="submit" class="flex-1 py-3 px-4 bg-light-primary hover:bg-light-hover text-white font-medium rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-primary transition-colors duration-300 dark:bg-dark-primary dark:hover:bg-dark-hover dark:focus:ring-dark-primary">
-                            Activar Plan Gratuito
                         </button>
                     </div>
                 @endif

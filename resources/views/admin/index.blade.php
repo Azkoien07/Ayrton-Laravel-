@@ -1,160 +1,99 @@
 @extends('layouts.admin')
+
 @section('admin-content')
-<div class="container mx-auto p-6">
-    <h2 class="text-2xl font-bold mb-4">Dashboard de Administrador</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <div class="bg-white shadow-md rounded-lg p-4 text-center">
-            <h3 class="text-lg font-semibold mb-2">Usuarios Registrados</h3>
-            <p class="text-gray-700 text-xl" id="user-count">{{ $users->count() }}</p>
+<div class="container mx-auto px-4 py-8">
+    @include('notify::components.notify')
+
+    <!-- Header Section -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800">Panel de Administración</h1>
+            <p class="text-gray-600 mt-2">Gestiona los usuarios de tu aplicación</p>
+        </div>
+        <div class="mt-4 md:mt-0 flex items-center space-x-2">
+            <span class="text-sm text-gray-500">Total usuarios:</span>
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">{{ $users->total() }}</span>
         </div>
     </div>
 
-    <div class="mt-6 overflow-x-auto">
-        <h3 class="text-xl font-bold mb-3">Lista de Usuarios</h3>
-        <table class="w-full border-collapse bg-white shadow-md min-w-max">
-            <thead>
-                <tr class="bg-gray-200">
-                    <th class="p-2 border">ID</th>
-                    <th class="p-2 border">Nombre</th>
-                    <th class="p-2 border">Email</th>
-                    <th class="p-2 border">Rol</th>
-                    <th class="p-2 border">Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="user-table">
-                @foreach($users as $user)
-                <tr class="text-center border-b" id="user-{{ $user->id }}">
-                    <td class="p-2 border">{{ $user->id }}</td>
-                    <td class="p-2 border">
-                        <span id="name-{{ $user->id }}">{{ $user->name }}</span>
-                        <input type="text" id="edit-name-{{ $user->id }}" class="hidden p-1 border rounded w-full" value="{{ $user->name }}">
-                    </td>
-                    <td class="p-2 border">
-                        <span id="email-{{ $user->id }}">{{ $user->email }}</span>
-                        <input type="email" id="edit-email-{{ $user->id }}" class="hidden p-1 border rounded w-full" value="{{ $user->email }}">
-                    </td>
-                    <td class="p-2 border">
-                        <span id="role-{{ $user->id }}">{{ $user->role }}</span>
-                        <select id="edit-role-{{ $user->id }}" class="hidden p-1 border rounded w-full">
-                            <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>Usuario</option>
-                            <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Administrador</option>
-                        </select>
-                    </td>
-                   
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <!-- Estadísticas -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-white border border-gray-200 rounded-xl shadow p-6">
+            <p class="text-sm text-gray-500 mb-1">Usuarios Totales</p>
+            <h2 class="text-2xl font-bold text-gray-800">{{ $users->count() }}</h2>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-xl shadow p-6">
+            <p class="text-sm text-gray-500 mb-1">Administradores</p>
+            <h2 class="text-2xl font-bold text-gray-800">
+                {{ $users->where('role.access_level', 'Admin')->count() }}
+            </h2>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-xl shadow p-6">
+            <p class="text-sm text-gray-500 mb-1">Usuarios Regulares</p>
+            <h2 class="text-2xl font-bold text-gray-800">
+                {{ $users->where('role.access_level', '!=', 'Admin')->count() }}
+            </h2>
+        </div>
+    </div>
+
+    <!-- Users Table -->
+    <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+        <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+            <h3 class="text-lg font-semibold text-gray-800">Lista de Usuarios</h3>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-gray-50">
+                    <tr class="text-left text-gray-600 text-sm font-medium">
+                        <th class="px-6 py-3">ID</th>
+                        <th class="px-6 py-3">Nombre</th>
+                        <th class="px-6 py-3">Email</th>
+                        <th class="px-6 py-3">Rol</th>
+                        <th class="px-6 py-3 text-right">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    @foreach($users as $user)
+                    <tr class="hover:bg-gray-50 transition-colors duration-150">
+                        <td class="px-6 py-4 font-medium">{{ $user->id }}</td>
+                        <td class="px-6 py-4">{{ $user->name }}</td>
+                        <td class="px-6 py-4">{{ $user->email }}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-medium {{ $user->role->access_level == 'Admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }}">
+                                {{ $user->role->access_level == 'Admin' ? 'Administrador' : 'Usuario' }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right space-x-2">
+                            <a href="{{ route('admin.edit', $user->id) }}" class="text-blue-600 hover:text-blue-800 transition inline-flex items-center" title="Editar">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 13l6-6m2 2L9 17H7v-2l8-8z" />
+                                </svg>
+                            </a>
+                            <form action="{{ route('admin.destroy', $user->id) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Estás seguro que deseas eliminar este usuario?');">
+                                @csrf
+                                @method('DELETE')
+                                <button class="delete-btn text-red-600 hover:text-red-900 ml-2" title="Eliminar">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <div class="px-6 py-4 border-t border-gray-100 flex justify-between items-center">
+            <div class="text-sm text-gray-500">
+                Mostrando <span class="font-medium">{{ $users->firstItem() }}</span> a <span class="font-medium">{{ $users->lastItem() }}</span> de <span class="font-medium">{{ $users->total() }}</span> resultados
+            </div>
+            <div class="flex space-x-2">
+                {{ $users->links() }}
+            </div>
+        </div>
     </div>
 </div>
-
-<script>
-// Function definitions for edit, cancel, save, and delete user actions
-function editUser(id) {
-    document.getElementById('name-' + id).classList.add('hidden');
-    document.getElementById('email-' + id).classList.add('hidden');
-    document.getElementById('role-' + id).classList.add('hidden');
-    
-    document.getElementById('edit-name-' + id)?.classList.remove('hidden');
-    document.getElementById('edit-email-' + id)?.classList.remove('hidden');
-    document.getElementById('edit-role-' + id)?.classList.remove('hidden');
-    
-    document.getElementById('save-btn-' + id)?.classList.remove('hidden');
-    document.getElementById('cancel-btn-' + id)?.classList.remove('hidden');
-    
-    document.getElementById('edit-btn-' + id)?.classList.add('hidden');
-    document.getElementById('delete-btn-' + id)?.classList.add('hidden');
-}
-
-function cancelEdit(id) {
-    const originalName = document.getElementById('name-' + id).textContent;
-    const originalEmail = document.getElementById('email-' + id).textContent;
-    const originalRole = document.getElementById('role-' + id).textContent;
-    
-    document.getElementById('edit-name-' + id)?.value = originalName;
-    document.getElementById('edit-email-' + id)?.value = originalEmail;
-    document.getElementById('edit-role-' + id)?.value = originalRole;
-    
-    document.getElementById('name-' + id)?.classList.remove('hidden');
-    document.getElementById('email-' + id)?.classList.remove('hidden');
-    document.getElementById('role-' + id)?.classList.remove('hidden');
-    
-    document.getElementById('edit-name-' + id)?.classList.add('hidden');
-    document.getElementById('edit-email-' + id)?.classList.add('hidden');
-    document.getElementById('edit-role-' + id)?.classList.add('hidden');
-    
-    document.getElementById('edit-btn-' + id)?.classList.remove('hidden');
-    document.getElementById('delete-btn-' + id)?.classList.remove('hidden');
-    
-    document.getElementById('save-btn-' + id)?.classList.add('hidden');
-    document.getElementById('cancel-btn-' + id)?.classList.add('hidden');
-}
-
-function saveUser(id) {
-    const nameInput = document.getElementById('edit-name-' + id);
-    const emailInput = document.getElementById('edit-email-' + id);
-    const roleInput = document.getElementById('edit-role-' + id);
-    
-    const name = nameInput.value;
-    const email = emailInput.value;
-    const role = roleInput.value;
-    
-    const csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
-    
-    fetch('/admin/users/' + id, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfTokenElement.getAttribute('content'),
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-            name: name,
-            email: email,
-            role: role,
-            _method: 'PUT'
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('name-' + id).textContent = name;
-        document.getElementById('email-' + id).textContent = email;
-        document.getElementById('role-' + id).textContent = role;
-        cancelEdit(id);
-        alert('Usuario actualizado correctamente');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Hubo un error al actualizar el usuario: ' + error.message);
-    });
-}
-
-function deleteUser(id) {
-    if (!confirm('¿Estás seguro de que deseas eliminar este usuario?')) return;
-    
-    const csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
-    
-    fetch('/admin/users/' + id, {
-        method: 'DELETE',
-        headers: {
-            'X-CSRF-TOKEN': csrfTokenElement.getAttribute('content'),
-            'Accept': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        const userRow = document.getElementById('user-' + id);
-        userRow.remove();
-        
-        const userCount = document.getElementById('user-count');
-        userCount.textContent = parseInt(userCount.textContent) - 1;
-        
-        alert('Usuario eliminado correctamente');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Hubo un error al eliminar el usuario: ' + error.message);
-    });
-}
-</script>
 @endsection
