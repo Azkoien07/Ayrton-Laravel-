@@ -18,6 +18,7 @@ class Task extends Model
         'reminder',
         'f_creation',
         'f_expiration',
+        'user_id'
     ];
 
     // Relación muchos a muchos con la tabla users (a través de la tabla intermedia user_task)

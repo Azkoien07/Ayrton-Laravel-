@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description') ->nullable();
             $table->string('category');
-            $table->enum('state', ['Pendiente', 'En_Progreso', 'Completado', 'Cancelado']);
+            $table->enum('state', ['Pendiente', 'En Progreso', 'Completado', 'Cancelado']);
             $table->enum('dificulty',['Fácil', 'Medio', 'Dificil']);
             $table->integer('points');
             $table->timestamps();
