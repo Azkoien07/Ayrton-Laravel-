@@ -4,8 +4,8 @@
     @include('notify::components.notify')
     <div class="max-w-3xl mx-auto p-4">
         <div class="mb-8 text-center">
-            <h2 class="text-3xl font-bold text-gray-800 mb-2 dark:text-dark-text">Envíe su PQRS</h2>
-            <p class="text-gray-600 dark:text-dark-text-secondary">Formulario para Peticiones, Quejas, Reclamos y Sugerencias</p>
+            <h2 class="text-3xl font-bold text-gray-800 mb-2 dark:text-dark-text">@lang('pqrs.title')</h2>
+            <p class="text-gray-600 dark:text-dark-text-secondary">@lang('pqrs.subtitle')</p>
         </div>
 
         <div class="bg-white dark:bg-dark-card rounded-lg shadow-lg border border-gray-100 dark:border-dark-border overflow-hidden">
@@ -16,7 +16,7 @@
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span>Por favor corrige los siguientes errores:</span>
+                        <span>@lang('pqrs.validation.errors_title')</span>
                     </div>
                     <ul class="mt-1 ml-6 list-disc">
                         @foreach($errors->all() as $error)
@@ -32,7 +32,7 @@
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span>{{ session('success') }}</span>
+                        <span>@lang('pqrs.messages.success')</span>
                     </div>
                 </div>
                 @endif
@@ -40,85 +40,77 @@
                 <form action="{{ route('pqrs.store') }}" method="POST">
                     @csrf
 
-                    <!-- Tipo de PQRS -->
+                    <!-- PQRS Type -->
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-2">Tipo de PQRS *</label>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-2">@lang('pqrs.form.type_label')</label>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            @foreach(__('pqrs.form.types') as $value => $label)
                             <label class="flex items-center">
-                                <input type="radio" name="type_pqr" value="Queja" class="h-4 w-4 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400"
-                                    {{ old('type_pqr') == 'Queja' ? 'checked' : '' }}>
-                                <span class="ml-2 text-sm text-gray-700 dark:text-dark-text">Queja</span>
+                                <input type="radio" name="type_pqr" value="{{ $label }}" class="h-4 w-4 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400"
+                                    {{ old('type_pqr') == $label ? 'checked' : '' }}>
+                                <span class="ml-2 text-sm text-gray-700 dark:text-dark-text">{{ $label }}</span>
                             </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="type_pqr" value="Sugerencia" class="h-4 w-4 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400"
-                                    {{ old('type_pqr') == 'Sugerencia' ? 'checked' : '' }}>
-                                <span class="ml-2 text-sm text-gray-700 dark:text-dark-text">Sugerencia</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="type_pqr" value="Sugerencia" class="h-4 w-4 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400"
-                                    {{ old('type_pqr') == 'Duda' ? 'checked' : '' }}>
-                                <span class="ml-2 text-sm text-gray-700 dark:text-dark-text">Duda</span>
-                            </label>
+                            @endforeach
                         </div>
                         @error('type_pqr')
                         <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <!-- Título (Asunto) -->
+                    <!-- Title -->
                     <div class="mb-6">
-                        <label for="title" class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-1">Título *</label>
+                        <label for="title" class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-1">@lang('pqrs.form.title_label')</label>
                         <input type="text" id="title" name="title" value="{{ old('title') }}"
                             class="w-full px-3 py-2 border border-gray-300 dark:border-dark-border rounded-md focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-background dark:text-dark-text"
                             required
                             minlength="10"
                             maxlength="255"
-                            placeholder="Ej: Problema con facturación del servicio">
+                            placeholder="@lang('pqrs.form.title_placeholder')">
                         @error('title')
                         <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <!-- Descripción -->
+                    <!-- Description -->
                     <div class="mb-6">
-                        <label for="description" class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-1">Descripción detallada *</label>
+                        <label for="description" class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-1">@lang('pqrs.form.description_label')</label>
                         <textarea id="description" name="description" rows="5"
                             class="w-full px-3 py-2 border border-gray-300 dark:border-dark-border rounded-md focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-background dark:text-dark-text"
                             required
                             minlength="20"
                             maxlength="1000"
-                            placeholder="Describa su petición, queja, reclamo o sugerencia con el mayor detalle posible">{{ old('description') }}</textarea>
+                            placeholder="@lang('pqrs.form.description_placeholder')">{{ old('description') }}</textarea>
                         @error('description')
                         <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <!-- Argumento -->
+                    <!-- Argument -->
                     <div class="mb-6">
-                        <label for="argument" class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-1">Argumento *</label>
+                        <label for="argument" class="block text-sm font-medium text-gray-700 dark:text-dark-text mb-1">@lang('pqrs.form.argument_label')</label>
                         <textarea id="argument" name="argument" rows="3"
                             class="w-full px-3 py-2 border border-gray-300 dark:border-dark-border rounded-md focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-background dark:text-dark-text"
-                            placeholder="Argumentos o razones que respaldan su solicitud">{{ old('argument') }}</textarea>
+                            placeholder="@lang('pqrs.form.argument_placeholder')">{{ old('argument') }}</textarea>
                         @error('argument')
                         <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <!-- Botón de envío -->
+                    <!-- Submit Button -->
                     <div class="flex justify-end">
                         <button type="submit"
                             class="bg-light-primary hover:bg-dark-background text-white font-medium py-2 px-6 rounded-lg shadow-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-dark-card">
-                            Enviar PQRS
+                            @lang('pqrs.form.submit_button')
                         </button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- Información adicional -->
+        <!-- Additional Information -->
         <div class="mt-6 text-center text-sm text-gray-500 dark:text-dark-text-secondary">
-            <p>Nos comprometemos a responder su solicitud en un plazo máximo de 5 días hábiles.</p>
-            <p class="mt-1">Para consultas urgentes, por favor contacte a nuestro servicio al cliente.</p>
+            <p>@lang('pqrs.messages.response_time')</p>
+            <p class="mt-1">@lang('pqrs.messages.urgent_contact')</p>
         </div>
     </div>
 </div>

@@ -5,18 +5,17 @@
 
     <!-- Encabezado y botón -->
     <div class="flex justify-between items-center mb-8">
-        <h1 class="text-3xl font-bold text-light-text dark:text-dark-text">Lista de Desafíos</h1>
+        <h1 class="text-3xl font-bold text-light-text dark:text-dark-text">@lang('challenge.challenges_list')</h1>
         <button
             @click="openModal = true"
             class="bg-light-primary dark:bg-dark-primary hover:bg-light-hover dark:hover:bg-dark-hover text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300 ease-in-out flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
             </svg>
-            Nuevo Desafío
+            @lang('challenge.new_challenge')
         </button>
     </div>
 
-    <!-- Modal -->
     <!-- Modal -->
     <div
         x-show="openModal"
@@ -38,7 +37,7 @@
                         <path d="M12 4v16m8-8H4" />
                     </svg>
                 </div>
-                <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Registrar desafío</h2>
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white">@lang('challenge.register_challenge')</h2>
             </div>
 
             <!-- Formulario -->
@@ -47,51 +46,51 @@
 
                 <!-- Campo: Título -->
                 <div>
-                    <label for="name" class="block text-base font-semibold text-gray-700 dark:text-gray-200 mb-1">Título</label>
+                    <label for="name" class="block text-base font-semibold text-gray-700 dark:text-gray-200 mb-1">@lang('challenge.title')</label>
                     <input type="text" name="name" id="name" required
                         class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-background text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-600 transition" />
                 </div>
 
                 <!-- Campo: Descripción -->
                 <div>
-                    <label for="description" class="block text-base font-semibold text-gray-700 dark:text-gray-200 mb-1">Descripción</label>
+                    <label for="description" class="block text-base font-semibold text-gray-700 dark:text-gray-200 mb-1">@lang('challenge.description')</label>
                     <textarea name="description" id="description" rows="4" required
                         class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-background text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-600 transition"></textarea>
                 </div>
 
                 <!-- Campo: Categoría -->
                 <div>
-                    <label for="category" class="block text-base font-semibold text-gray-700 dark:text-gray-200 mb-1">Categoría</label>
+                    <label for="category" class="block text-base font-semibold text-gray-700 dark:text-gray-200 mb-1">@lang('challenge.category')</label>
                     <input type="text" name="category" id="category" required
                         class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-background text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-600 transition" />
                 </div>
 
                 <!-- Campo: Estado -->
                 <div>
-                    <label for="state" class="block text-base font-semibold text-gray-700 dark:text-gray-200 mb-1">Estado</label>
+                    <label for="state" class="block text-base font-semibold text-gray-700 dark:text-gray-200 mb-1">@lang('challenge.status')</label>
                     <select name="state" id="state" required
                         class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-background text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-600 transition">
-                        <option value="Pendiente">Pendiente</option>
-                        <option value="En Progreso">En Progreso</option>
-                        <option value="Completado">Completado</option>
-                        <option value="Cancelado">Cancelado</option>
+                        <option value="Pendiente">@lang('challenge.pending')</option>
+                        <option value="En Progreso">@lang('challenge.in_progress')</option>
+                        <option value="Completado">@lang('challenge.completed')</option>
+                        <option value="Cancelado">@lang('challenge.canceled')</option>
                     </select>
                 </div>
 
                 <!-- Campo: Dificultad -->
                 <div>
-                    <label for="dificulty" class="block text-base font-semibold text-gray-700 dark:text-gray-200 mb-1">Dificultad</label>
+                    <label for="dificulty" class="block text-base font-semibold text-gray-700 dark:text-gray-200 mb-1">@lang('challenge.difficulty')</label>
                     <select name="dificulty" id="dificulty" required
                         class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-background text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-600 transition">
-                        <option value="Fácil">Fácil</option>
-                        <option value="Medio">Medio</option>
-                        <option value="Dificil">Difícil</option>
+                        <option value="Fácil">@lang('challenge.easy')</option>
+                        <option value="Medio">@lang('challenge.medium')</option>
+                        <option value="Dificil">@lang('challenge.hard')</option>
                     </select>
                 </div>
 
                 <!-- Campo: Puntos -->
                 <div>
-                    <label for="points" class="block text-base font-semibold text-gray-700 dark:text-gray-200 mb-1">Puntos</label>
+                    <label for="points" class="block text-base font-semibold text-gray-700 dark:text-gray-200 mb-1">@lang('challenge.points')</label>
                     <input type="number" name="points" id="points" min="1" required
                         class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-background text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-600 transition" />
                 </div>
@@ -100,11 +99,11 @@
                 <div class="flex justify-end gap-3 pt-2">
                     <button type="button" @click="openModal = false"
                         class="px-5 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-                        Cancelar
+                        @lang('challenge.cancel')
                     </button>
                     <button type="submit"
                         class="px-5 py-2 rounded-lg bg-light-primary dark:bg-dark-primary text-white hover:bg-light-hover dark:hover:bg-dark-hover transition">
-                        Registrar
+                        @lang('challenge.register')
                     </button>
                 </div>
             </form>
@@ -123,20 +122,20 @@
                 <div class="flex space-x-2">
                     <span class="@switch($desafio->state)
                             @case('Pendiente') bg-gray-400 dark:bg-gray-500 @break
-                            @case('En progreso') bg-yellow-400 dark:bg-yellow-500 @break
+                            @case('En Progreso') bg-yellow-400 dark:bg-yellow-500 @break
                             @case('Completado') bg-green-400 dark:bg-green-500 @break
                             @case('Cancelado') bg-red-400 dark:bg-red-500 @break
                             @default bg-gray-200 dark:bg-gray-600
                         @endswitch text-black dark:text-white text-xs px-2 py-1 rounded-full">
-                        {{ $desafio->state }}
+                        @lang('challenge.status_'.$desafio->state)
                     </span>
                     <span class="@switch($desafio->dificulty)
                             @case('Fácil') bg-green-400 dark:bg-green-500 @break
                             @case('Medio') bg-blue-400 dark:bg-blue-500 @break
-                            @case('Difícil') bg-purple-400 dark:bg-purple-500 @break
+                            @case('Dificil') bg-purple-400 dark:bg-purple-500 @break
                             @default bg-gray-200 dark:bg-gray-600
                         @endswitch text-black dark:text-white text-xs px-2 py-1 rounded-full">
-                        {{ $desafio->dificulty }}
+                        @lang('challenge.difficulty_'.$desafio->dificulty)
                     </span>
                 </div>
             </div>
