@@ -17,7 +17,7 @@ use App\Http\Controllers\PaymentController;
 // Ruta para el cambio de idioma
 Route::middleware([\App\Http\Middleware\Localization::class])->group(function () {
     Route::post('/language/switch', [LanguageController::class, 'switch'])->name('language.switch');
-     // Ruta para el cambio de tema
+    // Ruta para el cambio de tema
     Route::post('/set-theme', [ThemeController::class, 'setTheme'])->name('set.theme');
 
     // Ruta para el inicio de la aplicacion
@@ -49,8 +49,6 @@ Route::middleware([\App\Http\Middleware\Localization::class])->group(function ()
     // Rutas para el rol usuario
     Route::middleware('auth')->group(function () {
         Route::resource('tasks', TaskController::class);
-        Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
-        Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
     });
 
     // Rutas para el modulo de configuracion
@@ -71,13 +69,13 @@ Route::middleware([\App\Http\Middleware\Localization::class])->group(function ()
     Route::get('/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
     Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('payment.process');
     Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
-    
+
     // Rutas para el modulo de challenge
     Route::get('/challenge', [ChallengeController::class, 'index'])->name('challenge.index');
     Route::post('/challenge', [ChallengeController::class, 'store'])->name('challenge.store');
 
-        // Rutas CRUD
-        Route::get('/users/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
-        Route::put('/users/{id}', [AdminController::class, 'update'])->name('admin.update');
-        Route::delete('/users/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+    // Rutas CRUD
+    Route::get('/users/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+    Route::put('/users/{id}', [AdminController::class, 'update'])->name('admin.update');
+    Route::delete('/users/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });
