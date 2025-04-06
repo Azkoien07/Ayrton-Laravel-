@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["php" , "nodejs" , "phpPackages.composer"]
+nixPkgs = ["php", "nodejs", "phpPackages.composer"]
 commands = [
   "npm install -g pnpm"
 ]
