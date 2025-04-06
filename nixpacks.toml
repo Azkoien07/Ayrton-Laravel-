@@ -1,9 +1,16 @@
 [phases.setup]
-nixPkgs = ["php", "composer"]
+nixPkgs = ["php", "composer", "nodejs"]
 
-[phases.node]
-dependsOn = ["setup"]
-nixPkgs = ["nodejs", "pnpm"]
+[phases.setup.commands]
+# Instalamos pnpm globalmente desde npm
+install_pnpm = "npm install -g pnpm"
 
-[start]
-cmd = "php artisan migrate --force && pnpm run build && php artisan config:cache"
+[phases.install]
+commands = ["composer install", "pnpm install"]
+
+[phases.build]
+commands = [
+  "php artisan config:cache",
+  "php artisan route:cache",
+  "php artisan migrate --force"
+]
