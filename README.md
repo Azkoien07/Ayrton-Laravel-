@@ -82,29 +82,9 @@ DB_USERNAME=tu_usuario
 DB_PASSWORD=tu_contraseña
 ```
 
-Luego, ejecuta las migraciones y los seeders en este orden:
+Luego, ejecuta las migraciones y los seeders:
 ```bash
-# Laravel defaults
-php artisan migrate --path=database/migrations/2025_01_01_000001_create_cache_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000002_create_jobs_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000003_create_sessions_table.php
-
-# Migraciones del proyecto
-php artisan migrate --path=database/migrations/2025_01_01_000004_create_roles_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000005_create_pqrs_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000006_create_plans_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000007_create_challenges_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000008_create_rankings_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000009_create_vouchers_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000010_create_users_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000012_create_payments_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000011_create_tasks_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000013_create_user_pqr_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000014_create_user_task_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000015_create_payment_user_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000016_create_challenge_task_table.php
-php artisan migrate --path=database/migrations/2025_01_01_000017_create_challenge_ranking_table.php
-
+php artisan migrate:fresh --seed
 ```
 
 ### 4️⃣ Iniciar el Servidor
