@@ -72,9 +72,9 @@ return [
         'title' => 'Confirmar Suscripción',
         'confirming' => 'Estás a punto de suscribirte al plan :plan.',
         'billing_summary' => 'Resumen de Facturación',
-        'selected_plan' => 'Plan seleccionado:',
-        'monthly_price' => 'Precio mensual:',
-        'total_to_pay' => 'Total a pagar:',
+        'selected_plan' => 'Plan seleccionado',
+        'monthly_price' => 'Precio mensual',
+        'total_to_pay' => 'Total a pagar',
         'cancel' => 'Cancelar',
         'confirm_pay' => 'Confirmar y Pagar'
     ],

@@ -33,15 +33,25 @@ Route::middleware([\App\Http\Middleware\Localization::class])->group(function ()
 
     // Rutas para el rol administrador
     Route::middleware(['auth', RoleMiddleware::class . ':1'])
-        ->prefix('admin')
-        ->group(function () {
-            Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-            Route::get('/pqrs', [PqrController::class, 'index'])->name('admin.pqrs');
-            Route::post('/pqrs/update-status', [PqrController::class, 'updateStatus'])->name('admin.pqrs.update-status');
-            Route::post('/pqrs/archive', [PqrController::class, 'archive'])->name('admin.pqrs.archive');
-            Route::delete('/pqrs/delete', [PqrController::class, 'destroy'])->name('admin.pqrs.delete');
-            Route::get('/ranking', [AdminController::class, 'ranking'])->name('admin.ranking');
-        });
+    ->prefix('admin')
+    ->group(function () {
+        // Rutas principales del admin
+        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+        Route::get('/ranking', [AdminController::class, 'ranking'])->name('admin.ranking');
+        
+        // Rutas CRUD para usuarios
+        Route::get('/users/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+        Route::put('/users/{id}', [AdminController::class, 'update'])->name('admin.update');
+        Route::delete('/users/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+        
+        // Rutas para gestión de PQRs
+        Route::get('/pqrs', [PqrController::class, 'index'])->name('admin.pqrs');
+        Route::post('/pqrs/update-status', [PqrController::class, 'updateStatus'])->name('admin.pqrs.update-status');
+        Route::post('/pqrs/archive', [PqrController::class, 'archive'])->name('admin.pqrs.archive');
+        Route::delete('/pqrs/delete', [PqrController::class, 'destroy'])->name('admin.pqrs.delete');
+        
+        // Otras rutas del admin que puedas necesitar...
+    });
 
     // Rutas para el registro de los usuario
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -76,4 +86,9 @@ Route::middleware([\App\Http\Middleware\Localization::class])->group(function ()
     // Rutas para el modulo de challenge
     Route::get('/challenge', [ChallengeController::class, 'index'])->name('challenge.index');
     Route::post('/challenge', [ChallengeController::class, 'store'])->name('challenge.store');
+
+        // Rutas CRUD
+        Route::get('/users/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+        Route::put('/users/{id}', [AdminController::class, 'update'])->name('admin.update');
+        Route::delete('/users/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });

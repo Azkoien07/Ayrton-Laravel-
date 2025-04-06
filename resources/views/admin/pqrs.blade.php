@@ -2,7 +2,6 @@
 
 @section('admin-content')
 @php
-
     $stats = $stats ?? [
         'total' => 0,
         'pending' => 0,
@@ -14,22 +13,20 @@
 
 <div class="container mx-auto px-4 py-8">
     <div class="p-6">
-       
+        <!-- Encabezado -->
         <div class="mb-10">
             <h2 class="text-3xl font-bold text-gray-800 mb-2">Gestión de PQRs</h2>
             <p class="text-gray-600">Administra las peticiones, quejas, reclamos y sugerencias</p>
         </div>
 
-     
+        <!-- Estadísticas -->
         <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
-            
+            <!-- Total PQRS -->
             <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm font-medium text-gray-500">Total PQRS</p>
-                        <p id="total-pqrs" class="text-2xl font-bold text-blue-600 mt-1">
-                            {{ $stats['total'] }}
-                        </p>
+                        <p id="total-pqrs" class="text-2xl font-bold text-blue-600 mt-1">{{ $stats['total'] }}</p>
                     </div>
                     <div class="bg-blue-100 p-3 rounded-full">
                         <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -39,14 +36,12 @@
                 </div>
             </div>
             
-
+            <!-- Pendientes -->
             <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm font-medium text-gray-500">Pendientes</p>
-                        <p id="pending-pqrs" class="text-2xl font-bold text-yellow-600 mt-1">
-                            {{ $stats['pending'] }}
-                        </p>
+                        <p id="pending-pqrs" class="text-2xl font-bold text-yellow-600 mt-1">{{ $stats['pending'] }}</p>
                     </div>
                     <div class="bg-yellow-100 p-3 rounded-full">
                         <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,14 +51,12 @@
                 </div>
             </div>
             
-
+            <!-- En Proceso -->
             <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm font-medium text-gray-500">En Proceso</p>
-                        <p id="in-progress-pqrs" class="text-2xl font-bold text-blue-600 mt-1">
-                            {{ $stats['in_progress'] }}
-                        </p>
+                        <p id="in-progress-pqrs" class="text-2xl font-bold text-blue-600 mt-1">{{ $stats['in_progress'] }}</p>
                     </div>
                     <div class="bg-blue-100 p-3 rounded-full">
                         <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,14 +66,12 @@
                 </div>
             </div>
             
-     
+            <!-- Resueltas -->
             <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm font-medium text-gray-500">Resueltas</p>
-                        <p id="resolved-pqrs" class="text-2xl font-bold text-green-600 mt-1">
-                            {{ $stats['resolved'] }}
-                        </p>
+                        <p id="resolved-pqrs" class="text-2xl font-bold text-green-600 mt-1">{{ $stats['resolved'] }}</p>
                     </div>
                     <div class="bg-green-100 p-3 rounded-full">
                         <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,14 +81,12 @@
                 </div>
             </div>
             
-
+            <!-- Cerradas -->
             <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm font-medium text-gray-500">Cerradas</p>
-                        <p id="closed-pqrs" class="text-2xl font-bold text-gray-600 mt-1">
-                            {{ $stats['closed'] }}
-                        </p>
+                        <p id="closed-pqrs" class="text-2xl font-bold text-gray-600 mt-1">{{ $stats['closed'] }}</p>
                     </div>
                     <div class="bg-gray-100 p-3 rounded-full">
                         <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,7 +97,7 @@
             </div>
         </div>
 
-      
+        <!-- Filtros -->
         <div class="bg-white rounded-lg shadow-lg border border-gray-100 p-6 mb-8">
             <form action="{{ route('admin.pqrs') }}" method="GET">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -155,14 +144,14 @@
             </form>
         </div>
 
-   
+        <!-- Mensajes de éxito -->
         @if(session('success'))
         <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded shadow-md" role="alert">
             <p>{{ session('success') }}</p>
         </div>
         @endif
 
-       
+        <!-- Tabla de PQRs -->
         <div class="bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -207,30 +196,31 @@
                                 {{ $pqr->created_at->format('d/m/Y H:i') }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <div class="flex justify-end space-x-2">
-                                  
-                                    <select class="update-status text-xs border rounded p-1" data-id="{{ $pqr->id }}">
-                                        <option value="Pendiente" {{ $pqr->status == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
-                                        <option value="En Proceso" {{ $pqr->status == 'En Proceso' ? 'selected' : '' }}>En Proceso</option>
-                                        <option value="Resuelto" {{ $pqr->status == 'Resuelto' ? 'selected' : '' }}>Resuelto</option>
-                                        <option value="Cerrado" {{ $pqr->status == 'Cerrado' ? 'selected' : '' }}>Cerrado</option>
-                                    </select>
-                                    
-                                   
-                                    <button class="archive-btn text-gray-600 hover:text-gray-900 ml-2" data-id="{{ $pqr->id }}" title="Archivar">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                                        </svg>
-                                    </button>
-                                    
-                                  
-                                    <button class="delete-btn text-red-600 hover:text-red-900 ml-2" data-id="{{ $pqr->id }}" title="Eliminar">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </td>
+    <div class="flex justify-end space-x-2">
+        <!-- Selector de estado -->
+        <select class="update-status text-xs border rounded p-1" data-id="{{ $pqr->id }}">
+            <option value="Pendiente" {{ $pqr->status == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
+            <option value="En Proceso" {{ $pqr->status == 'En Proceso' ? 'selected' : '' }}>En Proceso</option>
+            <option value="Resuelto" {{ $pqr->status == 'Resuelto' ? 'selected' : '' }}>Resuelto</option>
+            <option value="Cerrado" {{ $pqr->status == 'Cerrado' ? 'selected' : '' }}>Cerrado</option>
+        </select>
+        
+        <!-- Botón Archivar - Actualizado al estilo de los botones de usuario -->
+        <button class="archive-btn text-blue-600 hover:text-blue-800 transition inline-flex items-center ml-2" data-id="{{ $pqr->id }}" title="Archivar">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+            </svg>
+        </button>
+        
+        <!-- Botón Eliminar - Actualizado al estilo de los botones de usuario -->
+        <button class="delete-btn text-red-600 hover:text-red-900 transition inline-flex items-center ml-2" data-id="{{ $pqr->id }}" title="Eliminar">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+        </button>
+    </div>
+</td>
+
                         </tr>
                         @empty
                         <tr>
@@ -252,103 +242,22 @@
 @endsection
 
 @section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
- 
-    $('.update-status').change(function() {
-        const pqrId = $(this).data('id');
-        const newStatus = $(this).val();
-        
-        $.ajax({
-            url: "{{ route('admin.pqrs.update-status') }}",
-            method: 'POST',
-            data: {
-                _token: "{{ csrf_token() }}",
-                id: pqrId,
-                status: newStatus
-            },
-            success: function(response) {
-                if(response.success) {
-                    toastr.success(response.message);
-                    updateStats(response.stats);
-              
-                    const badge = $(`tr[data-id="${pqrId}"] .status-badge`);
-                    badge.removeClass('bg-yellow-100 bg-blue-100 bg-green-100 bg-gray-100 text-yellow-800 text-blue-800 text-green-800 text-gray-800');
-                    badge.addClass(getStatusClasses(newStatus));
-                    badge.text(newStatus);
-                }
-            },
-            error: function(xhr) {
-                toastr.error('Error al actualizar el estado');
-                // Revertir el cambio en el select
-                const currentStatus = $(`tr[data-id="${pqrId}"] .status-badge`).text();
-                $(this).val(currentStatus);
-            }
-        });
-    });
-    
-   
-    $('.archive-btn').click(function() {
-        const pqrId = $(this).data('id');
-        
-        if(confirm('¿Estás seguro de archivar este PQR?')) {
-            $.ajax({
-                url: "{{ route('admin.pqrs.archive') }}",
-                method: 'POST',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    id: pqrId
-                },
-                success: function(response) {
-                    if(response.success) {
-                        toastr.success(response.message);
-                        updateStats(response.stats);
-                        // Actualizar la fila
-                        $(`tr[data-id="${pqrId}"] .status-badge`)
-                            .removeClass('bg-yellow-100 bg-blue-100 bg-green-100 text-yellow-800 text-blue-800 text-green-800')
-                            .addClass('bg-gray-100 text-gray-800')
-                            .text('Cerrado');
-                        // Actualizar el select de estado
-                        $(`tr[data-id="${pqrId}"] .update-status`).val('Cerrado');
-                    }
-                },
-                error: function() {
-                    toastr.error('Error al archivar el PQR');
-                }
-            });
+    // Configuración de AJAX para incluir CSRF token en todas las peticiones
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    
 
-    $('.delete-btn').click(function(e) {
-        e.preventDefault();
-        const pqrId = $(this).data('id');
-        
-        if(confirm('¿Estás seguro de eliminar este PQR permanentemente?')) {
-            $.ajax({
-                url: "{{ route('admin.pqrs.delete') }}",
-                method: 'DELETE',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    id: pqrId
-                },
-                success: function(response) {
-                    if(response.success) {
-                        toastr.success(response.message);
-                        updateStats(response.stats);
-                        // Eliminar la fila de la tabla
-                        $(`tr[data-id="${pqrId}"]`).fadeOut(300, function() {
-                            $(this).remove();
-                        });
-                    }
-                },
-                error: function(xhr) {
-                    toastr.error(xhr.responseJSON.message || 'Error al eliminar el PQR');
-                }
-            });
-        }
-    });
-    
+    // Función para mostrar notificaciones
+    function showNotification(message, type = 'success') {
+        alert(message); // Reemplaza esto con tu sistema de notificaciones preferido
+    }
+
+    // Función para actualizar las estadísticas
     function updateStats(stats) {
         $('#total-pqrs').text(stats.total);
         $('#pending-pqrs').text(stats.pending);
@@ -356,8 +265,8 @@ $(document).ready(function() {
         $('#resolved-pqrs').text(stats.resolved);
         $('#closed-pqrs').text(stats.closed);
     }
-    
 
+    // Función para obtener clases CSS según el estado
     function getStatusClasses(status) {
         const classes = {
             'Pendiente': 'bg-yellow-100 text-yellow-800',
@@ -367,6 +276,124 @@ $(document).ready(function() {
         };
         return classes[status] || '';
     }
+
+    // Manejar cambio de estado
+    $(document).on('change', '.update-status', function() {
+        const pqrId = $(this).data('id');
+        const newStatus = $(this).val();
+        const $select = $(this);
+
+        $.ajax({
+            url: "{{ route('admin.pqrs.update-status') }}",
+            method: 'POST',
+            data: {
+                id: pqrId,
+                status: newStatus
+            },
+            success: function(response) {
+                if(response.success) {
+                    // Actualizar el badge de estado
+                    const $badge = $(`tr[data-id="${pqrId}"] .status-badge`);
+                    $badge.removeClass().addClass('status-badge px-2 inline-flex text-xs leading-5 font-semibold rounded-full ' + getStatusClasses(newStatus));
+                    $badge.text(newStatus);
+                    
+                    // Actualizar estadísticas
+                    updateStats(response.stats);
+                    
+                    showNotification(response.message);
+                }
+            },
+            error: function(xhr) {
+                console.error(xhr);
+                // Revertir el cambio en el select
+                const currentStatus = $(`tr[data-id="${pqrId}"] .status-badge`).text();
+                $select.val(currentStatus);
+                
+                showNotification(xhr.responseJSON?.message || 'Error al actualizar el estado', 'error');
+            }
+        });
+    });
+
+    // Manejar archivar PQR
+    $(document).on('click', '.archive-btn', function() {
+        const pqrId = $(this).data('id');
+        const $button = $(this);
+
+        if(confirm('¿Estás seguro de archivar este PQR?')) {
+            $button.prop('disabled', true);
+            
+            $.ajax({
+                url: "{{ route('admin.pqrs.archive') }}",
+                method: 'POST',
+                data: {
+                    id: pqrId
+                },
+                success: function(response) {
+                    if(response.success) {
+                        // Actualizar la fila
+                        const $row = $(`tr[data-id="${pqrId}"]`);
+                        $row.find('.status-badge')
+                            .removeClass()
+                            .addClass('status-badge px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800')
+                            .text('Cerrado');
+                            
+                        $row.find('.update-status').val('Cerrado');
+                        
+                        // Actualizar estadísticas
+                        updateStats(response.stats);
+                        
+                        showNotification(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr);
+                    showNotification(xhr.responseJSON?.message || 'Error al archivar el PQR', 'error');
+                },
+                complete: function() {
+                    $button.prop('disabled', false);
+                }
+            });
+        }
+    });
+
+    // Manejar eliminar PQR
+    $(document).on('click', '.delete-btn', function(e) {
+        e.preventDefault();
+        const pqrId = $(this).data('id');
+        const $button = $(this);
+
+        if(confirm('¿Estás seguro de eliminar este PQR permanentemente?')) {
+            $button.prop('disabled', true);
+            
+            $.ajax({
+                url: "{{ route('admin.pqrs.delete') }}",
+                method: 'DELETE',
+                data: {
+                    id: pqrId
+                },
+                success: function(response) {
+                    if(response.success) {
+                        // Eliminar la fila de la tabla
+                        $(`tr[data-id="${pqrId}"]`).fadeOut(300, function() {
+                            $(this).remove();
+                        });
+                        
+                        // Actualizar estadísticas
+                        updateStats(response.stats);
+                        
+                        showNotification(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr);
+                    showNotification(xhr.responseJSON?.message || 'Error al eliminar el PQR', 'error');
+                },
+                complete: function() {
+                    $button.prop('disabled', false);
+                }
+            });
+        }
+    });
 });
 </script>
 @endsection

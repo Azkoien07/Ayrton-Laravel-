@@ -55,7 +55,6 @@
             @yield('content')
         </main>
     </div>
-    
     @notifyJs
     
     <script>
