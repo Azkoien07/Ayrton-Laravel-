@@ -1,16 +1,21 @@
 [phases.setup]
-nixPkgs = ["php", "nodejs", "phpPackages.composer", "pnpm"]
+nixPkgs = ["php83", "php83Extensions.swoole", "nodejs", "phpPackages.composer", "pnpm"]
 
 [phases.install]
 commands = [
-  "composer install",
+  "composer install --no-dev --optimize-autoloader",
   "pnpm install"
 ]
 
 [phases.build]
 commands = [
+  "php artisan migrate --force",
+  "php artisan db:seed --force",
   "php artisan optimize",
   "php artisan config:cache",
   "php artisan route:cache",
-  "php artisan migrate --force"
+  "php artisan view:cache"
 ]
+
+[start]
+cmd = "php artisan octane:start --server=swoole --host=0.0.0.0 --port=$PORT"
