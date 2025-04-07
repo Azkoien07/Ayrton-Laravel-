@@ -12,6 +12,7 @@
         "laravel/octane": "^2.8",
         "laravel/tinker": "^2.10.1",
         "mckenziearts/laravel-notify": "^2.7",
+        "nesbot/carbon": "^3.9",
         "stripe/stripe-php": "^17.1"
     },
     "require-dev": {

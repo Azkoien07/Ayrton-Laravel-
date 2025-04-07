@@ -8,6 +8,8 @@
     <title>@yield('title', 'Admin')</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon copy.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body class="flex flex-col md:flex-row min-h-screen bg-light-background text-light-text dark:bg-dark-background dark:text-dark-text transition-all">

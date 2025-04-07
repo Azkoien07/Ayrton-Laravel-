@@ -43,22 +43,6 @@ class PqrController extends Controller
         return view('admin.pqrs', compact('pqrs', 'stats'));
     }
 
-    public function updateStatus(Request $request)
-    {
-        $request->validate([
-            'id' => 'required|exists:pqrs,id',
-            'status' => 'required|in:Pendiente,En Proceso,Resuelto,Cerrado'
-        ]);
-
-        $pqr = Pqr::findOrFail($request->id);
-        $pqr->update(['status' => $request->status]);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Estado actualizado correctamente',
-            'stats' => $this->getUpdatedStats()
-        ]);
-    }
 
     public function archive(Request $request)
     {
@@ -73,20 +57,12 @@ class PqrController extends Controller
             'stats' => $this->getUpdatedStats()
         ]);
     }
-
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $request->validate(['id' => 'required|exists:pqrs,id']);
-
-        Pqr::findOrFail($request->id)->delete();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'PQRS eliminado correctamente',
-            'stats' => $this->getUpdatedStats()
-        ]);
+        Pqr::findOrFail($id)->delete();
+    
+        return redirect()->back()->with('success', 'PQRS eliminado correctamente');
     }
-
     protected function getUpdatedStats()
     {
         return [
@@ -129,4 +105,12 @@ class PqrController extends Controller
         Notify()->success('Hemos registrado tu PQRS con éxito. Nuestro equipo revisará tu solicitud y te responderá pronto.');
         return redirect()->route('pqrs.pqrs');
     }
+    public function updateStatus(Request $request, $id)
+{
+    $pqr = Pqr::findOrFail($id);
+    $pqr->status = $request->input('status');
+    $pqr->save();
+
+    return back()->with('success', 'Estado actualizado correctamente.');
+}
 }

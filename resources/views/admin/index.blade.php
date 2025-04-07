@@ -4,7 +4,7 @@
 <div class="container mx-auto px-4 py-8">
     @include('notify::components.notify')
 
-    <!-- Header Section -->
+
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
         <div>
             <h1 class="text-3xl font-bold text-gray-800">Panel de Administración</h1>
@@ -16,7 +16,6 @@
         </div>
     </div>
 
-    <!-- Estadísticas -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
         <div class="bg-white border border-gray-200 rounded-xl shadow p-6">
             <p class="text-sm text-gray-500 mb-1">Usuarios Totales</p>
@@ -36,7 +35,7 @@
         </div>
     </div>
 
-    <!-- Users Table -->
+
     <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
         <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
             <h3 class="text-lg font-semibold text-gray-800">Lista de Usuarios</h3>

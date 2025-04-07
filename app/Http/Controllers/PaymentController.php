@@ -8,7 +8,8 @@ use Stripe\Stripe;
 use Stripe\Charge;
 use Stripe\Exception\CardException;
 use Exception;
-
+use Carbon\Carbon;
+use App\Models\Payment;
 class PaymentController extends Controller
 {
     public function checkout(Request $request)
@@ -28,55 +29,66 @@ class PaymentController extends Controller
     }
 
     public function processPayment(Request $request): RedirectResponse
-    {
+{
+    $request->validate([
+        'stripeToken' => 'required',
+        'plan' => 'required|in:Básico,Premium,Platino',
+    ]);
+
+    $planPrices = [
+        'Básico' => 0,
+        'Premium' => 3400000,
+        'Platino' => 5000000
+    ];
+
+    $selectedPlan = $request->plan;
+    $amount = $planPrices[$selectedPlan];
+
+    if ($amount == 0) {
        
-        $request->validate([
-            'stripeToken' => 'required',
-            'plan' => 'required|in:Básico,Premium,Platino',
+        Payment::create([
+            'purchase_amount' => 0,
+            'payment_method' => 'Tarjeta Credito', 
+            'payment_date' => Carbon::now(),
+            'voucher_id' => null,
+        ]);
+
+        return redirect()->route('dashboard')->with(
+            'success_message',
+            'Plan Básico activado correctamente (gratuito)'
+        );
+    }
+
+    Stripe::setApiKey(env('STRIPE_SECRET'));
+
+    try {
+        $charge = Charge::create([
+            'amount' => $amount,
+            'currency' => 'cop',
+            'description' => 'Suscripción a plan '.$selectedPlan,
+            'source' => $request->stripeToken,
         ]);
 
         
-        $planPrices = [
-            'Básico' => 0,
-            'Premium' => 3400000, 
-            'Platino' => 5000000  
-        ];
+        Payment::create([
+            'purchase_amount' => $amount / 1000, 
+            'payment_method' => 'Tarjeta Credito', 
+            'payment_date' => Carbon::now(),
+            'voucher_id' => null,
+        ]);
 
-        $selectedPlan = $request->plan;
-        $amount = $planPrices[$selectedPlan];
+        return redirect()->route('dashboard')->with(
+            'success_message',
+            'Pago de $'.number_format($amount/100, 0, ',', '.').' COP procesado correctamente para el plan '.$selectedPlan
+        );
 
-    
-        if ($amount == 0) {
-            return redirect()->route('dashboard')->with(
-                'success_message', 
-                'Plan Básico activado correctamente (gratuito)'
-            );
-        }
-
-        
-        Stripe::setApiKey(env('STRIPE_SECRET'));
-
-        try {
-          
-            $charge = Charge::create([
-                'amount' => $amount,
-                'currency' => 'cop',
-                'description' => 'Suscripción a plan '.$selectedPlan,
-                'source' => $request->stripeToken,
-            ]);
-
-            return redirect()->route('dashboard')->with(
-                'success_message', 
-                'Pago de $'.number_format($amount/100, 0, ',', '.').' COP procesado correctamente para el plan '.$selectedPlan
-            );
-
-        } catch (CardException $e) {
-            return back()->with('error_message', $e->getMessage());
-        } catch (Exception $e) {
-            return back()->with(
-                'error_message', 
-                'Ocurrió un error al procesar el pago. Por favor intenta nuevamente.'
-            );
-        }
+    } catch (CardException $e) {
+        return back()->with('error_message', $e->getMessage());
+    } catch (Exception $e) {
+        return back()->with(
+            'error_message',
+            'Ocurrió un error al procesar el pago. Por favor intenta nuevamente.'
+        );
     }
+}
 }
