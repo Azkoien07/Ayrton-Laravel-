@@ -10,76 +10,80 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\TaskReminderMailable;
 use App\Models\User;
 use Carbon\Carbon;
+
 class TaskController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Task::query();
-        
-      
+        $query = Task::whereHas('users', function($q) {
+            $q->where('users.id', Auth::id());
+        });
+
+
+
         if ($request->filled('name')) {
             $query->where('name', 'like', '%'.$request->name.'%');
         }
-        
+
         if ($request->filled('state')) {
             $query->where('state', $request->state);
         }
-        
+
         if ($request->filled('priority')) {
             $query->where('priority', $request->priority);
         }
-        
+
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
-        
+
         // Filtros por fechas
         if ($request->filled('f_creation_from')) {
             $query->where('f_creation', '>=', $request->f_creation_from);
         }
-        
+
         if ($request->filled('f_creation_to')) {
             $query->where('f_creation', '<=', $request->f_creation_to);
         }
-        
+
         if ($request->filled('f_expiration_from')) {
             $query->where('f_expiration', '>=', $request->f_expiration_from);
         }
-        
+
         if ($request->filled('f_expiration_to')) {
             $query->where('f_expiration', '<=', $request->f_expiration_to);
         }
-        
+
         // Filtros por relaciones (asumiendo que existen estas relaciones en el modelo Task)
-        
+
         // Ejemplo: Filtrar por usuario asignado (relación belongsTo)
         if ($request->filled('user_name')) {
             $query->whereHas('user', function($q) use ($request) {
                 $q->where('name', 'like', '%'.$request->user_name.'%');
             });
         }
-        
+
         // Ejemplo: Filtrar por etiquetas (relación belongsToMany)
         if ($request->filled('tag_name')) {
             $query->whereHas('tags', function($q) use ($request) {
                 $q->where('name', 'like', '%'.$request->tag_name.'%');
             });
         }
-        
+
         // Ejemplo: Filtrar por comentarios (relación hasMany)
         if ($request->filled('comment_text')) {
             $query->whereHas('comments', function($q) use ($request) {
                 $q->where('text', 'like', '%'.$request->comment_text.'%');
             });
         }
-        
+
         // Ordenamiento
         $sortField = $request->get('sort_by', 'f_creation');
         $sortDirection = $request->get('sort_order', 'desc');
         $query->orderBy($sortField, $sortDirection);
-        
+
         $tasks = $query->paginate(15)->withQueryString();
-        
+
         return view('tasks.index', compact('tasks'));
     }
 
@@ -102,18 +106,20 @@ class TaskController extends Controller
         ], [
             'f_expiration.after_or_equal' => 'La fecha de expiración debe ser igual o posterior a la fecha de creación'
         ]);
-    
+
         $validated['user_id'] = Auth::id();
         $task = Task::create($validated);
+
+        $task->users()->attach(Auth::id());
         $user = Auth::user();
-    
-       
-        
-       
+
+
+
+
         if ($user && Carbon::parse($validated['reminder'])->isToday()) {
             Mail::to($user->email)->send(new TaskReminderMailable($task));
         }
-    
+
         Notify()->success('Tarea creada exitosamente', '¡Nueva tarea registrada!');
         return redirect()->route('tasks.index');
     }
