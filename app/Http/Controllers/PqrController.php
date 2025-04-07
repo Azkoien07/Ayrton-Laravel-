@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pqr;
 use Illuminate\Http\Request;
 use Mckenziearts\Notify\Facades\Notify;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 class PqrController extends Controller
 {
     public function index(Request $request)
@@ -112,5 +112,14 @@ class PqrController extends Controller
     $pqr->save();
 
     return back()->with('success', 'Estado actualizado correctamente.');
+}
+
+
+public function exportPdf(Request $request)
+{
+    $pqrs = Pqr::all(); 
+
+    $pdf = Pdf::loadView('admin.pdf.pqrs', compact('pqrs'));
+    return $pdf->download('pqrs_estado.pdf');
 }
 }

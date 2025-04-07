@@ -13,15 +13,15 @@ $stats = $stats ?? [
 
 <div class="container mx-auto px-4 py-8">
     <div class="p-6">
-   
+
         <div class="mb-10">
             <h2 class="text-3xl font-bold text-gray-800 mb-2">Gestión de PQRs</h2>
             <p class="text-gray-600">Administra las peticiones, quejas, reclamos y sugerencias</p>
         </div>
 
-       
+
         <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
-          
+
             <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between">
                     <div>
@@ -36,7 +36,7 @@ $stats = $stats ?? [
                 </div>
             </div>
 
-         
+
             <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between">
                     <div>
@@ -80,7 +80,7 @@ $stats = $stats ?? [
                 </div>
             </div>
 
-         
+
             <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between">
                     <div>
@@ -131,13 +131,21 @@ $stats = $stats ?? [
                         </select>
                     </div>
                 </div>
-                <div class="mt-4 flex justify-end">
-                    <a href="{{ route('admin.pqrs') }}" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg shadow-sm transition-colors duration-200 mr-2">
-                        Limpiar filtros
+                <div class="flex justify-between items-center mb-4">
+
+                    <a href="{{ route('admin.pqrs.pdf') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
+                        Descargar PDF
                     </a>
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
-                        Aplicar filtros
-                    </button>
+
+
+                    <div class="flex">
+                        <a href="{{ route('admin.pqrs') }}" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg shadow-sm transition-colors duration-200 mr-2">
+                            Limpiar filtros
+                        </a>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
+                            Aplicar filtros
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -194,46 +202,46 @@ $stats = $stats ?? [
                                 {{ $pqr->created_at->format('d/m/Y H:i') }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-    <div class="flex justify-end space-x-2">
+                                <div class="flex justify-end space-x-2">
 
- 
-        <form method="POST" action="{{ route('pqr.updateStatus', $pqr->id) }}">
-            @csrf
-            @method('PUT')
-            <select name="status" class="text-xs border rounded p-1" onchange="this.form.submit()">
-                <option value="Pendiente" {{ $pqr->status == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
-                <option value="En Proceso" {{ $pqr->status == 'En Proceso' ? 'selected' : '' }}>En Proceso</option>
-                <option value="Resuelto" {{ $pqr->status == 'Resuelto' ? 'selected' : '' }}>Resuelto</option>
-                <option value="Cerrado" {{ $pqr->status == 'Cerrado' ? 'selected' : '' }}>Cerrado</option>
-            </select>
-        </form>
 
-  
-        <form method="POST" action="{{ route('pqr.archive', $pqr->id) }}">
-            @csrf
-            @method('PUT')
-            <button type="submit" class="text-blue-600 hover:text-blue-800 ml-2" title="Archivar">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                </svg>
-            </button>
-        </form>
+                                    <form method="POST" action="{{ route('pqr.updateStatus', $pqr->id) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <select name="status" class="text-xs border rounded p-1" onchange="this.form.submit()">
+                                            <option value="Pendiente" {{ $pqr->status == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
+                                            <option value="En Proceso" {{ $pqr->status == 'En Proceso' ? 'selected' : '' }}>En Proceso</option>
+                                            <option value="Resuelto" {{ $pqr->status == 'Resuelto' ? 'selected' : '' }}>Resuelto</option>
+                                            <option value="Cerrado" {{ $pqr->status == 'Cerrado' ? 'selected' : '' }}>Cerrado</option>
+                                        </select>
+                                    </form>
 
-    
-        <form method="POST" action="{{ route('pqr.destroy', $pqr->id) }}" onsubmit="return confirm('¿Estás seguro de eliminar este PQR?');">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="text-red-600 hover:text-red-900 ml-2" title="Eliminar">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-            </button>
-        </form>
 
-    </div>
-</td>
+                                    <form method="POST" action="{{ route('pqr.archive', $pqr->id) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="text-blue-600 hover:text-blue-800 ml-2" title="Archivar">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                                            </svg>
+                                        </button>
+                                    </form>
+
+
+                                    <form method="POST" action="{{ route('pqr.destroy', $pqr->id) }}" onsubmit="return confirm('¿Estás seguro de eliminar este PQR?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-900 ml-2" title="Eliminar">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </td>
                         </tr>
                         @empty
                         <tr>
@@ -258,17 +266,18 @@ $stats = $stats ?? [
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-       
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
 
-      
+
         function showNotification(message, type = 'success') {
-            alert(message); 
+            alert(message);
         }
+
         function updateStats(stats) {
             $('#total-pqrs').text(stats.total);
             $('#pending-pqrs').text(stats.pending);
@@ -277,7 +286,7 @@ $stats = $stats ?? [
             $('#closed-pqrs').text(stats.closed);
         }
 
-     
+
         function getStatusClasses(status) {
             const classes = {
                 'Pendiente': 'bg-yellow-100 text-yellow-800',
@@ -302,7 +311,7 @@ $stats = $stats ?? [
                 },
                 success: function(response) {
                     if (response.success) {
-                
+
                         const $badge = $(`tr[data-id="${pqrId}"] .status-badge`);
                         $badge.removeClass().addClass('status-badge px-2 inline-flex text-xs leading-5 font-semibold rounded-full ' + getStatusClasses(newStatus));
                         $badge.text(newStatus);
@@ -314,7 +323,7 @@ $stats = $stats ?? [
                 },
                 error: function(xhr) {
                     console.error(xhr);
-           
+
                     const currentStatus = $(`tr[data-id="${pqrId}"] .status-badge`).text();
                     $select.val(currentStatus);
 
@@ -322,7 +331,7 @@ $stats = $stats ?? [
                 }
             });
         });
-        
+
         $(document).on('click', '.archive-btn', function() {
             const pqrId = $(this).data('id');
             const $button = $(this);
@@ -338,7 +347,7 @@ $stats = $stats ?? [
                     },
                     success: function(response) {
                         if (response.success) {
-    
+
                             const $row = $(`tr[data-id="${pqrId}"]`);
                             $row.find('.status-badge')
                                 .removeClass()
@@ -347,7 +356,7 @@ $stats = $stats ?? [
 
                             $row.find('.update-status').val('Cerrado');
 
-                
+
                             updateStats(response.stats);
 
                             showNotification(response.message);
@@ -381,12 +390,12 @@ $stats = $stats ?? [
                     },
                     success: function(response) {
                         if (response.success) {
-       
+
                             $(`tr[data-id="${pqrId}"]`).fadeOut(300, function() {
                                 $(this).remove();
                             });
 
-      
+
                             updateStats(response.stats);
 
                             showNotification(response.message);

@@ -51,6 +51,7 @@ Route::middleware([\App\Http\Middleware\Localization::class])->group(function ()
         Route::put('/pqrs/{id}/archive', [PqrController::class, 'archive'])->name('pqr.archive');
         Route::put('/admin/pqrs/archive', [PqrController::class, 'archive'])->name('admin.pqrs.archive');
         Route::get('/admin/pqrs/delete', [PqrController::class, 'delete'])->name('admin.pqrs.delete');
+        Route::get('/admin/pqrs/pdf', [PqrController::class, 'exportPdf'])->name('admin.pqrs.pdf');
     });
 
     // Rutas para el registro de los usuario
