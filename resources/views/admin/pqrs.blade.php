@@ -131,24 +131,24 @@ $stats = $stats ?? [
                         </select>
                     </div>
                 </div>
-                <div class="flex justify-between items-end gap-4 mt-4">
+                <div class="flex flex-col md:flex-row justify-between items-stretch md:items-end gap-4 mt-4">
+
                     <a href="{{ route('admin.pqrs.pdf') }}"
-                        class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200 mt-6">
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200 w-full md:w-auto">
                         Descargar PDF
                     </a>
 
-                    <div class="flex items-end gap-2 mt-6">
+                    <div class="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
                         <a href="{{ route('admin.pqrs') }}"
-                            class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg shadow-sm transition-colors duration-200">
+                            class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg shadow-sm transition-colors duration-200 w-full sm:w-auto text-center">
                             Limpiar filtros
                         </a>
                         <button type="submit"
-                            class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200 w-full sm:w-auto">
                             Aplicar filtros
                         </button>
                     </div>
                 </div>
-
             </form>
         </div>
 
