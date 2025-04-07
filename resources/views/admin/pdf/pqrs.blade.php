@@ -1,53 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <title>Reporte de PQRs</title>
+    <meta charset="UTF-8">
+    <title>Reporte de PQRS</title>
     <style>
         body {
             font-family: DejaVu Sans, sans-serif;
+            background-color: #F7F8FA;
+            color: #2D3748;
             font-size: 12px;
-            margin: 40px;
-            background-color: #fff;
-            color: #333;
+            padding: 30px;
         }
 
         h2 {
             text-align: center;
-            color: #2c3e50;
+            color: #4A5568;
             margin-bottom: 20px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0;
         }
 
         th, td {
-            border: 1px solid #ccc;
+            border: 1px solid #E2E8F0;
             padding: 10px;
+            text-align: left;
         }
 
         th {
-            background-color: #3498db;
-            color: #fff;
+            background-color: #4A5568;
+            color: #FFFFFF;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 11px;
         }
 
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #CBD5E0;
         }
 
         tr:hover {
-            background-color: #eef6fc;
+            background-color: #E2E8F0;
         }
     </style>
 </head>
 <body>
-    <h2>Reporte de PQRs</h2>
+    <h2>Reporte de PQRS</h2>
+
     <table>
         <thead>
             <tr>
@@ -62,7 +65,7 @@
                 <tr>
                     <td>{{ $pqr->id }}</td>
                     <td>{{ $pqr->title }}</td>
-                    <td>{{ $pqr->status }}</td>
+                    <td>{{ ucfirst($pqr->status) }}</td>
                     <td>{{ $pqr->created_at->format('Y-m-d') }}</td>
                 </tr>
             @endforeach
