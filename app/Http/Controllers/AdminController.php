@@ -20,55 +20,52 @@ class AdminController extends Controller
     public function pqrs()
     {
         $pqrs = Pqr::with(['user', 'category'])
-                 ->latest()
-                 ->paginate(10);
-        
+            ->latest()
+            ->paginate(10);
+
         return view('admin.pqrs', compact('pqrs'));
+    }
+
+    // Mostrar formulario de edición
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.edit', compact('user'));
+    }
+
+    // Actualizar usuario
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'role' => 'required|in:user,admin'
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role
+        ]);
+
+        Notify()->success('Usuario actualizado correctamente', 'Éxito');
+        return redirect()->route('admin.index');
+    }
+
+    // Eliminar usuario
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        Notify()->warning('Usuario eliminado correctamente', 'Usuario Eliminado');
+        return redirect()->route('admin.index');
     }
 
     public function ranking()
     {
-        $ranking = Ranking::with('user')
-        ->orderBy('score', 'desc')
-        ->paginate(10);
-        
-        return view('admin.ranking', compact('ranking'));
+        $users = User::where('role_id', 2)->get();
+        return view('admin.ranking', compact('users'));
     }
-     // Mostrar formulario de edición
-     public function edit($id)
-     {
-         $user = User::findOrFail($id);
-         return view('admin.edit', compact('user'));
-     }
- 
-     // Actualizar usuario
-     public function update(Request $request, $id)
-     {
-         $request->validate([
-             'name' => 'required|string|max:255',
-             'email' => 'required|email|unique:users,email,'.$id,
-             'role' => 'required|in:user,admin'
-         ]);
- 
-         $user = User::findOrFail($id);
-         $user->update([
-             'name' => $request->name,
-             'email' => $request->email,
-             'role' => $request->role
-         ]);
-         
-         Notify()->success('Usuario actualizado correctamente', 'Éxito');
-         return redirect()->route('admin.index');
-     }
- 
-     // Eliminar usuario
-     public function destroy($id)
-     {
-         $user = User::findOrFail($id);
-         $user->delete();
-        
-         Notify()->warning('Usuario eliminado correctamente', 'Usuario Eliminado');
-         return redirect()->route('admin.index');
-     }
-
 }

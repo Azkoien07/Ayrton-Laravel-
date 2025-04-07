@@ -84,11 +84,11 @@
                     </h3>
                     <form class="space-y-4">
                         <div class="flex items-center">
-                            <input type="checkbox" class="h-4 w-4 text-light-primary dark:text-dark-primary focus:ring-light-primary dark:focus:ring-dark-hover border-light-border dark:border-dark-border rounded">
+                            <input type="checkbox" checked class="h-4 w-4 text-light-primary dark:text-dark-primary focus:ring-light-primary dark:focus:ring-dark-hover border-light-border dark:border-dark-border rounded">
                             <label for="" class="ml-2 block text-sm text-light-text dark:text-dark-text">@lang('settings.email_notifications')</label>
                         </div>
                         <div class="flex items-center">
-                            <input type="checkbox" class="h-4 w-4 text-light-primary dark:text-dark-primary focus:ring-light-primary dark:focus:ring-dark-hover border-light-border dark:border-dark-border rounded">
+                            <input type="checkbox" checked class="h-4 w-4 text-light-primary dark:text-dark-primary focus:ring-light-primary dark:focus:ring-dark-hover border-light-border dark:border-dark-border rounded">
                             <label for="" class="ml-2 block text-sm text-light-text dark:text-dark-text">@lang('settings.push_notifications')</label>
                         </div>
                         <button class="bg-light-primary hover:bg-light-hover dark:bg-dark-primary dark:hover:bg-dark-hover text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-200">

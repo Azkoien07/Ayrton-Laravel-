@@ -4,17 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Ranking;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class RankingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
+    public function index() {}
 
+    
     /**
      * Show the form for creating a new resource.
      */
